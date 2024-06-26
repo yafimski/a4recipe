@@ -1,7 +1,8 @@
+import "./index.css";
 import React from "react";
 import ReactDOM from "react-dom/client";
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
-import "./index.css";
+
 import PageNotFound from "./components/PageNotFound";
 import HomePage from "./pages/HomePage";
 import Quantities from "./pages/Quantities";
