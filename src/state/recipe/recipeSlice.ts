@@ -6,6 +6,7 @@ interface RecipeState {
   currentItem: string;
   currentGroupName: string;
   possibleItems: string[];
+  batches: number;
 }
 
 const initialState: RecipeState = {
@@ -13,6 +14,7 @@ const initialState: RecipeState = {
   currentItem: "",
   currentGroupName: "",
   possibleItems: allPossibleIngredients,
+  batches: 1,
 };
 
 const recipeSlice = createSlice({
@@ -33,10 +35,13 @@ const recipeSlice = createSlice({
         item.toLowerCase().includes(action.payload.toLowerCase())
       );
     },
+    setBatches: (state, action: PayloadAction<number>) => {
+      state.batches = action.payload;
+    },
   },
 });
 
-export const { nameRecipe, nameGroup, setItem, updatePossibleItems } =
+export const { nameRecipe, nameGroup, setItem, updatePossibleItems, setBatches } =
   recipeSlice.actions;
 
 export default recipeSlice.reducer;

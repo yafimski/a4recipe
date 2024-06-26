@@ -6,7 +6,6 @@ import {
   updateUnit,
 } from "../state/ingredientGroups/ingredientGroupsSlice";
 import { useDispatch } from "react-redux";
-import AmountInput from "./AmountInput";
 import IngredientFullItem from "./IngredientFullItem";
 
 function UnitsPanel({ groupName, items }: ItemsGroup) {
@@ -17,7 +16,7 @@ function UnitsPanel({ groupName, items }: ItemsGroup) {
   };
 
   return (
-    <div className="flex flex-col center">
+    <div className="flex flex-col items-start mx-8">
       <p className="text-lg bg-slate-200 px-8 rounded-2xl mb-4">{groupName}</p>
       {items.map((item: IngredientItem) => (
         <div key={`${groupName}_${item.itemName}}`} className="flex flex-row center mb-8">
@@ -26,8 +25,7 @@ function UnitsPanel({ groupName, items }: ItemsGroup) {
             groupName={groupName}
             item={item}
           />
-          <AmountInput item={item} groupName={groupName} />
-          <div className="flex flex-col justify-start gap-y-2">
+          <div className="flex flex-col justify-start gap-y-2 mx-8 ">
             <UnitsButtonGroup
               identifier={`${item.itemName}_${groupName}_common1`}
               units={commonUnits.slice(0, commonUnits.length / 2 + 1)}
@@ -37,7 +35,7 @@ function UnitsPanel({ groupName, items }: ItemsGroup) {
               units={commonUnits.slice(commonUnits.length / 2 + 1)}
             />
           </div>
-          <form className="ml-8">
+          <form>
             <select
               className={`w-28 input-border rounded-md px-2 py-1 ${
                 extraUnits.includes(item.unit) ? "bg-blue-300" : null

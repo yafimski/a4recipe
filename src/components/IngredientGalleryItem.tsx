@@ -47,7 +47,7 @@ function IngredientGalleryItem({ groupName, item }: IngredientProp) {
     <div className="grid center">
       <div
         key={`${groupName}_${itemName}`}
-        className="relative flex flex-col rounded-2xl ingredient-card-shadow md:w-20 lg:w-28 xl:w-32 aspect-video-reverse"
+        className="relative flex flex-col rounded-2xl card-shadow md:w-20 lg:w-28 xl:w-32 aspect-video-reverse"
       >
         <img
           src={`../src/assets/${itemName.toLowerCase()}.webp`}

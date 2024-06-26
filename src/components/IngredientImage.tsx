@@ -18,7 +18,7 @@ function IngredientImage({ groupName, itemName }: IngredientProp) {
   return (
     <div
       key={itemName}
-      className="relative rounded-2xl aspect-square h-24  ingredient-card-shadow center mx-2"
+      className="relative rounded-2xl aspect-square h-24  card-shadow center mx-2"
     >
       <img
         src={`../src/assets/${itemName.toLowerCase()}.webp`}
