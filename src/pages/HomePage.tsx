@@ -5,7 +5,7 @@ import GoToButton from "../components/GoToButton";
 
 function HomePage() {
   return (
-    <div className="min-h-screen flex flex-col">
+    <div data-testid="homepage" className="min-h-screen flex flex-col">
       <GoToButton page={"/quantities"} isNext={true} />
       <Header />
       <div className="flex flex-grow p-4 gap-8 mx-4">

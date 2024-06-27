@@ -25,7 +25,10 @@ function UnitsPanel({ groupName, items }: ItemsGroup) {
             groupName={groupName}
             item={item}
           />
-          <div className="flex flex-col justify-start gap-y-2 mx-8 ">
+          <div
+            data-testid="unitsButtonsArray"
+            className="flex flex-col justify-start gap-y-2 mx-8 "
+          >
             <UnitsButtonGroup
               identifier={`${item.itemName}_${groupName}_common1`}
               units={commonUnits.slice(0, commonUnits.length / 2 + 1)}

@@ -28,13 +28,11 @@ describe("HomePage", () => {
       );
     });
 
-    const nextPageButton = screen.getByRole("button", { name: /next/i });
+    const nextPageButton = screen.getByTestId("next");
 
     const user = userEvent.setup();
     await user.click(nextPageButton);
 
-    screen.debug();
-
-    expect(screen.getByText(/select the unit for each ingredient/i)).toBeInTheDocument();
+    expect(screen.getByTestId(/quantities/i)).toBeInTheDocument();
   });
 });

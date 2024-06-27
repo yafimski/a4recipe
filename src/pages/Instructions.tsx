@@ -1,12 +1,13 @@
+import ActionSteps from "../components/ActionSteps";
 import GoToButton from "../components/GoToButton";
 
 function Instructions() {
   return (
-    <div className="min-h-screen flex flex-col">
+    <div data-testid="instructions" className="min-h-screen flex flex-col">
       <GoToButton page={"/notes"} isNext={true} />
       <GoToButton page={"/quantities"} isNext={false} />
       <div className="flex h-screen justify-center text-center">
-        {/* <ActionSteps /> */}
+        <ActionSteps />
       </div>
     </div>
   );

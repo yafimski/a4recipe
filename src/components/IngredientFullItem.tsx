@@ -10,7 +10,7 @@ function IngredientFullItem({ groupName, item }: IngredientProp) {
   const { itemName, unit } = item;
 
   return (
-    <div className="flex center">
+    <div data-testid="ingredientFullItem" className="flex center">
       <div
         key={`${groupName}_${itemName}`}
         className="flex flex-row w-72 h-32 rounded-2xl card-shadow"
