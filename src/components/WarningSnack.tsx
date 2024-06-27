@@ -25,6 +25,7 @@ function WarningSnack() {
       className="fixed top-16 left-1/2 transform -translate-x-1/2 bg-red-400 text-black font-semibold p-3 rounded-3xl px-8 toast"
       onClick={handleClose}
       onKeyDown={handleKeyDown}
+      data-testid={"snack"}
     >
       {warning}
     </div>

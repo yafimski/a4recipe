@@ -4,12 +4,14 @@ import "../index.css";
 import {
   nameGroup,
   nameRecipe,
+  resetRecipe,
   setItem,
   updatePossibleItems,
 } from "../state/recipe/recipeSlice";
 import {
   type ItemsGroup,
   addItemToIngredientGroup,
+  resetIngredientGroup,
 } from "../state/ingredientGroups/ingredientGroupsSlice";
 import { setWarning } from "../state/warning/warningSlice";
 import WarningSnack from "./WarningSnack";
@@ -19,6 +21,7 @@ function Header() {
   const ingredientsGroups = useSelector(
     (state: RootState) => state.groups.ingredientsGroups
   );
+  const possibleItems = useSelector((state: RootState) => state.recipe.possibleItems);
   const currentGroupName = useSelector(
     (state: RootState) => state.recipe.currentGroupName
   );
@@ -35,25 +38,34 @@ function Header() {
     event.preventDefault();
 
     if (!groupName) {
-      dispatch(setWarning("Ingredient group cannot be empty"));
+      dispatch(setWarning("Enter a group name!"));
     } else if (!itemName) {
-      dispatch(setWarning("Ingredient must be selected"));
+      dispatch(setWarning("Search an ingredient!"));
     } else {
-      const existingGroup = ingredientsGroups.filter(
-        (group: ItemsGroup) => group.groupName === groupName
-      )[0];
-
-      if (existingGroup) {
-        const itemExists = existingGroup.items.filter(
-          (item) => item.itemName === itemName
+      if (possibleItems.length === 0) {
+        dispatch(setWarning("No items found!"));
+      } else if (possibleItems.length === 1) {
+        const existingGroup = ingredientsGroups.filter(
+          (group: ItemsGroup) => group.groupName === groupName
         )[0];
 
-        if (itemExists) {
-          dispatch(setWarning("Ingredient is already in the group!"));
+        if (existingGroup) {
+          const existingItem = existingGroup.items.filter(
+            (item) => item.itemName === possibleItems[0]
+          )[0];
+
+          if (existingItem) {
+            dispatch(setWarning("Ingredient is already in the group!"));
+          } else {
+            const updatedData = { groupName, itemName: possibleItems[0] };
+            dispatch(addItemToIngredientGroup(updatedData));
+          }
         } else {
-          const updatedData = { groupName, itemName: itemName };
+          const updatedData = { groupName, itemName: possibleItems[0] };
           dispatch(addItemToIngredientGroup(updatedData));
         }
+      } else {
+        dispatch(setWarning("Too many ingredients found!"));
       }
     }
   };
@@ -64,11 +76,16 @@ function Header() {
     dispatch(updatePossibleItems(val));
   };
 
+  const handleReset = () => {
+    dispatch(resetRecipe());
+    dispatch(resetIngredientGroup());
+  };
+
   return (
     <>
-      <header className="w-full h-1/4 center text-center">
-        <h1 className="text-2xl pt-4">Welcome to a4recipe</h1>
-        <h3 className="text-xl pt-2 pb-4">
+      <div className="w-full h-1/4 center text-center">
+        <h1 className="pt-8 text-fluidTitle">Welcome to a4recipe</h1>
+        <h3 className="text-xl pt-2 pb-4 text-fluidSubtitle">
           Name your recipe and start adding ingredients!
         </h3>
         <input
@@ -79,7 +96,14 @@ function Header() {
           value={recipeTitle}
           onChange={(e) => dispatch(nameRecipe(e.target.value))}
         />
-        <form className="p-6 pb-2">
+        <form className="p-8 pb-4">
+          <button
+            type="button"
+            className="bg-gray-200 w-20 text-black rounded-3xl mr-16 py-2 card-shadow"
+            onClick={handleReset}
+          >
+            RESET
+          </button>
           <input
             type="text"
             className="input-border w-1/5 mr-8"
@@ -97,13 +121,13 @@ function Header() {
           <button
             form="addIngredientsSelect"
             type="submit"
-            className="bg-blue-500 w-20 text-white font-semibold rounded-3xl ml-4 py-2"
+            className="bg-blue-500 w-20 text-white font-semibold rounded-3xl ml-4 py-2 card-shadow"
             onClick={(e) => handleAddIngredient(e, currentGroupName, currentItem)}
           >
             ADD
           </button>
         </form>
-      </header>
+      </div>
       {warning && <WarningSnack />}
     </>
   );

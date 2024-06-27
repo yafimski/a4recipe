@@ -1,6 +1,6 @@
 import { type PayloadAction, createSlice } from "@reduxjs/toolkit";
 
-interface WarningState {
+export interface WarningState {
   warning: string;
 }
 

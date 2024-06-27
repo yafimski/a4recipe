@@ -23,6 +23,7 @@ function IngredientImage({ groupName, itemName }: IngredientProp) {
       <img
         src={`../src/assets/${itemName.toLowerCase()}.webp`}
         alt={itemName}
+        data-testid={`${groupName}_${itemName}_selected`}
         className="rounded-2xl"
       />
       <div className="absolute inset-0 flex center bg-white bg-opacity-70 opacity-0 hover:opacity-100 transition-opacity">

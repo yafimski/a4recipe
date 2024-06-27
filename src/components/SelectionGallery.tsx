@@ -9,25 +9,22 @@ function SelectionGallery() {
     (state: RootState) => state.recipe.possibleItems
   );
 
-  const isFewItems = possibleIngredients.length < 5;
+  const gridClass =
+    possibleIngredients.length < 5 ? "center grid-few gap-x-8" : "grid-autofill";
 
   return (
-    <div className={`flex-grow overflow-auto ${isFewItems ? "flex center" : ""}`}>
-      <div
-        className={`md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-y-8 p-8 ${
-          isFewItems ? "flex h-full items-start" : "grid grid-cols-5 gap-4"
-        } gap-x-12`}
-      >
+    <div className={"center overflow-auto"}>
+      <div className={`gap-y-8 gap-x-2 p-4 ${gridClass}`}>
         {possibleIngredients.map((itemName) => (
           <Suspense
-            key={itemName}
-            fallback={<div className="suspenseGalleryItem">{""}</div>}
+            key={`${itemName}_suspense`}
+            fallback={
+              <div className="suspense-gallery-item" data-testid={`${itemName}_suspense`}>
+                {""}
+              </div>
+            }
           >
-            <IngredientGalleryItem
-              key={itemName}
-              groupName={""}
-              item={{ itemName, amount: 0, unit: "none" }}
-            />
+            <IngredientGalleryItem item={{ itemName, amount: 0, unit: "none" }} />
           </Suspense>
         ))}
       </div>

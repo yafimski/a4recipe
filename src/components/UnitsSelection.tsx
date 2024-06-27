@@ -14,7 +14,7 @@ function UnitsSelection() {
   return (
     <div className="flex flex-col justify-center">
       <div className="flex flex-col h-5/6 w-fit input-gallery-border  overflow-auto p-4 items-center">
-        <h1 className="text-xl mb-8">Select the Unit for each ingredient</h1>
+        <h1 className="text-fluidSubtitle mb-8">Select the Unit for each ingredient</h1>
         {ingredientsGroups.map((group: ItemsGroup) => (
           <div key={group.groupName} className="mb-4">
             <UnitsPanel

@@ -23,6 +23,9 @@ const ingredientGroupsSlice = createSlice({
   name: "groups",
   initialState,
   reducers: {
+    resetIngredientGroup: (state) => {
+      state.ingredientsGroups = [];
+    },
     addItemToIngredientGroup: (
       state,
       action: PayloadAction<{ groupName: string; itemName: string }>
@@ -87,41 +90,6 @@ const ingredientGroupsSlice = createSlice({
         existingIngredient[0].amount = amount;
       }
     },
-    incrementAmount: (
-      state,
-      action: PayloadAction<{ groupName: string; itemName: string }>
-    ) => {
-      const { groupName, itemName } = action.payload;
-
-      const existingGroup = state.ingredientsGroups.find(
-        (g) => g.groupName === groupName
-      );
-
-      const existingIngredient = existingGroup?.items.filter(
-        (item) => item.itemName === itemName
-      )[0];
-      if (existingIngredient) {
-        existingIngredient.amount = existingIngredient.amount + 1;
-      }
-    },
-    decrementAmount: (
-      state,
-      action: PayloadAction<{ groupName: string; itemName: string }>
-    ) => {
-      const { groupName, itemName } = action.payload;
-
-      const existingGroup = state.ingredientsGroups.find(
-        (g) => g.groupName === groupName
-      );
-
-      const existingIngredient = existingGroup?.items.filter(
-        (item) => item.itemName === itemName
-      )[0];
-
-      if (existingIngredient) {
-        existingIngredient.amount = existingIngredient.amount - 1;
-      }
-    },
     updateUnit: (
       state,
       action: PayloadAction<{ groupName: string; itemName: string; unit: string }>
@@ -148,8 +116,7 @@ export const {
   removeItemFromIngredientGroup,
   updateAmount,
   updateUnit,
-  incrementAmount,
-  decrementAmount,
+  resetIngredientGroup,
 } = ingredientGroupsSlice.actions;
 
 export default ingredientGroupsSlice.reducer;

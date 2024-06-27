@@ -19,11 +19,12 @@ function ChosenIngredientsGallery() {
 
   return (
     <div className="p-4 overflow-auto center text-center">
-      <h1 className="text-xl mb-8">Selected ingredients</h1>
+      <h1 className="mb-8 text-fluidSubtitle">Selected ingredients</h1>
       {ingredientsGroups.map((group: ItemsGroup) => (
         <div key={group.groupName} className="flex flex-col center">
           <p
             onKeyDown={handleKeyDown}
+            data-testid={"chosen_group"}
             onClick={() => dispatch(nameGroup(group.groupName))}
             className="text-lg bg-slate-200 w-min px-8 rounded-2xl mb-4"
           >

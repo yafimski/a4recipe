@@ -1,4 +1,4 @@
-import { type IngredientItem } from "../state/ingredientGroups/ingredientGroupsSlice";
+import type { IngredientItem } from "../state/ingredientGroups/ingredientGroupsSlice";
 import AmountInput from "./AmountInput";
 
 interface IngredientProp {

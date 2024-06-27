@@ -1,7 +1,7 @@
 import { type PayloadAction, createSlice } from "@reduxjs/toolkit";
 import { allPossibleIngredients } from "../../utils/data";
 
-interface RecipeState {
+export interface RecipeState {
   title: string;
   currentItem: string;
   currentGroupName: string;
@@ -21,6 +21,13 @@ const recipeSlice = createSlice({
   name: "recipe",
   initialState,
   reducers: {
+    resetRecipe: (state) => {
+      state.title = "";
+      state.currentItem = "";
+      state.currentGroupName = "";
+      state.possibleItems = allPossibleIngredients;
+      state.batches = 1;
+    },
     nameRecipe: (state, action: PayloadAction<string>) => {
       state.title = action.payload;
     },
@@ -41,7 +48,13 @@ const recipeSlice = createSlice({
   },
 });
 
-export const { nameRecipe, nameGroup, setItem, updatePossibleItems, setBatches } =
-  recipeSlice.actions;
+export const {
+  nameRecipe,
+  nameGroup,
+  setItem,
+  updatePossibleItems,
+  setBatches,
+  resetRecipe,
+} = recipeSlice.actions;
 
 export default recipeSlice.reducer;

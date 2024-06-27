@@ -9,12 +9,7 @@ import { setWarning } from "../state/warning/warningSlice";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCirclePlus } from "@fortawesome/free-solid-svg-icons";
 
-interface IngredientProp {
-  groupName: string;
-  item: IngredientItem;
-}
-
-function IngredientGalleryItem({ groupName, item }: IngredientProp) {
+function IngredientGalleryItem({ item }: { item: IngredientItem }) {
   const { itemName } = item;
 
   const ingredientsGroups = useSelector(
@@ -44,11 +39,8 @@ function IngredientGalleryItem({ groupName, item }: IngredientProp) {
   };
 
   return (
-    <div className="grid center">
-      <div
-        key={`${groupName}_${itemName}`}
-        className="relative flex flex-col rounded-2xl card-shadow md:w-20 lg:w-28 xl:w-32 aspect-video-reverse"
-      >
+    <div className="grid center" data-testid={`${itemName}_gallery`}>
+      <div className="relative flex flex-col rounded-2xl card-shadow md:w-20 lg:w-28 xl:w-32 aspect-video-reverse">
         <img
           src={`../src/assets/${itemName.toLowerCase()}.webp`}
           alt={itemName}
