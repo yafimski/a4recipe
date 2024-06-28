@@ -1,3 +1,5 @@
+export const defUnit = "None";
+
 export const handleKeyDown = (e: React.KeyboardEvent) => {
   if (e.key === "Enter" || e.key === " ") {
     e.preventDefault();

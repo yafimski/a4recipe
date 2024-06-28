@@ -1,6 +1,7 @@
 import { useSelector } from "react-redux";
 import type { RootState } from "../state/store";
 import { Suspense, lazy } from "react";
+import { defUnit } from "../utils/helpers";
 
 const IngredientGalleryItem = lazy(() => import("./IngredientGalleryItem"));
 
@@ -24,7 +25,7 @@ function SelectionGallery() {
               </div>
             }
           >
-            <IngredientGalleryItem item={{ itemName, amount: 0, unit: "none" }} />
+            <IngredientGalleryItem item={{ itemName, amount: 0, unit: defUnit }} />
           </Suspense>
         ))}
       </div>

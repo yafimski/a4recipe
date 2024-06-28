@@ -1,4 +1,5 @@
 import type { IngredientItem } from "../state/ingredientGroups/ingredientGroupsSlice";
+import { defUnit } from "../utils/helpers";
 import AmountInput from "./AmountInput";
 
 interface IngredientProp {
@@ -24,7 +25,13 @@ function IngredientFullItem({ groupName, item }: IngredientProp) {
           <p className="text-sm">{itemName}</p>
           <hr className="w-full border-gray-400 my-2" />
           <AmountInput item={item} groupName={groupName} />
-          <p className="text-md font-semibold">{unit}</p>
+          <p
+            className={`text-md font-semibold ${
+              unit === defUnit && "required-element-fill"
+            }`}
+          >
+            {unit}
+          </p>
         </div>
       </div>
     </div>

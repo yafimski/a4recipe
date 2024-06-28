@@ -1,11 +1,11 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
-  IngredientItem,
+  type IngredientItem,
   updateAmount,
 } from "../state/ingredientGroups/ingredientGroupsSlice";
 import { faMinus, faPlus } from "@fortawesome/free-solid-svg-icons";
 import { useDispatch } from "react-redux";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 interface AmountInputProps {
   item: IngredientItem;
@@ -14,12 +14,6 @@ interface AmountInputProps {
 
 function AmountInput({ item, groupName }: AmountInputProps) {
   const dispatch = useDispatch();
-  // const batches = useSelector((state: RootState) => state.recipe.batches);
-
-  // useEffect(() => {
-  //   if (batches >= 1) setLocalAmount((prev) => prev * batches);
-  // }, [batches]);
-
   const [localAmount, setLocalAmount] = useState<number>(item.amount);
 
   const handleFocus = (e: { target: { select: () => void } }) => {
@@ -27,7 +21,11 @@ function AmountInput({ item, groupName }: AmountInputProps) {
   };
 
   const handleAmountChange = (amount: number) => {
-    setLocalAmount(amount);
+    if (Number.isNaN(amount)) {
+      setLocalAmount(0);
+    } else {
+      setLocalAmount(amount);
+    }
   };
 
   const handleSubtract = () => {
@@ -36,7 +34,11 @@ function AmountInput({ item, groupName }: AmountInputProps) {
     }
   };
 
-  const handleUpdateAmount = () => {
+  const handleAdd = () => {
+    setLocalAmount((prev) => prev + 1);
+  };
+
+  useEffect(() => {
     dispatch(
       updateAmount({
         groupName,
@@ -44,15 +46,17 @@ function AmountInput({ item, groupName }: AmountInputProps) {
         amount: localAmount,
       })
     );
-  };
+  }, [dispatch, groupName, item.itemName, localAmount]);
 
   return (
     <div className="flex flex-row rounded-md mx-6">
-      <button type="button" className="ml-2" onClick={handleSubtract}>
+      <button type="button" className="mx-2" onClick={handleSubtract}>
         <FontAwesomeIcon icon={faMinus} className="cursor-pointer text-xl" />
       </button>
       <input
-        className="w-20 focus:outline-none text-center"
+        className={`w-20 focus:outline-none text-center ${
+          localAmount === 0 && "required-element-fill"
+        }`}
         type="number"
         id="units-number-input"
         value={localAmount}
@@ -60,13 +64,8 @@ function AmountInput({ item, groupName }: AmountInputProps) {
         onChange={(e) => handleAmountChange(Number.parseFloat(e.target.value))}
         onFocus={handleFocus}
         onWheel={(e) => (e.target as HTMLElement).blur()}
-        onBlur={handleUpdateAmount}
       />
-      <button
-        type="button"
-        className="mr-2"
-        onClick={() => setLocalAmount((prev) => prev + 1)}
-      >
+      <button type="button" className="mx-2" onClick={handleAdd}>
         <FontAwesomeIcon icon={faPlus} className="cursor-pointer text-xl" />
       </button>
     </div>

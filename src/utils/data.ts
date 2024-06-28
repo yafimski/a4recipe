@@ -1,3 +1,5 @@
+import { defUnit } from "./helpers";
+
 export const allPossibleIngredients = [
   "Almonds",
   "Almond flour",
@@ -190,6 +192,7 @@ export const commonUnits = [
 ];
 
 export const extraUnits = [
+  defUnit,
   "gallon",
   "piece",
   "slice",

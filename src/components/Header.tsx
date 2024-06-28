@@ -1,5 +1,4 @@
 import { useDispatch, useSelector } from "react-redux";
-import type { RootState } from "../state/store";
 import "../index.css";
 import {
   nameGroup,
@@ -15,20 +14,20 @@ import {
 } from "../state/ingredientGroups/ingredientGroupsSlice";
 import { setWarning } from "../state/warning/warningSlice";
 import WarningSnack from "./WarningSnack";
+import type { RootState } from "../state/store";
 
 function Header() {
-  const recipeTitle = useSelector((state: RootState) => state.recipe.title);
-  const ingredientsGroups = useSelector(
-    (state: RootState) => state.groups.ingredientsGroups
-  );
+  const dispatch = useDispatch();
   const possibleItems = useSelector((state: RootState) => state.recipe.possibleItems);
   const currentGroupName = useSelector(
     (state: RootState) => state.recipe.currentGroupName
   );
-
   const currentItem = useSelector((state: RootState) => state.recipe.currentItem);
+  const recipeTitle = useSelector((state: RootState) => state.recipe.title);
   const warning = useSelector((state: RootState) => state.warning.warning);
-  const dispatch = useDispatch();
+  const ingredientsGroups = useSelector(
+    (state: RootState) => state.groups.ingredientsGroups
+  );
 
   const handleAddIngredient = (
     event: React.FormEvent<HTMLButtonElement>,
@@ -84,19 +83,21 @@ function Header() {
   return (
     <>
       <div className="w-full h-1/4 center text-center">
-        <h1 className="pt-8 text-fluidTitle">Welcome to a4recipe</h1>
+        <h1 className="pt-6 text-fluidTitle">Welcome to a4recipe</h1>
         <h3 className="text-xl pt-2 pb-4 text-fluidSubtitle">
           Name your recipe and start adding ingredients!
         </h3>
         <input
           type="text"
           required
-          className="w-1/4 center input-border rounded-3xl"
+          className={`w-1/4 center input-border rounded-3xl ${
+            recipeTitle.length === 0 && "required-element-border"
+          }`}
           placeholder="Give your recipe a name"
           value={recipeTitle}
           onChange={(e) => dispatch(nameRecipe(e.target.value))}
         />
-        <form className="p-8 pb-4">
+        <form className="p-6 pb-4">
           <button
             type="button"
             className="bg-gray-200 w-20 text-black rounded-3xl mr-16 py-2 card-shadow"
@@ -106,7 +107,7 @@ function Header() {
           </button>
           <input
             type="text"
-            className="input-border w-1/5 mr-8"
+            className="input-border w-96 mr-8"
             placeholder="Search ingredient"
             value={currentItem}
             onInput={handleInputChange}

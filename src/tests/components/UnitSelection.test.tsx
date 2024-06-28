@@ -7,6 +7,7 @@ import { Provider } from "react-redux";
 import createMockStore from "../../test-utils/mockStore";
 import { RouterProvider, createMemoryRouter } from "react-router-dom";
 import routesConfig from "../../test-utils/mockRouter";
+import { defUnit } from "../../utils/helpers";
 
 describe("UnitSelection", () => {
   let store: ReturnType<typeof createMockStore>;
@@ -27,7 +28,7 @@ describe("UnitSelection", () => {
         ingredientsGroups: [
           {
             groupName: "Mock group name",
-            items: [{ itemName: "Mock item 1", amount: 0, unit: "none" }],
+            items: [{ itemName: "Mock item 1", amount: 0, unit: defUnit }],
           },
         ],
       },
@@ -59,8 +60,8 @@ describe("UnitSelection", () => {
           {
             groupName: "Mock group name",
             items: [
-              { itemName: "Mock item 1", amount: 0, unit: "none" },
-              { itemName: "Mock item 2", amount: 0, unit: "none" },
+              { itemName: "Mock item 1", amount: 0, unit: defUnit },
+              { itemName: "Mock item 2", amount: 0, unit: defUnit },
             ],
           },
         ],

@@ -2,8 +2,14 @@ import Header from "../components/Header";
 import SelectionGallery from "../components/SelectionGallery";
 import ChosenIngredientsGallery from "../components/ChosenIngredientsGallery";
 import GoToButton from "../components/GoToButton";
+import { useSelector } from "react-redux";
+import type { RootState } from "../state/store";
 
 function HomePage() {
+  const ingredientsGroups = useSelector(
+    (state: RootState) => state.groups.ingredientsGroups
+  );
+
   return (
     <div data-testid="homepage" className="min-h-screen flex flex-col">
       <GoToButton page={"/quantities"} isNext={true} />
@@ -12,7 +18,11 @@ function HomePage() {
         <div className="main-gallery w-3/5">
           <SelectionGallery />
         </div>
-        <div className="main-gallery w-2/5">
+        <div
+          className={`main-gallery w-2/5 ${
+            ingredientsGroups.length === 0 && "required-element-border"
+          }`}
+        >
           <ChosenIngredientsGallery />
         </div>
       </div>

@@ -5,10 +5,11 @@ import { nameGroup } from "../state/recipe/recipeSlice";
 import IngredientImage from "./IngredientImage";
 
 function ChosenIngredientsGallery() {
+  const dispatch = useDispatch();
+
   const ingredientsGroups = useSelector(
     (state: RootState) => state.groups.ingredientsGroups
   );
-  const dispatch = useDispatch();
 
   const handleKeyDown = (e: React.KeyboardEvent) => {
     if (e.key === "Enter" || e.key === " ") {

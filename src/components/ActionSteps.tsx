@@ -12,11 +12,11 @@ function ActionSteps() {
     <div className="flex flex-col justify-center">
       <div className="flex flex-col h-5/6 w-fit input-gallery-border  overflow-auto p-4 items-center">
         <h1 className="text-fluidSubtitle mb-8">Plan how to use the ingredients!</h1>
-        {ingredientsGroups.map((group: ItemsGroup) => (
-          <div key={group.groupName} className="mb-4">
+        {ingredientsGroups.map((group: ItemsGroup, i) => (
+          <div key={`${group.groupName}_${i}`} className="mb-4">
             {group.items.map((item) => (
               <IngredientImage
-                key={group.groupName}
+                key={`${group.groupName}_${item.itemName}`}
                 groupName={group.groupName}
                 itemName={item.itemName}
               />

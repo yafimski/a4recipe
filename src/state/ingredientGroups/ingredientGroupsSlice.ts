@@ -1,4 +1,5 @@
 import { type PayloadAction, createSlice } from "@reduxjs/toolkit";
+import { defUnit } from "../../utils/helpers";
 
 export interface IngredientItem {
   itemName: string;
@@ -39,13 +40,13 @@ const ingredientGroupsSlice = createSlice({
         const updatedItem = {
           itemName,
           amount: 0,
-          unit: "none",
+          unit: defUnit,
         };
         existingGroup.items.push(updatedItem);
       } else {
         state.ingredientsGroups.push({
           groupName,
-          items: [{ itemName, amount: 0, unit: "none" }],
+          items: [{ itemName, amount: 0, unit: defUnit }],
         });
       }
     },

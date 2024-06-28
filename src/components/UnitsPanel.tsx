@@ -1,18 +1,22 @@
 import { commonUnits, extraUnits } from "../utils/data";
 import UnitsButtonGroup from "./UnitsButtonGroup";
 import {
-  type ItemsGroup,
   type IngredientItem,
   updateUnit,
 } from "../state/ingredientGroups/ingredientGroupsSlice";
 import { useDispatch } from "react-redux";
 import IngredientFullItem from "./IngredientFullItem";
 
-function UnitsPanel({ groupName, items }: ItemsGroup) {
+interface UnitsPanelProps {
+  groupName: string;
+  items: IngredientItem[];
+}
+
+function UnitsPanel({ groupName, items }: UnitsPanelProps) {
   const dispatch = useDispatch();
 
-  const handleExtraUnitsChange = (itemName: string, unit: string) => {
-    dispatch(updateUnit({ groupName, itemName, unit }));
+  const handleExtraUnitsChange = (item: IngredientItem, unit: string) => {
+    dispatch(updateUnit({ groupName, itemName: item.itemName, unit }));
   };
 
   return (
@@ -41,13 +45,17 @@ function UnitsPanel({ groupName, items }: ItemsGroup) {
           <form>
             <select
               className={`w-28 input-border rounded-md px-2 py-1 ${
-                extraUnits.includes(item.unit) ? "bg-blue-300" : null
+                extraUnits.includes(item.unit)
+                  ? "border-blue-500 border-1 bg-blue-300"
+                  : null
               }`}
-              value={extraUnits.includes(item.unit) ? item.unit : ""}
-              onChange={(e) => handleExtraUnitsChange(item.itemName, e.target.value)}
+              value={item.unit}
+              onChange={(e) => handleExtraUnitsChange(item, e.target.value)}
             >
               {extraUnits.map((unit: string) => (
-                <option key={unit}>{unit}</option>
+                <option key={unit} value={unit}>
+                  {unit}
+                </option>
               ))}
             </select>
           </form>
