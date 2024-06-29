@@ -1,4 +1,4 @@
-import ActionSteps from "../components/ActionSteps";
+import ActionSteps from "../components/InstructionsPage/ActionSteps";
 import GoToButton from "../components/GoToButton";
 
 function Instructions() {

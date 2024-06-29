@@ -7,9 +7,9 @@ import { Provider } from "react-redux";
 import createMockStore from "../../test-utils/mockStore";
 
 import { allPossibleIngredients } from "../../utils/data";
-import Header from "../../components/Header";
-import SelectionGallery from "../../components/SelectionGallery";
-import ChosenIngredientsGallery from "../../components/ChosenIngredientsGallery";
+import Header from "../../components/HomePage/Header";
+import SelectionGallery from "../../components/HomePage/SelectionGallery";
+import ChosenIngredientsGallery from "../../components/HomePage/ChosenIngredientsGallery";
 
 describe("SelectionGallery", () => {
   let store: ReturnType<typeof createMockStore>;

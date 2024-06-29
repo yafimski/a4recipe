@@ -1,13 +1,13 @@
 import { useDispatch, useSelector } from "react-redux";
-import {
-  type ItemsGroup,
-  type IngredientItem,
-  addItemToIngredientGroup,
-} from "../state/ingredientGroups/ingredientGroupsSlice";
-import type { RootState } from "../state/store";
-import { setWarning } from "../state/warning/warningSlice";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCirclePlus } from "@fortawesome/free-solid-svg-icons";
+import {
+  type IngredientItem,
+  type ItemsGroup,
+  addItemToIngredientGroup,
+} from "../../state/ingredientGroups/ingredientGroupsSlice";
+import { setWarning } from "../../state/warning/warningSlice";
+import type { RootState } from "../../state/store";
 
 function IngredientGalleryItem({ item }: { item: IngredientItem }) {
   const { itemName } = item;
@@ -42,7 +42,7 @@ function IngredientGalleryItem({ item }: { item: IngredientItem }) {
     <div className="grid center" data-testid={`${itemName}_gallery`}>
       <div className="relative flex flex-col rounded-2xl card-shadow md:w-20 lg:w-28 xl:w-32 aspect-video-reverse">
         <img
-          src={`../src/assets/${itemName.toLowerCase()}.webp`}
+          src={`../src/assets/ingredients/${itemName.toLowerCase()}.webp`}
           alt={itemName}
           className="rounded-t-2xl"
         />

@@ -1,6 +1,6 @@
-import type { RootState } from "../state/store";
+import type { RootState } from "../../state/store";
 import { useSelector } from "react-redux";
-import type { ItemsGroup } from "../state/ingredientGroups/ingredientGroupsSlice";
+import type { ItemsGroup } from "../../state/ingredientGroups/ingredientGroupsSlice";
 import UnitsPanel from "./UnitsPanel";
 
 function UnitsSelection() {

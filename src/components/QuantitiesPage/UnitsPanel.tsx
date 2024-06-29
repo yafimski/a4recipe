@@ -1,11 +1,11 @@
-import { commonUnits, extraUnits } from "../utils/data";
+import { commonUnits, extraUnits } from "../../utils/data";
 import UnitsButtonGroup from "./UnitsButtonGroup";
 import {
   type IngredientItem,
   updateUnit,
-} from "../state/ingredientGroups/ingredientGroupsSlice";
+} from "../../state/ingredientGroups/ingredientGroupsSlice";
 import { useDispatch } from "react-redux";
-import IngredientFullItem from "./IngredientFullItem";
+import IngredientFullItem from "../IngredientFullItem";
 
 interface UnitsPanelProps {
   groupName: string;

@@ -1,20 +1,19 @@
 import { useDispatch, useSelector } from "react-redux";
-import "../index.css";
-import {
-  nameGroup,
-  nameRecipe,
-  resetRecipe,
-  setItem,
-  updatePossibleItems,
-} from "../state/recipe/recipeSlice";
+import type { RootState } from "../../state/store";
 import {
   type ItemsGroup,
   addItemToIngredientGroup,
   resetIngredientGroup,
-} from "../state/ingredientGroups/ingredientGroupsSlice";
-import { setWarning } from "../state/warning/warningSlice";
-import WarningSnack from "./WarningSnack";
-import type { RootState } from "../state/store";
+} from "../../state/ingredientGroups/ingredientGroupsSlice";
+import {
+  setItem,
+  updatePossibleItems,
+  resetRecipe,
+  nameRecipe,
+  nameGroup,
+} from "../../state/recipe/recipeSlice";
+import { setWarning } from "../../state/warning/warningSlice";
+import WarningSnack from "../WarningSnack";
 
 function Header() {
   const dispatch = useDispatch();

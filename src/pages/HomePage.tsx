@@ -1,6 +1,6 @@
-import Header from "../components/Header";
-import SelectionGallery from "../components/SelectionGallery";
-import ChosenIngredientsGallery from "../components/ChosenIngredientsGallery";
+import Header from "../components/HomePage/Header";
+import SelectionGallery from "../components/HomePage/SelectionGallery";
+import ChosenIngredientsGallery from "../components/HomePage/ChosenIngredientsGallery";
 import GoToButton from "../components/GoToButton";
 import { useSelector } from "react-redux";
 import type { RootState } from "../state/store";

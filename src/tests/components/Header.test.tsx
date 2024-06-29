@@ -3,7 +3,7 @@ import "@testing-library/jest-dom/vitest";
 import { cleanup, render, screen } from "@testing-library/react";
 import { Provider } from "react-redux";
 import createMockStore from "../../test-utils/mockStore";
-import Header from "../../components/Header";
+import Header from "../../components/HomePage/Header";
 
 describe("Header", () => {
   let store: ReturnType<typeof createMockStore>;

@@ -46,6 +46,10 @@ input::placeholder {
     @apply border border-solid border-gray-300 rounded-2xl;
   }
 
+  .border-selected {
+    @apply ring-4 ring-green-600 rounded-2xl;
+  }
+
   .semi-height {
     max-height: 60vh;
   }

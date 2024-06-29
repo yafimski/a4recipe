@@ -1,7 +1,7 @@
+import { lazy, Suspense } from "react";
 import { useSelector } from "react-redux";
-import type { RootState } from "../state/store";
-import { Suspense, lazy } from "react";
-import { defUnit } from "../utils/helpers";
+import { defUnit } from "../../utils/helpers";
+import type { RootState } from "../../state/store";
 
 const IngredientGalleryItem = lazy(() => import("./IngredientGalleryItem"));
 

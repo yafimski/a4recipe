@@ -1,6 +1,6 @@
 import { useDispatch, useSelector } from "react-redux";
-import type { RootState } from "../state/store";
-import { updateUnit } from "../state/ingredientGroups/ingredientGroupsSlice";
+import type { RootState } from "../../state/store";
+import { updateUnit } from "../../state/ingredientGroups/ingredientGroupsSlice";
 
 interface UnitsButtonGroupProps {
   identifier: string;

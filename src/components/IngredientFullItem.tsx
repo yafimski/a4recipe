@@ -1,6 +1,6 @@
 import type { IngredientItem } from "../state/ingredientGroups/ingredientGroupsSlice";
 import { defUnit } from "../utils/helpers";
-import AmountInput from "./AmountInput";
+import AmountInput from "./QuantitiesPage/AmountInput";
 
 interface IngredientProp {
   groupName: string;
@@ -17,7 +17,7 @@ function IngredientFullItem({ groupName, item }: IngredientProp) {
         className="flex flex-row w-72 h-32 rounded-2xl card-shadow"
       >
         <img
-          src={`../src/assets/${itemName.toLowerCase()}.webp`}
+          src={`../src/assets/ingredients/${itemName.toLowerCase()}.webp`}
           alt={itemName}
           className="rounded-l-2xl"
         />

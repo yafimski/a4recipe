@@ -1,6 +1,6 @@
 import { useSelector } from "react-redux";
 import GoToButton from "../components/GoToButton";
-import UnitsSelection from "../components/UnitsSelection";
+import UnitsSelection from "../components/QuantitiesPage/UnitsSelection";
 import WarningSnack from "../components/WarningSnack";
 import type { RootState } from "../state/store";
 

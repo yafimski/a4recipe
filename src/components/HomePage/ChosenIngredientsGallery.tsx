@@ -1,8 +1,8 @@
-import type { RootState } from "../state/store";
 import { useDispatch, useSelector } from "react-redux";
-import type { ItemsGroup } from "../state/ingredientGroups/ingredientGroupsSlice";
-import { nameGroup } from "../state/recipe/recipeSlice";
-import IngredientImage from "./IngredientImage";
+import type { ItemsGroup } from "../../state/ingredientGroups/ingredientGroupsSlice";
+import { nameGroup } from "../../state/recipe/recipeSlice";
+import IngredientImage from "../IngredientImage";
+import type { RootState } from "../../state/store";
 
 function ChosenIngredientsGallery() {
   const dispatch = useDispatch();
@@ -33,11 +33,13 @@ function ChosenIngredientsGallery() {
           </p>
           <div className="flex flex-wrap justify-center gap-y-4 mb-10 center ">
             {group.items.map((item, i) => (
-              <IngredientImage
-                key={`${item}${i.toString()}`}
-                groupName={group.groupName}
-                itemName={item.itemName}
-              />
+              <div key={`${item}${i.toString()}`} className="mx-2">
+                <IngredientImage
+                  groupName={group.groupName}
+                  itemName={item.itemName}
+                  allowRemove={true}
+                />
+              </div>
             ))}
           </div>
         </div>

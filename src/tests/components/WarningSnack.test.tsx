@@ -5,7 +5,7 @@ import { Provider } from "react-redux";
 
 import createMockStore from "../../test-utils/mockStore";
 
-import Header from "../../components/Header";
+import Header from "../../components/HomePage/Header";
 import userEvent from "@testing-library/user-event";
 import type { RootState } from "../../state/store";
 
@@ -48,6 +48,7 @@ describe("WarningSnack", () => {
         ingredientsGroups: [],
       },
       warning: { ...store.getState().warning },
+      actions: { ...store.getState().actions },
     };
 
     const snack = await setupTest(customInitialState);
@@ -66,6 +67,7 @@ describe("WarningSnack", () => {
         ingredientsGroups: [],
       },
       warning: { ...store.getState().warning },
+      actions: { ...store.getState().actions },
     };
 
     const snack = await setupTest(customInitialState);
@@ -84,6 +86,7 @@ describe("WarningSnack", () => {
         ingredientsGroups: [],
       },
       warning: { ...store.getState().warning },
+      actions: { ...store.getState().actions },
     };
 
     const snack = await setupTest(customInitialState);
@@ -102,6 +105,7 @@ describe("WarningSnack", () => {
         ingredientsGroups: [],
       },
       warning: { ...store.getState().warning },
+      actions: { ...store.getState().actions },
     };
 
     const snack = await setupTest(customInitialState);
