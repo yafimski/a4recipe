@@ -17,7 +17,16 @@ export interface ItemsGroups {
 }
 
 const initialState: ItemsGroups = {
-  ingredientsGroups: [],
+  ingredientsGroups: [
+    {
+      groupName: "a",
+      items: [
+        { itemName: "Garlic", amount: 1, unit: "g" },
+        { itemName: "Apples", amount: 4, unit: "whole" },
+        { itemName: "Olive oil", amount: 1, unit: "l" },
+      ],
+    },
+  ],
 };
 
 const ingredientGroupsSlice = createSlice({

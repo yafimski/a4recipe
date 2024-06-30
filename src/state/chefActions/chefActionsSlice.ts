@@ -17,10 +17,14 @@ export interface ChefInstruction {
 
 export interface ChefInstructions {
   chefInstructions: ChefInstruction[];
+  currentAction: ChefAction | null;
+  currentItems: IngredientItem[];
 }
 
 const initialState: ChefInstructions = {
   chefInstructions: [],
+  currentAction: null,
+  currentItems: [],
 };
 
 const chefActionSlice = createSlice({
@@ -29,8 +33,22 @@ const chefActionSlice = createSlice({
   reducers: {
     resetChefInstructions: (state) => {
       state.chefInstructions = [];
+      state.currentAction = null;
+      state.currentItems = [];
+    },
+    setCurrentAction: (state, action: PayloadAction<ChefAction | null>) => {
+      state.currentAction = action.payload;
+    },
+    addToCurrentActionItems: (state, action: PayloadAction<IngredientItem>) => {
+      state.currentItems = [...state.currentItems, action.payload];
+    },
+    removeFromCurrentActionItems: (state, action: PayloadAction<IngredientItem>) => {
+      state.currentItems = state.currentItems.filter(
+        (item) => !isEqual(item, action.payload)
+      );
     },
     addChefInstruction: (state, action: PayloadAction<ChefInstruction>) => {
+      console.log("addChefInstruction called with:", action.payload);
       state.chefInstructions.push(action.payload);
     },
     removeChefInstruction: (state, action: PayloadAction<ChefInstruction>) => {
@@ -64,6 +82,20 @@ const chefActionSlice = createSlice({
         state.chefInstructions.push(updatedInstruction);
       }
     },
+    updateInstructionTime: (
+      state,
+      action: PayloadAction<{ instruction: ChefInstruction; time: number }>
+    ) => {
+      const { instruction, time } = action.payload;
+
+      const existingInstruction = state.chefInstructions.find((inst) =>
+        isEqual(inst, instruction)
+      );
+
+      if (existingInstruction) {
+        existingInstruction.action.time = time;
+      }
+    },
   },
 });
 
@@ -72,6 +104,10 @@ export const {
   addChefInstruction,
   removeChefInstruction,
   updateChefInstructionItems,
+  setCurrentAction,
+  addToCurrentActionItems,
+  removeFromCurrentActionItems,
+  updateInstructionTime,
 } = chefActionSlice.actions;
 
 export default chefActionSlice.reducer;

@@ -54,6 +54,10 @@ input::placeholder {
     max-height: 60vh;
   }
 
+  .page-height {
+    max-height: 90vh;
+  }
+
   .main-gallery {
     @apply input-gallery-border flex flex-col overflow-hidden semi-height;
   }

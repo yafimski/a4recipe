@@ -11,7 +11,7 @@ export interface RecipeState {
 }
 
 const initialState: RecipeState = {
-  title: "",
+  title: "Mock",
   currentItem: "",
   currentGroupName: "",
   possibleItems: allPossibleIngredients,
