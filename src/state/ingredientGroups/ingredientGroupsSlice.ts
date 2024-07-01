@@ -24,6 +24,34 @@ const initialState: ItemsGroups = {
         { itemName: "Garlic", amount: 1, unit: "g" },
         { itemName: "Apples", amount: 4, unit: "whole" },
         { itemName: "Olive oil", amount: 1, unit: "l" },
+        { itemName: "Water", amount: 1, unit: "l" },
+        { itemName: "Lemon zest", amount: 1, unit: "l" },
+        { itemName: "Kale", amount: 1, unit: "l" },
+      ],
+    },
+    {
+      groupName: "asdv",
+      items: [
+        { itemName: "Garlic", amount: 1, unit: "g" },
+        { itemName: "Water", amount: 1, unit: "l" },
+      ],
+    },
+    {
+      groupName: "c",
+      items: [
+        { itemName: "Garlic", amount: 1, unit: "g" },
+        { itemName: "Apples", amount: 4, unit: "whole" },
+        { itemName: "Olive oil", amount: 1, unit: "l" },
+        { itemName: "Water", amount: 1, unit: "l" },
+        { itemName: "Lemon zest", amount: 1, unit: "l" },
+      ],
+    },
+    {
+      groupName: "d",
+      items: [
+        { itemName: "Apples", amount: 4, unit: "whole" },
+        { itemName: "Olive oil", amount: 1, unit: "l" },
+        { itemName: "Water", amount: 1, unit: "l" },
       ],
     },
   ],
@@ -33,7 +61,7 @@ const ingredientGroupsSlice = createSlice({
   name: "groups",
   initialState,
   reducers: {
-    resetIngredientGroup: (state) => {
+    resetIngredientsGroup: (state) => {
       state.ingredientsGroups = [];
     },
     addItemToIngredientGroup: (
@@ -126,7 +154,7 @@ export const {
   removeItemFromIngredientGroup,
   updateAmount,
   updateUnit,
-  resetIngredientGroup,
+  resetIngredientsGroup,
 } = ingredientGroupsSlice.actions;
 
 export default ingredientGroupsSlice.reducer;

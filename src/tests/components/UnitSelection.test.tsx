@@ -6,7 +6,7 @@ import { act } from "react";
 import { Provider } from "react-redux";
 import createMockStore from "../../test-utils/mockStore";
 import { RouterProvider, createMemoryRouter } from "react-router-dom";
-import routesConfig from "../../test-utils/mockRouter";
+import routesConfig from "../../utils/routerConfig";
 import { defUnit } from "../../utils/helpers";
 
 describe("UnitSelection", () => {

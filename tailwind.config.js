@@ -6,6 +6,7 @@ export default {
       fontSize: {
         fluidTitle: "var(--fluid-16-40)",
         fluidSubtitle: "var(--fluid-16-24)",
+        fluidFooter: "var(--fluid-2-6)",
       },
     },
   },

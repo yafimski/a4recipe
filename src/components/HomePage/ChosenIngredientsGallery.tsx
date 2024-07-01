@@ -1,5 +1,8 @@
 import { useDispatch, useSelector } from "react-redux";
-import type { ItemsGroup } from "../../state/ingredientGroups/ingredientGroupsSlice";
+import {
+  removeItemFromIngredientGroup,
+  type ItemsGroup,
+} from "../../state/ingredientGroups/ingredientGroupsSlice";
 import { nameGroup } from "../../state/recipe/recipeSlice";
 import IngredientImage from "../IngredientImage";
 import type { RootState } from "../../state/store";
@@ -16,6 +19,10 @@ function ChosenIngredientsGallery() {
       e.preventDefault();
       e.stopPropagation();
     }
+  };
+
+  const handleRemoveItemFromIngredients = (groupName: string, itemName: string) => {
+    dispatch(removeItemFromIngredientGroup({ groupName, itemName }));
   };
 
   return (
@@ -38,6 +45,9 @@ function ChosenIngredientsGallery() {
                   groupName={group.groupName}
                   itemName={item.itemName}
                   allowRemove={true}
+                  onRemove={() =>
+                    handleRemoveItemFromIngredients(group.groupName, item.itemName)
+                  }
                 />
               </div>
             ))}

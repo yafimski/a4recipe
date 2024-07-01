@@ -3,7 +3,7 @@ import type { RootState } from "../../state/store";
 import {
   type ItemsGroup,
   addItemToIngredientGroup,
-  resetIngredientGroup,
+  resetIngredientsGroup,
 } from "../../state/ingredientGroups/ingredientGroupsSlice";
 import {
   setItem,
@@ -76,7 +76,7 @@ function Header() {
 
   const handleReset = () => {
     dispatch(resetRecipe());
-    dispatch(resetIngredientGroup());
+    dispatch(resetIngredientsGroup());
   };
 
   return (

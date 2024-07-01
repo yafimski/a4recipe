@@ -18,6 +18,10 @@ function GoToButton({ page, isNext }: GoToButtonProps) {
     (state: RootState) => state.groups.ingredientsGroups
   );
 
+  const chefInstructions = useSelector(
+    (state: RootState) => state.actions.chefInstructions
+  );
+
   const areUnitsValid = async () => {
     const allItems = ingredientsGroups.flatMap((group) => group.items.flat());
 
@@ -25,6 +29,22 @@ function GoToButton({ page, isNext }: GoToButtonProps) {
     const allItemsHaveUnits = allItems.every((item) => item.unit !== defUnit);
 
     return allItemsHaveAmount && allItemsHaveUnits;
+  };
+
+  const areInstructionsValid = async () => {
+    const allInstructionsHaveItems = chefInstructions.every(
+      (inst) => inst.items.length > 0
+    );
+
+    const allRelevantInstructionsHaveTime = chefInstructions.every(
+      (inst) => inst.action.time !== 0
+    );
+
+    return (
+      chefInstructions.length > 0 &&
+      allInstructionsHaveItems &&
+      allRelevantInstructionsHaveTime
+    );
   };
 
   const handleNext = async () => {
@@ -38,6 +58,12 @@ function GoToButton({ page, isNext }: GoToButtonProps) {
 
       if (page === "/instructions") {
         if (await areUnitsValid()) {
+          pageValid = true;
+        }
+      }
+
+      if (page === "/result") {
+        if (await areInstructionsValid()) {
           pageValid = true;
         }
       }

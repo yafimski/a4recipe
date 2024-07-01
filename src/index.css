@@ -9,6 +9,11 @@ html {
   box-sizing: border-box;
 }
 
+div,
+button {
+  user-select: none;
+}
+
 input {
   padding: 0.5em 1em;
 }
@@ -21,6 +26,7 @@ input::placeholder {
   :root {
     --fluid-16-40: clamp(1rem, -1.2722rem + 3.5503vi, 2.5rem);
     --fluid-16-24: clamp(1rem, 0.2426rem + 1.1834vi, 1.5rem);
+    --fluid-2-6: clamp(0.125rem, -0.2537rem + 0.5917cqi, 0.375rem);
   }
 
   .grid-autofill {
@@ -50,16 +56,44 @@ input::placeholder {
     @apply ring-4 ring-green-600 rounded-2xl;
   }
 
+  .text-footer {
+    font-size: 0.5ch;
+  }
+
   .semi-height {
     max-height: 60vh;
   }
 
-  .page-height {
-    max-height: 90vh;
+  .half-height {
+    max-height: 55ch;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+
+  .short-height {
+    max-height: 20ch;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+
+  .short-height::-webkit-scrollbar {
+    display: none;
+  }
+
+  .half-height::-webkit-scrollbar {
+    display: none;
   }
 
   .main-gallery {
     @apply input-gallery-border flex flex-col overflow-hidden semi-height;
+  }
+
+  .a4ratio {
+    aspect-ratio: 1 / 1.41;
+  }
+
+  .a4scale {
+    scale: 0.75;
   }
 
   .card-shadow {

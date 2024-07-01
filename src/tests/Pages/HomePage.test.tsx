@@ -7,7 +7,7 @@ import userEvent from "@testing-library/user-event";
 
 import { Provider } from "react-redux";
 import createMockStore from "../../test-utils/mockStore";
-import routesConfig from "../../test-utils/mockRouter";
+import routesConfig from "../../utils/routerConfig";
 import { RouterProvider, createMemoryRouter } from "react-router-dom";
 
 describe("HomePage", () => {

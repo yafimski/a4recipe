@@ -47,7 +47,7 @@ function TimeInput({ instruction }: TimeInputProps) {
         <FontAwesomeIcon icon={faMinus} className="cursor-pointer text-xl" />
       </button>
       <input
-        className={`w-24 focus:outline-none text-center bg-transparent text-2xl ${
+        className={`w-20 focus:outline-none text-center bg-transparent text-2xl bg-yellow-300 ${
           localTime === 0 && "required-element-fill"
         }`}
         type="number"

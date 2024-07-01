@@ -11,6 +11,7 @@ export interface ChefAction {
 
 export interface ChefInstruction {
   id: number;
+  note: string;
   action: ChefAction;
   items: IngredientItem[];
 }
@@ -19,12 +20,14 @@ export interface ChefInstructions {
   chefInstructions: ChefInstruction[];
   currentAction: ChefAction | null;
   currentItems: IngredientItem[];
+  currentInstruction: ChefInstruction | null;
 }
 
 const initialState: ChefInstructions = {
   chefInstructions: [],
   currentAction: null,
   currentItems: [],
+  currentInstruction: null,
 };
 
 const chefActionSlice = createSlice({
@@ -33,11 +36,15 @@ const chefActionSlice = createSlice({
   reducers: {
     resetChefInstructions: (state) => {
       state.chefInstructions = [];
-      state.currentAction = null;
-      state.currentItems = [];
+    },
+    setCurrentInstruction: (state, action: PayloadAction<ChefInstruction | null>) => {
+      state.currentInstruction = action.payload;
     },
     setCurrentAction: (state, action: PayloadAction<ChefAction | null>) => {
       state.currentAction = action.payload;
+    },
+    setCurrentItems: (state, action: PayloadAction<IngredientItem[]>) => {
+      state.currentItems = action.payload;
     },
     addToCurrentActionItems: (state, action: PayloadAction<IngredientItem>) => {
       state.currentItems = [...state.currentItems, action.payload];
@@ -48,7 +55,6 @@ const chefActionSlice = createSlice({
       );
     },
     addChefInstruction: (state, action: PayloadAction<ChefInstruction>) => {
-      console.log("addChefInstruction called with:", action.payload);
       state.chefInstructions.push(action.payload);
     },
     removeChefInstruction: (state, action: PayloadAction<ChefInstruction>) => {
@@ -96,18 +102,46 @@ const chefActionSlice = createSlice({
         existingInstruction.action.time = time;
       }
     },
+    updateInstructionAction: (
+      state,
+      action: PayloadAction<{ id: number; action: ChefAction }>
+    ) => {
+      const existingInstruction = state.chefInstructions.find(
+        (inst) => inst.id === action.payload.id
+      );
+
+      if (existingInstruction) {
+        existingInstruction.action = action.payload.action;
+      }
+    },
+    updateInstructionNote: (
+      state,
+      action: PayloadAction<{ id: number; note: string }>
+    ) => {
+      const existingInstruction = state.chefInstructions.find(
+        (inst) => inst.id === action.payload.id
+      );
+
+      if (existingInstruction) {
+        existingInstruction.note = action.payload.note;
+      }
+    },
   },
 });
 
 export const {
   resetChefInstructions,
+  setCurrentInstruction,
   addChefInstruction,
   removeChefInstruction,
   updateChefInstructionItems,
   setCurrentAction,
+  setCurrentItems,
   addToCurrentActionItems,
   removeFromCurrentActionItems,
   updateInstructionTime,
+  updateInstructionAction,
+  updateInstructionNote,
 } = chefActionSlice.actions;
 
 export default chefActionSlice.reducer;

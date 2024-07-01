@@ -1,11 +1,10 @@
 import "./index.css";
 import React from "react";
-
+import { Provider } from "react-redux";
 import ReactDOM from "react-dom/client";
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
-import routesConfig from "../src/test-utils/mockRouter";
 
-import { Provider } from "react-redux";
+import routesConfig from "./utils/routerConfig";
 import { store } from "./state/store";
 
 const router = createBrowserRouter(routesConfig);
