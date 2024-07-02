@@ -21,7 +21,7 @@ function UnitsPanel({ groupName, items }: UnitsPanelProps) {
 
   return (
     <div className="flex flex-col items-start mx-8">
-      <p className="text-lg bg-slate-200 px-8 rounded-2xl mb-4">{groupName}</p>
+      <p className="group-chip-dead">{groupName}</p>
       {items.map((item: IngredientItem) => (
         <div key={`${groupName}_${item.itemName}}`} className="flex flex-row center mb-8">
           <IngredientFullItem
@@ -35,11 +35,11 @@ function UnitsPanel({ groupName, items }: UnitsPanelProps) {
           >
             <UnitsButtonGroup
               identifier={`${item.itemName}_${groupName}_common1`}
-              units={commonUnits.slice(0, commonUnits.length / 2 + 1)}
+              units={commonUnits.slice(0, commonUnits.length / 2)}
             />
             <UnitsButtonGroup
               identifier={`${item.itemName}_${groupName}_common2`}
-              units={commonUnits.slice(commonUnits.length / 2 + 1)}
+              units={commonUnits.slice(commonUnits.length / 2)}
             />
           </div>
           <form>

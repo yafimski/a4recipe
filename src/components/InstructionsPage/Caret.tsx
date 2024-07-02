@@ -1,6 +1,6 @@
 import type { IconDefinition } from "@fortawesome/fontawesome-svg-core";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { handleKeyDown } from "../../utils/helpers";
+import { handleKeyDownPrevent } from "../../utils/helpers";
 
 interface CaretProps {
   icon: IconDefinition;
@@ -12,7 +12,7 @@ function Caret({ icon, onCaretClick }: CaretProps) {
     <div
       className="flex center short-height cursor-pointer hover:border-y-2 hover:border-black"
       onClick={() => onCaretClick()}
-      onKeyDown={handleKeyDown}
+      onKeyDown={handleKeyDownPrevent}
     >
       <FontAwesomeIcon icon={icon} size="lg" />
     </div>

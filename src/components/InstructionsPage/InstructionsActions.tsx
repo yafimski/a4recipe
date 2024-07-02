@@ -5,10 +5,9 @@ import {
   type ChefAction,
 } from "../../state/chefActions/chefActionsSlice";
 import { allPossibleChefActions } from "../../utils/data";
-import { handleKeyDown } from "../../utils/helpers";
-import ActionImage from "../ActionImage";
 import { useDispatch, useSelector } from "react-redux";
 import type { RootState } from "../../state/store";
+import ActionImageWithName from "../ActionImageWithName";
 
 function InstructionsActions() {
   const dispatch = useDispatch();
@@ -20,7 +19,7 @@ function InstructionsActions() {
 
   const [chosenAction, setChosenAction] = useState<ChefAction | null>(null);
 
-  const handleChooseAction = (action: ChefAction) => {
+  const handleChooseAction = (_e: React.MouseEvent, action: ChefAction) => {
     if (chosenAction?.actionName === action.actionName) {
       setChosenAction(null);
       dispatch(setCurrentAction(null));
@@ -39,20 +38,14 @@ function InstructionsActions() {
     setChosenAction(currentAction);
   }, [currentAction]);
 
-  return allPossibleChefActions.map((action: ChefAction, i) => (
-    <div
-      key={`${action.actionName}_${i}`}
-      className={`mr-6 mb-4 bg-white card-shadow rounded-2xl hover:opacity-100 ${
-        action.actionName === chosenAction?.actionName
-          ? "opacity-100 border-selected"
-          : "opacity-70"
-      }`}
-      onClick={() => handleChooseAction(action)}
-      onKeyDown={handleKeyDown}
-    >
-      <ActionImage action={action} allowRemove={false} />
-      <p className="py-1">{action.actionName}</p>
-    </div>
+  return allPossibleChefActions.map((action: ChefAction) => (
+    <ActionImageWithName
+      key={`${action.actionName}`}
+      action={action}
+      chosenAction={chosenAction}
+      allowRemove={false}
+      onClickAction={(e, action) => handleChooseAction(e, action)}
+    />
   ));
 }
 

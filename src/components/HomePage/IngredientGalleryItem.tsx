@@ -39,21 +39,23 @@ function IngredientGalleryItem({ item }: { item: IngredientItem }) {
   };
 
   return (
-    <div className="grid center" data-testid={`${itemName}_gallery`}>
-      <div className="relative flex flex-col rounded-2xl card-shadow md:w-20 lg:w-28 xl:w-32 aspect-video-reverse">
+    <div className="flex flex-row" data-testid={`${itemName}_gallery`}>
+      <div className="relative flex flex-col rounded-2xl card-shadow w-cw aspect-video-reverse">
         <img
           src={`../src/assets/ingredients/${itemName.toLowerCase()}.webp`}
           alt={itemName}
           className="rounded-t-2xl"
         />
-        <div className="absolute inset-0 flex center bg-white bg-opacity-70 opacity-0 hover:opacity-100 transition-opacity">
+        <div className="absolute inset-0 flex center bg-white rounded-2xl bg-opacity-70 opacity-0 hover:opacity-100 transition-opacity">
           <FontAwesomeIcon
             icon={faCirclePlus}
             onClick={() => handleAddItemFromIngredients()}
             className="cursor-pointer text-4xl text-green-600"
           />
         </div>
-        <p className="flex flex-grow rounded-b-2xl center px-4 text-center">{itemName}</p>
+        <p className="flex flex-grow rounded-b-2xl center px-4 text-center sm:text-fluidCard">
+          {itemName}
+        </p>
       </div>
     </div>
   );

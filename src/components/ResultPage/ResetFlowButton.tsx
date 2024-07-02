@@ -1,5 +1,5 @@
 import { useNavigate } from "react-router-dom";
-import { handleKeyDown } from "../../utils/helpers";
+import { handleKeyDownPrevent } from "../../utils/helpers";
 import { useDispatch } from "react-redux";
 import { setWarning } from "../../state/warning/warningSlice";
 import { resetRecipe } from "../../state/recipe/recipeSlice";
@@ -28,10 +28,13 @@ function ResetFlowButton() {
   };
 
   return (
-    <div data-testid={"make_another"} onKeyDown={handleKeyDown} onClick={handleNext}>
+    <div
+      data-testid={"make_another"}
+      onKeyDown={handleKeyDownPrevent}
+      onClick={handleNext}
+    >
       <button
-        className="absolute w-24 h-24 m-8 py-8 px-6 card-shadow text-white font-semibold text-lg tracking-wider rounded-full
-            right-0 bg-green-500 hover:bg-green-400"
+        className="go-to-button-arrow right-0 py-4 bg-green-500 hover:bg-green-400 hover:-translate-y-4"
         type="button"
       >
         MAKE ANOTHER

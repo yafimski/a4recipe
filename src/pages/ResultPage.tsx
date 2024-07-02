@@ -14,16 +14,20 @@ function ResultPage() {
       <ResetFlowButton />
       <GoToButton page={"/instructions"} isNext={false} />
       <div className="flex flex-col center mt-12">
-        <div className="flex flex-col a4ratio w-2/5 text-center input-border justify-between">
-          <h1 className="text-fluidTitle mb-6">{recipeTitle}</h1>
-          <h2 className="text-fluidSubtitle mb-4">Ingredients:</h2>
-          <div className="flex flex-row flex-wrap p-2 w-fit center">
+        <div className="flex flex-col a4ratio w-2/5 text-center input-border">
+          <h1 className="text-fluidTitle font-shadow-light mb-2 bg-yellow-300">
+            {recipeTitle}
+          </h1>
+          <h2 className="text-fluidSubtitle bg-yellow-200">Ingredients:</h2>
+          <div className="flex flex-wrap p-2 w-fit items-start justify-center">
             <RecipeGroups />
           </div>
-          <h2 className="text-fluidSubtitle mt-8">Steps:</h2>
-          <RecipeInstructions />
-          <h2 className="text-fluidSubtitle mb-4">Enjoy!</h2>
-          <footer className="text-fluidFooter flex flex-col items-start p-4">
+          <h2 className="text-fluidSubtitle mt-2 bg-yellow-200">Steps:</h2>
+          <div className="a4scale flex flex-col center items-center">
+            <RecipeInstructions />
+          </div>
+          <h2 className="text-fluidSubtitle bg-yellow-200">Enjoy !</h2>
+          <footer className="text-fluidFooter font-indie flex flex-col items-start p-4">
             <p>*coded with love by Yafim Simanovsky</p>
             <p>https://github.com/yafimski/a4recipe</p>
           </footer>

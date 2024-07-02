@@ -14,7 +14,7 @@ function IngredientFullItem({ groupName, item }: IngredientProp) {
     <div data-testid="ingredientFullItem" className="flex center">
       <div
         key={`${groupName}_${itemName}`}
-        className="flex flex-row w-72 h-32 rounded-2xl card-shadow"
+        className="aspect-video-wide flex flex-row full-image rounded-2xl card-shadow"
       >
         <img
           src={`../src/assets/ingredients/${itemName.toLowerCase()}.webp`}
@@ -22,11 +22,11 @@ function IngredientFullItem({ groupName, item }: IngredientProp) {
           className="rounded-l-2xl"
         />
         <div className="flex flex-col center w-1/2 p-2 m-auto gap-1">
-          <p className="text-sm">{itemName}</p>
+          <p className="text-md font-indie ">{itemName}</p>
           <hr className="w-full border-gray-400 my-2" />
           <AmountInput item={item} groupName={groupName} />
           <p
-            className={`text-md font-semibold ${
+            className={`text-lg font-indie rounded-xl px-3 ${
               unit === defUnit && "required-element-fill"
             }`}
           >

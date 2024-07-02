@@ -1,8 +1,10 @@
 import { useNavigate } from "react-router-dom";
-import { defUnit, handleKeyDown } from "../utils/helpers";
+import { defUnit, handleKeyDownPrevent } from "../utils/helpers";
 import { useDispatch, useSelector } from "react-redux";
 import { setWarning } from "../state/warning/warningSlice";
 import type { RootState } from "../state/store";
+import { faArrowLeft, faArrowRight } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 interface GoToButtonProps {
   page: string;
@@ -50,21 +52,29 @@ function GoToButton({ page, isNext }: GoToButtonProps) {
   const handleNext = async () => {
     if (isNext) {
       let pageValid = false;
+      let warningText = "";
+
       if (page === "/quantities") {
         if (recipeTitle.length > 0 && ingredientsGroups.length > 0) {
           pageValid = true;
+        } else {
+          warningText = "Title and ingredients must be selected!";
         }
       }
 
       if (page === "/instructions") {
         if (await areUnitsValid()) {
           pageValid = true;
+        } else {
+          warningText = "Fill in all quantities and units!";
         }
       }
 
       if (page === "/result") {
         if (await areInstructionsValid()) {
           pageValid = true;
+        } else {
+          warningText = "Create some instructions with ingredients!";
         }
       }
 
@@ -72,7 +82,7 @@ function GoToButton({ page, isNext }: GoToButtonProps) {
         dispatch(setWarning(""));
         navigate(page);
       } else {
-        dispatch(setWarning("You forgot to fill in some elements!"));
+        dispatch(setWarning(warningText));
       }
     } else {
       dispatch(setWarning(""));
@@ -83,19 +93,26 @@ function GoToButton({ page, isNext }: GoToButtonProps) {
   return (
     <div
       data-testid={isNext ? "next" : "back"}
-      onKeyDown={handleKeyDown}
+      onKeyDown={handleKeyDownPrevent}
       onClick={handleNext}
     >
-      <button
-        className={`absolute w-24 h-24 m-8 py-8 px-6 card-shadow text-white font-semibold text-lg tracking-wider rounded-full ${
-          isNext
-            ? "right-0 bg-green-500 hover:bg-green-400"
-            : "left-0 bg-red-500 hover:bg-red-400"
-        } `}
-        type="button"
-      >
-        {isNext ? "NEXT" : "BACK"}
-      </button>
+      {isNext ? (
+        <button
+          className="go-to-button-arrow right-0 bg-green-500 hover:bg-green-400 hover:translate-x-4"
+          type="button"
+        >
+          NEXT
+          <FontAwesomeIcon icon={faArrowRight} className="text-xl ml-4" />
+        </button>
+      ) : (
+        <button
+          className="go-to-button-arrow left-0 bg-red-500 hover:bg-red-400 hover:-translate-x-4"
+          type="button"
+        >
+          <FontAwesomeIcon icon={faArrowLeft} className="text-xl mr-4" />
+          BACK
+        </button>
+      )}
     </div>
   );
 }

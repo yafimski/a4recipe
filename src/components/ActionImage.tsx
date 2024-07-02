@@ -11,6 +11,7 @@ function ActionImage({ action, allowRemove }: IngredientProp) {
   return (
     <div key={action.actionName} className="relative rounded-2xl aspect-square h-24">
       <img
+        draggable={false}
         src={`../src/assets/chefActions/${action.actionName.toLowerCase()}.webp`}
         alt={action.actionName}
         data-testid={`${action.actionName}_action`}

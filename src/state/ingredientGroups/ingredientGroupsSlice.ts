@@ -23,17 +23,17 @@ const initialState: ItemsGroups = {
       items: [
         { itemName: "Garlic", amount: 1, unit: "g" },
         { itemName: "Apples", amount: 4, unit: "whole" },
-        { itemName: "Olive oil", amount: 1, unit: "l" },
-        { itemName: "Water", amount: 1, unit: "l" },
-        { itemName: "Lemon zest", amount: 1, unit: "l" },
-        { itemName: "Kale", amount: 1, unit: "l" },
+        { itemName: "Olive oil", amount: 1, unit: "liter" },
+        { itemName: "Water", amount: 1, unit: "liter" },
+        { itemName: "Lemon zest", amount: 1, unit: "liter" },
+        { itemName: "Kale", amount: 1, unit: "liter" },
       ],
     },
     {
       groupName: "asdv",
       items: [
         { itemName: "Garlic", amount: 1, unit: "g" },
-        { itemName: "Water", amount: 1, unit: "l" },
+        { itemName: "Water", amount: 1, unit: "liter" },
       ],
     },
     {
@@ -41,17 +41,18 @@ const initialState: ItemsGroups = {
       items: [
         { itemName: "Garlic", amount: 1, unit: "g" },
         { itemName: "Apples", amount: 4, unit: "whole" },
-        { itemName: "Olive oil", amount: 1, unit: "l" },
-        { itemName: "Water", amount: 1, unit: "l" },
-        { itemName: "Lemon zest", amount: 1, unit: "l" },
+        { itemName: "Olive oil", amount: 1, unit: "liter" },
+        { itemName: "Water", amount: 1, unit: "liter" },
+        { itemName: "Lemon zest", amount: 1, unit: "liter" },
       ],
     },
     {
       groupName: "d",
       items: [
         { itemName: "Apples", amount: 4, unit: "whole" },
-        { itemName: "Olive oil", amount: 1, unit: "l" },
-        { itemName: "Water", amount: 1, unit: "l" },
+        { itemName: "Olive oil", amount: 1, unit: "liter" },
+        { itemName: "Water", amount: 1, unit: "liter" },
+        { itemName: "Cream of mushroom soup", amount: 1, unit: "liter" },
       ],
     },
   ],

@@ -41,13 +41,15 @@ function TimeInput({ instruction }: TimeInputProps) {
     dispatch(updateInstructionTime({ instruction, time: localTime }));
   }, [dispatch, instruction, localTime]);
 
+  console.log(localTime);
+
   return (
-    <div className="flex flex-row rounded-md mx-4">
-      <button type="button" className="mx-2" onClick={handleSubtract}>
-        <FontAwesomeIcon icon={faMinus} className="cursor-pointer text-xl" />
+    <div className="flex flex-row rounded-md mx-2">
+      <button type="button" onClick={handleSubtract}>
+        <FontAwesomeIcon icon={faMinus} className="num-input-icons" />
       </button>
       <input
-        className={`w-20 focus:outline-none text-center bg-transparent text-2xl bg-yellow-300 ${
+        className={`w-16 p-0 mx-4 focus:outline-none text-center rounded-2xl text-5xl ${
           localTime === 0 && "required-element-fill"
         }`}
         type="number"
@@ -58,8 +60,8 @@ function TimeInput({ instruction }: TimeInputProps) {
         onFocus={handleFocus}
         onWheel={(e) => (e.target as HTMLElement).blur()}
       />
-      <button type="button" className="mx-2" onClick={handleAdd}>
-        <FontAwesomeIcon icon={faPlus} className="cursor-pointer text-xl" />
+      <button type="button" onClick={handleAdd}>
+        <FontAwesomeIcon icon={faPlus} className="num-input-icons" />
       </button>
     </div>
   );

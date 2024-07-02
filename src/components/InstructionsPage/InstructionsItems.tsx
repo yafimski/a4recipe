@@ -1,10 +1,7 @@
 import type { RootState } from "../../state/store";
 import { useDispatch, useSelector } from "react-redux";
-import type {
-  IngredientItem,
-  ItemsGroup,
-} from "../../state/ingredientGroups/ingredientGroupsSlice";
-import { handleKeyDown } from "../../utils/helpers";
+import type { IngredientItem } from "../../state/ingredientGroups/ingredientGroupsSlice";
+import { handleKeyDownPrevent } from "../../utils/helpers";
 import IngredientImage from "../IngredientImage";
 import { useEffect, useState } from "react";
 import {
@@ -63,31 +60,27 @@ function InstructionsItems() {
     setChosenItems(currentItems.map((item) => item.itemName));
   }, [currentItems]);
 
-  return ingredientsGroups.map((group: ItemsGroup, i) => (
-    <div key={`${group.groupName}_${i}`} className="mb-12">
-      {group.items.map((item) => (
-        <div
-          key={`${group.groupName}_${item.itemName}`}
-          onKeyDown={handleKeyDown}
-          className="mb-4"
-        >
-          <div
-            className={`hover:opacity-100 ${
-              chosenItems.includes(item.itemName)
-                ? "opacity-100 border-selected"
-                : "opacity-50"
-            }`}
-            onClick={() => handleChooseItem(item)}
-            onKeyDown={handleKeyDown}
-          >
-            <IngredientImage
-              groupName={group.groupName}
-              itemName={item.itemName}
-              allowRemove={false}
-            />
-          </div>
-        </div>
-      ))}
+  const allItems = ingredientsGroups.flatMap((group) => group.items);
+
+  return allItems.map((item) => (
+    <div key={item.itemName} onKeyDown={handleKeyDownPrevent} className="py-2">
+      <div
+        data-item-name={item.itemName}
+        className={`hover:opacity-100 ${
+          chosenItems.includes(item.itemName)
+            ? "opacity-100 border-selected"
+            : "opacity-50"
+        }`}
+        onClick={() => handleChooseItem(item)}
+        onKeyDown={handleKeyDownPrevent}
+      >
+        <IngredientImage
+          groupName={""}
+          itemName={item.itemName}
+          allowRemove={false}
+          size={"sm"}
+        />
+      </div>
     </div>
   ));
 }

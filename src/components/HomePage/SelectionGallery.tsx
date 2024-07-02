@@ -11,11 +11,11 @@ function SelectionGallery() {
   );
 
   const gridClass =
-    possibleIngredients.length < 5 ? "center grid-few gap-x-8" : "grid-autofill";
+    possibleIngredients.length < 5 ? "flex flex-row gap-x-8" : "grid-autofill";
 
   return (
-    <div className={"center overflow-auto"}>
-      <div className={`gap-y-8 gap-x-2 p-4 ${gridClass}`}>
+    <div className="flex flex-row overflow-auto no-scrollbar p-4  justify-evenly">
+      <div className={`flex flex-row flex-wrap center gap-y-8 gap-x-4 ${gridClass}`}>
         {possibleIngredients.map((itemName) => (
           <Suspense
             key={`${itemName}_suspense`}

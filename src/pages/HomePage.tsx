@@ -14,7 +14,7 @@ function HomePage() {
     <div data-testid="homepage" className="min-h-screen flex flex-col">
       <GoToButton page={"/quantities"} isNext={true} />
       <Header />
-      <div className="flex flex-grow p-4 gap-8 mx-4">
+      <div className="flex flex-grow p-4 gap-8 mx-4 mt-4">
         <div className="main-gallery w-3/5">
           <SelectionGallery />
         </div>

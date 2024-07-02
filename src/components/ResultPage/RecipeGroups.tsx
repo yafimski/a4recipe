@@ -1,6 +1,6 @@
 import { useSelector } from "react-redux";
 import type { RootState } from "../../state/store";
-import IngredientImage from "../IngredientImage";
+import PrintItemFull from "./PrintItemFull";
 
 function RecipeGroups() {
   const ingredientsGroups = useSelector(
@@ -8,17 +8,12 @@ function RecipeGroups() {
   );
 
   return ingredientsGroups.map((group) => (
-    <div key={group.groupName} className="mx-4 center flex flex-col">
-      <p className="bg-slate-200 w-fit px-8 rounded-2xl mb-1">{group.groupName}</p>
-      <div className="flex flex-row flex-wrap center mb-12">
+    <div key={group.groupName} className="flex flex-col center">
+      <p className="font-indie w-fit px-4 rounded-2xl text-md">{group.groupName}</p>
+      <div className="flex flex-row flex-wrap center rounded-2xl mb-4 px-2 recipe-group-border w-9/12">
         {group.items.map((item) => (
-          <div key={item.itemName} className="m-2">
-            <IngredientImage
-              groupName={group.groupName}
-              itemName={item.itemName}
-              allowRemove={false}
-              size={"sm"}
-            />
+          <div key={item.itemName} className="m-1">
+            <PrintItemFull groupName={group.groupName} item={item} />
           </div>
         ))}
       </div>

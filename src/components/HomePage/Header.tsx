@@ -14,6 +14,9 @@ import {
 } from "../../state/recipe/recipeSlice";
 import { setWarning } from "../../state/warning/warningSlice";
 import WarningSnack from "../WarningSnack";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faSearch } from "@fortawesome/free-solid-svg-icons";
+import { handleFocusSelect } from "../../utils/helpers";
 
 function Header() {
   const dispatch = useDispatch();
@@ -63,7 +66,7 @@ function Header() {
           dispatch(addItemToIngredientGroup(updatedData));
         }
       } else {
-        dispatch(setWarning("Too many ingredients found!"));
+        dispatch(setWarning("Too many ingredients at once!"));
       }
     }
   };
@@ -82,46 +85,62 @@ function Header() {
   return (
     <>
       <div className="w-full h-1/4 center text-center">
-        <h1 className="pt-6 text-fluidTitle">Welcome to a4recipe</h1>
-        <h3 className="text-xl pt-2 pb-4 text-fluidSubtitle">
+        <h1 className="pt-6 text-fluidTitle font-shadow-light ">Welcome to a4recipe</h1>
+        <h3 className="pt-2 pb-4 text-fluidSubtitle font-indie">
           Name your recipe and start adding ingredients!
         </h3>
         <input
           type="text"
           required
-          className={`w-1/4 center input-border rounded-3xl ${
+          className={`w-1/4 center input-border ${
             recipeTitle.length === 0 && "required-element-border"
           }`}
           placeholder="Give your recipe a name"
           value={recipeTitle}
           onChange={(e) => dispatch(nameRecipe(e.target.value))}
+          onKeyDown={(e) => {
+            if (e.key === "Enter") {
+              (e.target as HTMLInputElement).blur();
+            }
+          }}
+          onFocus={handleFocusSelect}
         />
         <form className="p-6 pb-4">
           <button
             type="button"
-            className="bg-gray-200 w-20 text-black rounded-3xl mr-16 py-2 card-shadow"
+            className="mr-24 sexy-button bg-slate-500 hover:bg-white hover:text-slate-500 focus:text-slate-500 focus:bg-gray-200 text-gray-50"
             onClick={handleReset}
           >
             RESET
           </button>
-          <input
-            type="text"
-            className="input-border w-96 mr-8"
-            placeholder="Search ingredient"
-            value={currentItem}
-            onInput={handleInputChange}
-          />
+          <>
+            <FontAwesomeIcon
+              icon={faSearch}
+              color="rgba(0,0,0,0.3)"
+              size="1x"
+              className="relative -mx-6"
+            />
+            <input
+              type="text"
+              className="input-border text-center w-96 mr-8"
+              placeholder="Search ingredients"
+              value={currentItem}
+              onInput={handleInputChange}
+              onFocus={handleFocusSelect}
+            />
+          </>
           <input
             type="text"
             className="input-border w-60"
             placeholder="Give them a group name"
             value={currentGroupName}
             onChange={(e) => dispatch(nameGroup(e.target.value))}
+            onFocus={handleFocusSelect}
           />
           <button
             form="addIngredientsSelect"
             type="submit"
-            className="bg-blue-500 w-20 text-white font-semibold rounded-3xl ml-4 py-2 card-shadow"
+            className="ml-8 sexy-button bg-blue-500 hover:bg-white hover:text-blue-500 focus:text-blue-500 focus:bg-gray-200 text-gray-50"
             onClick={(e) => handleAddIngredient(e, currentGroupName, currentItem)}
           >
             ADD

@@ -1,4 +1,4 @@
-@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Caveat:wght@400..700&family=Indie+Flower&family=Shadows+Into+Light&family=Shantell+Sans:ital,wght@0,300..800;1,300..800&display=swap&family=Roboto:wght@300;400;500;700&display=swap");
 
 @tailwind base;
 @tailwind components;
@@ -12,10 +12,17 @@ html {
 div,
 button {
   user-select: none;
+  font-family: "Roboto";
+}
+
+h2,
+input {
+  font-family: "Indie Flower";
 }
 
 input {
   padding: 0.5em 1em;
+  font-style: italic;
 }
 
 input::placeholder {
@@ -26,7 +33,48 @@ input::placeholder {
   :root {
     --fluid-16-40: clamp(1rem, -1.2722rem + 3.5503vi, 2.5rem);
     --fluid-16-24: clamp(1rem, 0.2426rem + 1.1834vi, 1.5rem);
+    --fluid-6-16: clamp(0.375rem, -0.5717rem + 1.6vi, 1rem);
     --fluid-2-6: clamp(0.125rem, -0.2537rem + 0.5917cqi, 0.375rem);
+  }
+
+  .font-shadow-light {
+    font-family: "Shadows Into Light";
+  }
+
+  .font-indie {
+    font-family: "Indie Flower";
+  }
+
+  .font-roboto {
+    font-family: "Roboto";
+    font-style: normal;
+  }
+
+  .instruction-word {
+    @apply font-indie text-xl mx-4;
+  }
+
+  .instruction-word-small {
+    @apply font-indie text-sm;
+  }
+
+  .num-input-icons {
+    @apply cursor-pointer text-xl;
+  }
+
+  .group-chip {
+    @apply px-8 py-1 border-2 rounded-2xl border-blue-300 text-black mb-4;
+    transition: all 0.5s;
+    -webkit-transition: all 0.5s;
+  }
+
+  .group-chip:hover {
+    @apply bg-blue-400 scale-110;
+    box-shadow: 0 0 8px rgba(0, 0, 0, 0.3);
+  }
+
+  .group-chip-dead {
+    @apply px-8 py-1 border-none rounded-2xl bg-blue-300 text-black mb-4;
   }
 
   .grid-autofill {
@@ -35,9 +83,46 @@ input::placeholder {
     grid-auto-columns: auto;
   }
 
-  .grid-few {
-    display: flex;
-    flex-direction: row;
+  .full-image {
+    height: 16ch;
+  }
+
+  .mini-image {
+    height: 7ch;
+  }
+
+  .mini-text {
+    font-family: "Indie Flower";
+    font-size: 7px;
+  }
+
+  .large-image {
+    height: 10ch;
+  }
+
+  .small-image {
+    height: 7ch;
+  }
+
+  .semi-height {
+    max-height: 60vh;
+  }
+
+  .half-height {
+    max-height: 55ch;
+  }
+
+  .short-height {
+    max-height: 20ch;
+  }
+
+  .no-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
   }
 
   .center {
@@ -45,11 +130,9 @@ input::placeholder {
   }
 
   .input-border {
-    @apply border border-solid border-gray-400 rounded-3xl;
-  }
-
-  .input-gallery-border {
-    @apply border border-solid border-gray-300 rounded-2xl;
+    @apply bg-white card-shadow rounded-lg;
+    border: 0.5px solid rgba(0, 0, 0, 0.12);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.12);
   }
 
   .border-selected {
@@ -60,32 +143,8 @@ input::placeholder {
     font-size: 0.5ch;
   }
 
-  .semi-height {
-    max-height: 60vh;
-  }
-
-  .half-height {
-    max-height: 55ch;
-    -ms-overflow-style: none;
-    scrollbar-width: none;
-  }
-
-  .short-height {
-    max-height: 20ch;
-    -ms-overflow-style: none;
-    scrollbar-width: none;
-  }
-
-  .short-height::-webkit-scrollbar {
-    display: none;
-  }
-
-  .half-height::-webkit-scrollbar {
-    display: none;
-  }
-
   .main-gallery {
-    @apply input-gallery-border flex flex-col overflow-hidden semi-height;
+    @apply flex flex-col overflow-hidden semi-height rounded-lg bg-white gallery-shadow p-4;
   }
 
   .a4ratio {
@@ -93,12 +152,29 @@ input::placeholder {
   }
 
   .a4scale {
-    scale: 0.75;
+    scale: 0.8;
+  }
+
+  .w-cw {
+    width: 6.5cqw;
   }
 
   .card-shadow {
     box-shadow: 0px 3px 3px -2px rgba(0, 0, 0, 0.2), 0px 3px 4px 0px rgba(0, 0, 0, 0.14),
       0px 1px 8px 0px rgba(0, 0, 0, 0.12);
+  }
+
+  .card-shadow-strong {
+    box-shadow: 0px 6px 6px -4px rgba(0, 0, 0, 0.4), 0px 6px 8px 0px rgba(0, 0, 0, 0.28),
+      0px 2px 16px 0px rgba(0, 0, 0, 0.24);
+  }
+
+  .gallery-shadow {
+    box-shadow: 0px 0px 15px 0px rgba(0, 0, 0, 0.3);
+  }
+
+  .thin-shadow {
+    box-shadow: 0px 3px 8px 0px rgba(0, 0, 0, 0.2);
   }
 
   .suspense-gallery-item {
@@ -107,6 +183,10 @@ input::placeholder {
 
   .aspect-video-reverse {
     aspect-ratio: 9 / 16;
+  }
+
+  .aspect-video-wide {
+    aspect-ratio: 18 / 9;
   }
 
   input[type="number"]::-webkit-inner-spin-button,
@@ -121,17 +201,38 @@ input::placeholder {
   }
 
   .toast {
+    @apply fixed top-16 left-1/2 transform -translate-x-1/2 bg-black text-white p-4 px-8;
     animation: fadeIn 1s ease-in-out;
   }
 
   .required-element-border {
-    border-width: 1px;
-    border-style: solid;
-    border-color: red;
+    border-bottom: 2px solid red;
   }
 
   .required-element-fill {
     background-color: rgba(255, 0, 0, 0.2);
+  }
+
+  .recipe-group-border {
+    border-left: 1px solid gray;
+    border-right: 1px solid gray;
+  }
+
+  .unit-card {
+    @apply bg-white text-black border-b-4 border-transparent thin-shadow p-1 px-2 mx-1 font-indie text-xl;
+  }
+
+  .unit-card-chosen {
+    @apply border-b-4 border-blue-500 text-blue-500 scale-110;
+    transition: 0.3s;
+  }
+
+  .sexy-button {
+    @apply py-1.5 px-6 rounded-xl rounded-t-xl tracking-wider leading-loose transition duration-200 card-shadow;
+  }
+
+  .go-to-button-arrow {
+    @apply absolute flex text-white text-center px-4 py-2 m-12 cursor-pointer font-semibold tracking-widest rounded-md duration-300 hover:gap-2;
   }
 }
 

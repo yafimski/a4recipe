@@ -1,18 +1,17 @@
-import { handleKeyDown } from "../../utils/helpers";
+import { handleKeyDownPrevent } from "../../utils/helpers";
 
 function PrintButton() {
   return (
     <div
       data-testid={"print"}
-      onKeyDown={handleKeyDown}
+      onKeyDown={handleKeyDownPrevent}
       onClick={() => console.log("here")}
     >
       <button
-        className="w-24 h-24 m-8 py-8 px-6 card-shadow text-white font-semibold text-lg tracking-wider rounded-full
-            right-0 bg-blue-500 hover:bg-blue-400"
         type="button"
+        className="my-8 sexy-button bg-blue-500 hover:bg-white hover:text-blue-500 focus:text-blue-500 focus:bg-gray-200 text-gray-50"
       >
-        Print!
+        PRINT PAGE
       </button>
     </div>
   );

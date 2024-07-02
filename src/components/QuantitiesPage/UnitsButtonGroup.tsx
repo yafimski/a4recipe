@@ -22,11 +22,11 @@ function UnitsButtonGroup({ identifier, units }: UnitsButtonGroupProps) {
 
   return (
     currentItem && (
-      <div className="md:text-sm lg:text-md">
+      <div className="text-fluidCard">
         {units.map((unit: string) => (
           <button
-            className={`border border-solid border-blue-500 rounded-lg min-w-min px-4 py-1 mr-1 ${
-              currentItem.unit === unit ? "bg-blue-300" : null
+            className={`unit-card my-1 sm: text-xs md:text-xl ${
+              currentItem.unit === unit ? "unit-card-chosen" : null
             }`}
             type="button"
             key={`${identifier}_${unit}`}

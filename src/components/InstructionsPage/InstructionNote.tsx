@@ -31,6 +31,11 @@ function InstructionNote({ instruction }: { instruction: ChefInstruction }) {
     dispatch(updateInstructionNote({ id: instruction.id, note: "" }));
   };
 
+  const handleNoteText = (e: React.ChangeEvent<HTMLInputElement>) => {
+    console.log(e.target.value);
+    setCurrentNoteText(e.target.value);
+  };
+
   const showInput = addingNoteId === instruction.id;
 
   useEffect(() => {
@@ -39,7 +44,7 @@ function InstructionNote({ instruction }: { instruction: ChefInstruction }) {
     }
   }, [showInput]);
 
-  return showInput ? (
+  return showInput || instruction.note ? (
     <div className="flex justify-end items-center w-96 bg-gray-400">
       <input
         type="text"
@@ -47,7 +52,7 @@ function InstructionNote({ instruction }: { instruction: ChefInstruction }) {
         className="input-border w-full text-sm text-center"
         placeholder="Add a note to this instruction"
         value={currentNoteText}
-        onChange={(e) => setCurrentNoteText(e.target.value)}
+        onChange={handleNoteText}
         onBlur={(e) => handleBlur(e.target.value)}
         onFocus={() => dispatch(setCurrentInstruction(instruction))}
       />

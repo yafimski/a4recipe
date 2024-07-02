@@ -1,7 +1,7 @@
 import { useSelector } from "react-redux";
 import type { RootState } from "../../state/store";
-import ActionImage from "../ActionImage";
 import IngredientImage from "../IngredientImage";
+import ActionImageWithName from "../ActionImageWithName";
 
 function RecipeInstructions() {
   const chefInstructions = useSelector(
@@ -9,36 +9,32 @@ function RecipeInstructions() {
   );
 
   return chefInstructions.map((inst) => (
-    <div key={`${inst.id}`} className="flex flex-col center mb-8">
-      <div className="flex pl-16">
-        <div className="flex center w-full">
-          <div className="py-2 a4scale">
-            <ActionImage action={inst.action} allowRemove={false} />
+    <div key={`${inst.id}`} className="center">
+      <div className="flex center justify-start gap-2 max-w-11/12 p-2 bg-green-300">
+        <ActionImageWithName
+          action={inst.action}
+          allowRemove={false}
+          chosenAction={null}
+          onClickAction={() => console.log("")}
+        />
+        <span className="instruction-word-small">THE</span>
+        {inst.items.map((item) => (
+          <div key={`${inst.id}_${item.itemName}`} className="m-1">
+            <IngredientImage
+              groupName={inst.id.toString()}
+              itemName={item.itemName}
+              allowRemove={false}
+              size="sm"
+            />
           </div>
-          <span>THE</span>
-          <div className="flex">
-            {inst.items.map((item) => (
-              <div key={`${inst.id}_${item.itemName}`} className=" a4scale">
-                <IngredientImage
-                  groupName={inst.id.toString()}
-                  itemName={item.itemName}
-                  allowRemove={false}
-                />
-              </div>
-            ))}
-          </div>
-          {inst.action.time !== -1 && (
-            <div className="flex center">
-              <span>
-                FOR {inst.action.time} {inst.action.unit}
-              </span>
-            </div>
-          )}
-        </div>
+        ))}
+        {inst.action.time !== -1 && (
+          <span className="instruction-word-small">
+            FOR {inst.action.time} {inst.action.unit}
+          </span>
+        )}
       </div>
-      <div className="flex center">
-        <p>{inst.note}</p>
-      </div>
+      <p className="instruction-word-small mb-4">{inst.note}</p>
     </div>
   ));
 }
