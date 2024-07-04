@@ -5,7 +5,7 @@ import {
   setCurrentInstruction,
 } from "../../state/chefActions/chefActionsSlice";
 import { useDispatch } from "react-redux";
-import { faClose, faPlus } from "@fortawesome/free-solid-svg-icons";
+import { faClose } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 function InstructionNote({ instruction }: { instruction: ChefInstruction }) {
@@ -32,7 +32,6 @@ function InstructionNote({ instruction }: { instruction: ChefInstruction }) {
   };
 
   const handleNoteText = (e: React.ChangeEvent<HTMLInputElement>) => {
-    console.log(e.target.value);
     setCurrentNoteText(e.target.value);
   };
 
@@ -44,33 +43,44 @@ function InstructionNote({ instruction }: { instruction: ChefInstruction }) {
     }
   }, [showInput]);
 
+  const handleKeyDownBlur = (
+    e: React.KeyboardEvent<HTMLInputElement>,
+    instruction: ChefInstruction
+  ) => {
+    if (e.key === "Enter") {
+      const { id, note } = instruction;
+      dispatch(updateInstructionNote({ id, note }));
+      (e.target as HTMLInputElement).blur();
+    }
+  };
+
   return showInput || instruction.note ? (
-    <div className="flex justify-end items-center w-96 bg-gray-400">
+    <div className="flex justify-end items-center w-96">
       <input
         type="text"
         ref={inputRef}
-        className="input-border w-full text-sm text-center"
+        className="input-border w-full text-sm text-center -m-4 text-ellipsis whitespace-nowrap overflow-hidden"
         placeholder="Add a note to this instruction"
         value={currentNoteText}
         onChange={handleNoteText}
         onBlur={(e) => handleBlur(e.target.value)}
         onFocus={() => dispatch(setCurrentInstruction(instruction))}
+        onKeyDown={(e) => handleKeyDownBlur(e, instruction)}
       />
       <FontAwesomeIcon
         icon={faClose}
         size="1x"
-        className="absolute mr-4 cursor-pointer"
+        className="absolute bg-white pl-2 cursor-pointer"
         onClick={() => handleCancelNote()}
       />
     </div>
   ) : (
     <button
       type="button"
-      className="flex center p-1 -m-1 w-16 card-shadow bg-blue-600 text-white rounded-2xl text-xs"
+      className="sexy-button px-3 py-2 -m-4 min-w-16 card-shadow border border-transparent bg-yellow-100 text-neutral-800 font-semibold rounded-lg text-xs hover:bg-white hover:border-2 hover:border-yellow-200"
       onClick={() => setAddingNoteId(instruction.id)}
     >
-      <FontAwesomeIcon icon={faPlus} size="sm" className="cursor-pointer" />
-      <span className="ml-1">Note</span>
+      <span>Add Note</span>
     </button>
   );
 }

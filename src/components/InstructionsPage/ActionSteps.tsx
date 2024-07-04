@@ -1,19 +1,37 @@
 import InstructionsItems from "./InstructionsItems";
 import InstructionsActions from "./InstructionsActions";
-import InstructionsPanels from "./InstructionsPanels";
 import { useDispatch, useSelector } from "react-redux";
 import type { RootState } from "../../state/store";
 import {
   type ChefInstruction,
+  type ChefAction,
   addChefInstruction,
-  setCurrentAction,
-  setCurrentInstruction,
-  setCurrentItems,
+  updateChefInstructionItems,
+  updateInstructionAction,
+  updateAvailableItems,
 } from "../../state/chefActions/chefActionsSlice";
 import { useEffect, useRef, useState } from "react";
 import { faAnglesLeft, faAnglesRight } from "@fortawesome/free-solid-svg-icons";
 import Caret from "./Caret";
 import type { IngredientItem } from "../../state/ingredientGroups/ingredientGroupsSlice";
+import {
+  DndContext,
+  type DragEndEvent,
+  type DragStartEvent,
+  DragOverlay,
+  closestCorners,
+  pointerWithin,
+  type Active,
+  type ClientRect,
+  type DroppableContainer,
+} from "@dnd-kit/core";
+import { restrictToWindowEdges } from "@dnd-kit/modifiers";
+import IngredientImage from "../IngredientImage";
+import PanelsContainer from "./PanelsContainer";
+import ActionImageWithName from "../ActionImageWithName";
+import { isEqual } from "lodash";
+import type { RectMap } from "@dnd-kit/core/dist/store";
+import type { Coordinates } from "@dnd-kit/utilities";
 
 function ActionSteps() {
   const scrollRef = useRef<HTMLDivElement>(null);
@@ -22,6 +40,8 @@ function ActionSteps() {
   const [isDragging, setIsDragging] = useState<boolean>(false);
   const [startX, setStartX] = useState<number>(0);
   const [scrollAmount, setScrollLeft] = useState<number>(0);
+  const [activeAction, setActiveAction] = useState<ChefAction | null>(null);
+  const [activeItem, setActiveItem] = useState<IngredientItem | null>(null);
 
   const [currentRef, setCurrentRef] = useState<React.RefObject<HTMLDivElement> | null>(
     null
@@ -32,30 +52,25 @@ function ActionSteps() {
     (state: RootState) => state.actions.chefInstructions
   );
 
-  const currentAction = useSelector((state: RootState) => state.actions.currentAction);
-
-  const currentItems = useSelector((state: RootState) => state.actions.currentItems);
-
-  const currentInstruction = useSelector(
-    (state: RootState) => state.actions.currentInstruction
-  );
-
   useEffect(() => {
     if (currentRef) {
       const scrollable = currentRef.current;
 
       const handleWheel = (e: WheelEvent) => {
+        const scrollAmount = 20;
         if (scrollable) {
+          e.preventDefault();
+
           if (e.deltaY < 0) {
-            scrollable.scrollLeft -= 5;
+            scrollable.scrollLeft -= scrollAmount;
           } else {
-            scrollable.scrollLeft += 5;
+            scrollable.scrollLeft += scrollAmount;
           }
         }
       };
 
       if (scrollable) {
-        scrollable.addEventListener("wheel", handleWheel, { passive: true });
+        scrollable.addEventListener("wheel", handleWheel, { passive: false });
       }
 
       return () => {
@@ -64,7 +79,7 @@ function ActionSteps() {
         }
       };
     }
-  });
+  }, [currentRef]);
 
   const scrollByItems = (direction: string) => {
     if (currentRef?.current) {
@@ -101,106 +116,161 @@ function ActionSteps() {
     }
   };
 
-  const handleAddInstruction = () => {
-    if (currentAction !== null && currentItems.length > 0) {
-      dispatch(
-        addChefInstruction({
-          id:
-            chefInstructions.length > 0
-              ? Math.max(...chefInstructions.map((inst) => inst.id)) + 1
-              : 0,
-          note: "",
-          action: currentAction,
-          items: currentItems,
-        })
-      );
-
-      dispatch(setCurrentAction(null));
-      dispatch(setCurrentItems([]));
-    }
-  };
-
-  const handleResetInstruction = () => {
-    dispatch(setCurrentInstruction(null));
-    dispatch(setCurrentAction(null));
-    dispatch(setCurrentItems([]));
-  };
-
-  const handleInstructionClick = (inst: ChefInstruction, item?: IngredientItem) => {
-    let actionsScrollbar = scrollRef.current;
+  const handleInstructionClick = (inst: ChefInstruction) => {
+    const actionsScrollbar = scrollRef.current;
     let targetAction = null;
 
-    if (item) {
-      actionsScrollbar = scrollRef2.current;
-      targetAction = actionsScrollbar?.querySelector(
-        `[data-item-name="${item.itemName}"]`
-      );
-    } else {
-      targetAction = actionsScrollbar?.querySelector(
-        `[data-action-name="${inst.action.actionName}"]`
-      );
-    }
+    targetAction = actionsScrollbar?.querySelector(
+      `[data-action-name="${inst.action.actionName}"]`
+    );
 
     if (targetAction) {
       targetAction.scrollIntoView({ behavior: "smooth", inline: "center" });
     }
   };
 
-  const buttonDisabled =
-    currentAction === null ||
-    currentItems.length === 0 ||
-    (currentAction !== null && currentInstruction !== null);
+  const handleAddInstruction = (action: ChefAction) => {
+    dispatch(
+      addChefInstruction({
+        id:
+          chefInstructions.length > 0
+            ? Math.max(...chefInstructions.map((inst) => inst.id)) + 1
+            : 0,
+        note: "",
+        action,
+        items: [],
+      })
+    );
+  };
+
+  const handleDragStart = (e: DragStartEvent) => {
+    if (e.active.data.current?.type === "Action") {
+      setActiveAction(e.active.data.current?.action);
+    } else {
+      setActiveAction(null);
+    }
+
+    if (e.active.data.current?.type === "Ingredient") {
+      setActiveItem(e.active.data.current?.item);
+    } else {
+      setActiveItem(null);
+    }
+  };
+
+  const handleDragEnd = (e: DragEndEvent) => {
+    const { active, over } = e;
+    if (!over) return;
+
+    const activeType = active.data.current?.type;
+    const overType = over.data.current?.type;
+
+    if (activeType === "Action" && overType === "Steps") {
+      handleAddInstruction(active.data.current?.action);
+    } else if (overType === "Instruction") {
+      const instruction = over.data.current?.instruction as ChefInstruction;
+
+      if (activeType === "Action") {
+        const action = active.data.current?.action as ChefAction;
+        dispatch(updateInstructionAction({ id: instruction.id, action }));
+      } else if (activeType === "Ingredient") {
+        const item = active.data.current?.item as IngredientItem;
+        const itemExists = instruction.items.find((currItem) => isEqual(currItem, item));
+        if (!itemExists) {
+          dispatch(
+            updateChefInstructionItems({
+              id: instruction.id,
+              items: [...instruction.items, item],
+            })
+          );
+
+          dispatch(updateAvailableItems(item));
+        }
+      }
+    }
+  };
+
+  const customCollisionDetectionAlgorithm = (args: {
+    active: Active;
+    collisionRect: ClientRect;
+    droppableRects: RectMap;
+    droppableContainers: DroppableContainer[];
+    pointerCoordinates: Coordinates | null;
+  }) => {
+    const collisions = pointerWithin(args);
+    if (collisions.length > 0) {
+      const sortedCollisions = collisions.sort((a, b) => {
+        const aRect = args.droppableRects.get(a.id);
+        const bRect = args.droppableRects.get(b.id);
+
+        if (aRect && bRect) {
+          const aArea = aRect.width * aRect.height;
+          const bArea = bRect.width * bRect.height;
+
+          return aArea - bArea;
+        }
+
+        return 0;
+      });
+
+      return sortedCollisions;
+    }
+
+    return closestCorners(args);
+  };
 
   return (
-    <div className="mt-12 h-5/6 w-2/3 input-gallery-border overflow-y-hidden overflow-x-hidden p-4">
-      <h2 className="text-fluidSubtitle">Plan how to use the ingredients!</h2>
-      <div className="flex flex-row gap-2">
-        <Caret icon={faAnglesLeft} onCaretClick={() => scrollByItems("left")} />
-        <div
-          id="actions-scrollbar"
-          className="flex w-full overflow-x-scroll short-height px-2 py-4 pt-6 no-scrollbar"
-          ref={scrollRef}
-          onMouseDown={(e) => handleMouseDown(scrollRef, e)}
-          onMouseLeave={() => setIsDragging(false)}
-          onMouseUp={() => setIsDragging(false)}
-          onMouseMove={(e) => handleMouseMove(scrollRef, e)}
-        >
-          <InstructionsActions />
+    <DndContext
+      collisionDetection={customCollisionDetectionAlgorithm}
+      modifiers={[restrictToWindowEdges]}
+      onDragEnd={handleDragEnd}
+      onDragStart={handleDragStart}
+    >
+      <div className="mt-12 max-h-5/6 w-2/3 input-gallery-border p-4">
+        <h2 className="text-fluidSubtitle mb-2">
+          Plan the instructions and steps for this recipe!
+        </h2>
+        <div className="flex flex-row gap-2">
+          <Caret icon={faAnglesLeft} onCaretClick={() => scrollByItems("left")} />
+          <div
+            id="actions-scrollbar"
+            className="flex w-full overflow-x-scroll py-4 pt-4 overflow-y-auto"
+            ref={scrollRef}
+            onMouseDown={(e) => handleMouseDown(scrollRef, e)}
+            onMouseLeave={() => setIsDragging(false)}
+            onMouseUp={() => setIsDragging(false)}
+            onMouseMove={(e) => handleMouseMove(scrollRef, e)}
+          >
+            <InstructionsActions />
+          </div>
+          <Caret icon={faAnglesRight} onCaretClick={() => scrollByItems("right")} />
+          {activeAction && (
+            <DragOverlay>
+              <ActionImageWithName action={activeAction} showName={true} />
+            </DragOverlay>
+          )}
         </div>
-        <Caret icon={faAnglesRight} onCaretClick={() => scrollByItems("right")} />
-      </div>
-      <button
-        type="button"
-        disabled={buttonDisabled}
-        className={`sexy-button mt-2 ${
-          buttonDisabled
-            ? "bg-gray-100 text-gray-400 shadow-none border border-gray-300"
-            : " bg-blue-500 text-white"
-        }`}
-        onClick={() => handleAddInstruction()}
-      >
-        Add Instruction
-      </button>
-      <div className="flex w-full justify-between">
-        <div
-          ref={scrollRef2}
-          className="flex flex-col min-w-fit p-4 half-height no-scrollbar overflow-scroll"
-        >
-          <InstructionsItems />
-        </div>
-        <div
-          className="w-full mx-8 half-height overflow-scroll no-scrollbar"
-          onClick={() => handleResetInstruction()}
-          onKeyDown={() => {
-            return;
-          }}
-        >
-          <InstructionsPanels
-            onRefClick={(instruction, item) => handleInstructionClick(instruction, item)}
+        <div className="flex w-full justify-between mt-8">
+          <div
+            ref={scrollRef2}
+            className="flex flex-col min-w-fit p-4 mr-10 half-height no-scrollbar overflow-scroll"
+          >
+            <InstructionsItems />
+          </div>
+          {activeItem && (
+            <DragOverlay>
+              <IngredientImage
+                groupName={Math.random().toString()}
+                item={activeItem}
+                allowRemove={false}
+              />
+            </DragOverlay>
+          )}
+          <PanelsContainer
+            onInstructionClick={(inst: ChefInstruction) => handleInstructionClick(inst)}
           />
         </div>
       </div>
-    </div>
+    </DndContext>
   );
 }
 

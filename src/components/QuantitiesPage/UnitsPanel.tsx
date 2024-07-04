@@ -44,7 +44,7 @@ function UnitsPanel({ groupName, items }: UnitsPanelProps) {
           </div>
           <form>
             <select
-              className={`w-28 input-border rounded-md px-2 py-1 ${
+              className={`font-indie w-28 input-border rounded-md px-2 py-1 ${
                 extraUnits.includes(item.unit)
                   ? "border-blue-500 border-1 bg-blue-300"
                   : null

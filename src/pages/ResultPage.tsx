@@ -14,23 +14,27 @@ function ResultPage() {
       <ResetFlowButton />
       <GoToButton page={"/instructions"} isNext={false} />
       <div className="flex flex-col center mt-12">
-        <div className="flex flex-col a4ratio w-2/5 text-center input-border">
-          <h1 className="text-fluidTitle font-shadow-light mb-2 bg-yellow-300">
+        <div className="relative flex flex-col a4ratio w-2/5 text-center input-border justify-start">
+          <h1 className="text-fluidTitle font-shadow-light text-2xl mt-4">
             {recipeTitle}
           </h1>
-          <h2 className="text-fluidSubtitle bg-yellow-200">Ingredients:</h2>
-          <div className="flex flex-wrap p-2 w-fit items-start justify-center">
+          <h2 className="text-fluidCard mb-2 mt-4 font-bold">Ingredients:</h2>
+          <div className="flex flex-row items-start justify-center">
             <RecipeGroups />
           </div>
-          <h2 className="text-fluidSubtitle mt-2 bg-yellow-200">Steps:</h2>
-          <div className="a4scale flex flex-col center items-center">
-            <RecipeInstructions />
+          <h2 className="text-fluidCard my-2 font-bold">Steps:</h2>
+          <div className="flex center">
+            <div className="flex flex-col justify-start items-start">
+              <RecipeInstructions />
+            </div>
           </div>
-          <h2 className="text-fluidSubtitle bg-yellow-200">Enjoy !</h2>
-          <footer className="text-fluidFooter font-indie flex flex-col items-start p-4">
-            <p>*coded with love by Yafim Simanovsky</p>
-            <p>https://github.com/yafimski/a4recipe</p>
-          </footer>
+          <div className="flex flex-row center mb-1">
+            <h2 className="text-fluidSubtitle">Enjoy !</h2>
+            <footer className="absolute right-0 mr-4 text-fluidFooter font-indie flex flex-col items-start">
+              <p>*coded with love by Yafim Simanovsky</p>
+              <p>https://github.com/yafimski/a4recipe</p>
+            </footer>
+          </div>
         </div>
       </div>
       <div className="flex center">

@@ -8,9 +8,9 @@ function RecipeGroups() {
   );
 
   return ingredientsGroups.map((group) => (
-    <div key={group.groupName} className="flex flex-col center">
-      <p className="font-indie w-fit px-4 rounded-2xl text-md">{group.groupName}</p>
-      <div className="flex flex-row flex-wrap center rounded-2xl mb-4 px-2 recipe-group-border w-9/12">
+    <div key={group.groupName} className="flex flex-col flex-wrap center mx-4">
+      <p className="font-indie rounded-2xl text-md">{group.groupName}</p>
+      <div className="flex flex-col rounded-2xl  recipe-group-border w-full py-2 px-3">
         {group.items.map((item) => (
           <div key={item.itemName} className="m-1">
             <PrintItemFull groupName={group.groupName} item={item} />

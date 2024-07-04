@@ -67,20 +67,28 @@ const ingredientGroupsSlice = createSlice({
     },
     addItemToIngredientGroup: (
       state,
-      action: PayloadAction<{ groupName: string; itemName: string }>
+      action: PayloadAction<{
+        groupName: string;
+        itemName: string;
+        item?: IngredientItem;
+      }>
     ) => {
-      const { groupName, itemName } = action.payload;
+      const { groupName, itemName, item } = action.payload;
       const existingGroup = state.ingredientsGroups.find(
         (g) => g.groupName === groupName
       );
 
       if (existingGroup) {
-        const updatedItem = {
-          itemName,
-          amount: 0,
-          unit: defUnit,
-        };
-        existingGroup.items.push(updatedItem);
+        if (item) {
+          existingGroup.items.push(item);
+        } else {
+          const updatedItem = {
+            itemName,
+            amount: 0,
+            unit: defUnit,
+          };
+          existingGroup.items.push(updatedItem);
+        }
       } else {
         state.ingredientsGroups.push({
           groupName,
@@ -100,11 +108,11 @@ const ingredientGroupsSlice = createSlice({
       if (existingGroup) {
         const index = existingGroup.items.findIndex((item) => item.itemName === itemName);
 
-        if (index > -1) {
+        if (index !== -1) {
           existingGroup.items.splice(index, 1);
         }
 
-        if (existingGroup?.items.length === 0) {
+        if (existingGroup.items.length === 0) {
           state.ingredientsGroups = state.ingredientsGroups.filter(
             (g) => g.groupName !== groupName
           );

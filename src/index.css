@@ -50,6 +50,10 @@ input::placeholder {
     font-style: normal;
   }
 
+  .steps-container {
+    max-height: 20ch;
+  }
+
   .instruction-word {
     @apply font-indie text-xl mx-4;
   }
@@ -58,23 +62,26 @@ input::placeholder {
     @apply font-indie text-sm;
   }
 
+  .instruction-word-tiny {
+    @apply font-indie;
+    font-size: 0.5cqw;
+  }
+
   .num-input-icons {
     @apply cursor-pointer text-xl;
   }
 
   .group-chip {
-    @apply px-8 py-1 border-2 rounded-2xl border-blue-300 text-black mb-4;
-    transition: all 0.5s;
-    -webkit-transition: all 0.5s;
+    @apply group-chip-dead;
   }
 
   .group-chip:hover {
-    @apply bg-blue-400 scale-110;
-    box-shadow: 0 0 8px rgba(0, 0, 0, 0.3);
+    @apply bg-blue-400 text-white;
+    box-shadow: 0px 2px 4px 0px rgba(0, 0, 0, 0.2);
   }
 
   .group-chip-dead {
-    @apply px-8 py-1 border-none rounded-2xl bg-blue-300 text-black mb-4;
+    @apply px-6 py-0.5 border-r-2 border-l-2 rounded-2xl border-blue-300 text-black mb-4 font-indie;
   }
 
   .grid-autofill {
@@ -88,12 +95,17 @@ input::placeholder {
   }
 
   .mini-image {
-    height: 7ch;
+    height: 2.5cqw;
   }
 
   .mini-text {
     font-family: "Indie Flower";
-    font-size: 7px;
+    font-size: 6px;
+  }
+
+  .small-text {
+    font-family: "Indie Flower";
+    font-size: 10px;
   }
 
   .large-image {
@@ -102,6 +114,10 @@ input::placeholder {
 
   .small-image {
     height: 7ch;
+  }
+
+  .tiny-image {
+    height: 5ch;
   }
 
   .semi-height {
@@ -149,10 +165,7 @@ input::placeholder {
 
   .a4ratio {
     aspect-ratio: 1 / 1.41;
-  }
-
-  .a4scale {
-    scale: 0.8;
+    max-height: calc((2 / 3 * 100cqw) * 1.41);
   }
 
   .w-cw {
@@ -186,7 +199,11 @@ input::placeholder {
   }
 
   .aspect-video-wide {
-    aspect-ratio: 18 / 9;
+    aspect-ratio: 20 / 9;
+  }
+
+  .aspect-video-thin {
+    aspect-ratio: 9 / 13;
   }
 
   input[type="number"]::-webkit-inner-spin-button,
@@ -214,8 +231,8 @@ input::placeholder {
   }
 
   .recipe-group-border {
-    border-left: 1px solid gray;
-    border-right: 1px solid gray;
+    border-left: 1px solid rgba(0, 0, 0, 0.4);
+    border-right: 1px solid rgba(0, 0, 0, 0.4);
   }
 
   .unit-card {
@@ -232,7 +249,7 @@ input::placeholder {
   }
 
   .go-to-button-arrow {
-    @apply absolute flex text-white text-center px-4 py-2 m-12 cursor-pointer font-semibold tracking-widest rounded-md duration-300 hover:gap-2;
+    @apply absolute flex text-white text-center px-4 py-2 m-12 cursor-pointer font-semibold tracking-widest rounded-md duration-300;
   }
 }
 

@@ -8,6 +8,7 @@ import { allPossibleChefActions } from "../../utils/data";
 import { useDispatch, useSelector } from "react-redux";
 import type { RootState } from "../../state/store";
 import ActionImageWithName from "../ActionImageWithName";
+import { handleKeyDownPrevent } from "../../utils/helpers";
 
 function InstructionsActions() {
   const dispatch = useDispatch();
@@ -19,7 +20,7 @@ function InstructionsActions() {
 
   const [chosenAction, setChosenAction] = useState<ChefAction | null>(null);
 
-  const handleChooseAction = (_e: React.MouseEvent, action: ChefAction) => {
+  const handleChooseAction = (action: ChefAction) => {
     if (chosenAction?.actionName === action.actionName) {
       setChosenAction(null);
       dispatch(setCurrentAction(null));
@@ -39,13 +40,14 @@ function InstructionsActions() {
   }, [currentAction]);
 
   return allPossibleChefActions.map((action: ChefAction) => (
-    <ActionImageWithName
+    <div
       key={`${action.actionName}`}
-      action={action}
-      chosenAction={chosenAction}
-      allowRemove={false}
-      onClickAction={(e, action) => handleChooseAction(e, action)}
-    />
+      onClick={() => handleChooseAction(action)}
+      onKeyDown={handleKeyDownPrevent}
+      className="bg-white mx-2 min-h-36 aspect-video-thin rounded-2xl hover:scale-105"
+    >
+      <ActionImageWithName action={action} showName={true} />
+    </div>
   ));
 }
 

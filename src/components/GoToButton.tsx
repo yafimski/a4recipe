@@ -5,6 +5,7 @@ import { setWarning } from "../state/warning/warningSlice";
 import type { RootState } from "../state/store";
 import { faArrowLeft, faArrowRight } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { setAvailableItems } from "../state/chefActions/chefActionsSlice";
 
 interface GoToButtonProps {
   page: string;
@@ -65,6 +66,9 @@ function GoToButton({ page, isNext }: GoToButtonProps) {
       if (page === "/instructions") {
         if (await areUnitsValid()) {
           pageValid = true;
+
+          const allItems = ingredientsGroups.flatMap((group) => group.items.flat());
+          dispatch(setAvailableItems(allItems));
         } else {
           warningText = "Fill in all quantities and units!";
         }

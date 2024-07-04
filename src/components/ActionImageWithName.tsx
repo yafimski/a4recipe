@@ -1,33 +1,40 @@
 import type { ChefAction } from "../state/chefActions/chefActionsSlice";
-import { handleKeyDownPrevent } from "../utils/helpers";
-import ActionImage from "./ActionImage";
+import { CSS } from "@dnd-kit/utilities";
+import { useSortable } from "@dnd-kit/sortable";
 
 interface IngredientProp {
   action: ChefAction;
-  chosenAction: ChefAction | null;
-  allowRemove: boolean;
-  onClickAction: (e: React.MouseEvent, action: ChefAction) => void;
+  showName: boolean;
 }
 
-function ActionImageWithName({
-  action,
-  chosenAction,
-  allowRemove,
-  onClickAction,
-}: IngredientProp) {
+function ActionImageWithName({ action, showName }: IngredientProp) {
+  const { attributes, listeners, setNodeRef, transform, transition } = useSortable({
+    id: action.actionName,
+    data: {
+      type: "Action",
+      action,
+    },
+  });
+
+  const style = {
+    transition,
+    transform: CSS.Translate.toString(transform),
+  };
+
+  const { actionName } = action;
+
   return (
-    <div
-      data-action-name={action.actionName}
-      className={`mx-2 card-shadow rounded-2xl hover:opacity-100 hover:scale-110 ${
-        action.actionName === chosenAction?.actionName
-          ? "opacity-100 border-selected -translate-y-4 card-shadow-strong"
-          : "opacity-60"
-      }`}
-      onClick={(e) => onClickAction(e, action)}
-      onKeyDown={handleKeyDownPrevent}
-    >
-      <ActionImage action={action} allowRemove={allowRemove} />
-      <p className="py-1">{action.actionName}</p>
+    <div ref={setNodeRef} style={style} {...listeners} {...attributes}>
+      <div key={actionName} className="bg-white card-shadow rounded-2xl">
+        <img
+          draggable="false"
+          src={`../src/assets/chefActions/${actionName.toLowerCase()}.webp`}
+          alt={actionName}
+          data-testid={`${actionName}_action`}
+          className="rounded-t-2xl max-h-28"
+        />
+        {showName && <p className="text-base py-2">{actionName}</p>}
+      </div>
     </div>
   );
 }

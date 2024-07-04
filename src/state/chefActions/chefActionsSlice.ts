@@ -21,6 +21,7 @@ export interface ChefInstructions {
   currentAction: ChefAction | null;
   currentItems: IngredientItem[];
   currentInstruction: ChefInstruction | null;
+  availableItems: IngredientItem[];
 }
 
 const initialState: ChefInstructions = {
@@ -28,6 +29,7 @@ const initialState: ChefInstructions = {
   currentAction: null,
   currentItems: [],
   currentInstruction: null,
+  availableItems: [],
 };
 
 const chefActionSlice = createSlice({
@@ -126,6 +128,25 @@ const chefActionSlice = createSlice({
         existingInstruction.note = action.payload.note;
       }
     },
+    setAvailableItems: (state, action: PayloadAction<IngredientItem[]>) => {
+      state.availableItems = action.payload;
+    },
+    updateAvailableItems: (state, action: PayloadAction<IngredientItem>) => {
+      console.log("Updating available items");
+      console.log(action.payload);
+
+      const firstIdxMatch = state.availableItems.findIndex((item) =>
+        isEqual(item, action.payload)
+      );
+
+      if (firstIdxMatch === -1) {
+        console.log("Adding item");
+        state.availableItems.push(action.payload);
+      } else {
+        console.log("item exists");
+        state.availableItems.splice(firstIdxMatch, 1);
+      }
+    },
   },
 });
 
@@ -142,6 +163,8 @@ export const {
   updateInstructionTime,
   updateInstructionAction,
   updateInstructionNote,
+  setAvailableItems,
+  updateAvailableItems,
 } = chefActionSlice.actions;
 
 export default chefActionSlice.reducer;

@@ -1,4 +1,5 @@
 import type { IngredientItem } from "../../state/ingredientGroups/ingredientGroupsSlice";
+import PrintItemImg from "./PrintItemImg";
 
 interface IngredientProp {
   groupName: string;
@@ -14,11 +15,12 @@ function IngredientFullItem({ groupName, item }: IngredientProp) {
         key={`${groupName}_${itemName}`}
         className="aspect-video-wide flex flex-row mini-image rounded-md card-shadow"
       >
-        <img
+        <PrintItemImg itemName={itemName} square={false} />
+        {/* <img
           src={`../src/assets/ingredients/${itemName.toLowerCase()}.webp`}
           alt={itemName}
           className="rounded-l-md"
-        />
+        /> */}
         <div className="flex flex-col center w-full p-1">
           <p className="mini-text">{itemName}</p>
           <hr className="w-2/3 border-gray-400 py-1" />

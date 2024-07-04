@@ -41,15 +41,13 @@ function TimeInput({ instruction }: TimeInputProps) {
     dispatch(updateInstructionTime({ instruction, time: localTime }));
   }, [dispatch, instruction, localTime]);
 
-  console.log(localTime);
-
   return (
     <div className="flex flex-row rounded-md mx-2">
       <button type="button" onClick={handleSubtract}>
         <FontAwesomeIcon icon={faMinus} className="num-input-icons" />
       </button>
       <input
-        className={`w-16 p-0 mx-4 focus:outline-none text-center rounded-2xl text-5xl ${
+        className={`w-16 p-0 mx-4 focus:outline-none text-center rounded-2xl text-5xl bg-transparent ${
           localTime === 0 && "required-element-fill"
         }`}
         type="number"
