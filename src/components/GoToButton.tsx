@@ -35,8 +35,8 @@ function GoToButton({ page, isNext }: GoToButtonProps) {
   };
 
   const areInstructionsValid = async () => {
-    const allInstructionsHaveItems = chefInstructions.every(
-      (inst) => inst.items.length > 0
+    const allInstructionsHaveItemsOrCustomIngredient = chefInstructions.every(
+      (inst) => inst.items.length > 0 || inst.customItem
     );
 
     const allRelevantInstructionsHaveTime = chefInstructions.every(
@@ -45,7 +45,7 @@ function GoToButton({ page, isNext }: GoToButtonProps) {
 
     return (
       chefInstructions.length > 0 &&
-      allInstructionsHaveItems &&
+      allInstructionsHaveItemsOrCustomIngredient &&
       allRelevantInstructionsHaveTime
     );
   };
@@ -59,7 +59,7 @@ function GoToButton({ page, isNext }: GoToButtonProps) {
         if (recipeTitle.length > 0 && ingredientsGroups.length > 0) {
           pageValid = true;
         } else {
-          warningText = "Title and ingredients must be selected!";
+          warningText = "You must have a Recipe Title and ingredients!";
         }
       }
 

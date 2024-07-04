@@ -14,20 +14,17 @@ export interface ChefInstruction {
   note: string;
   action: ChefAction;
   items: IngredientItem[];
+  customItem?: string;
 }
 
 export interface ChefInstructions {
   chefInstructions: ChefInstruction[];
-  currentAction: ChefAction | null;
-  currentItems: IngredientItem[];
   currentInstruction: ChefInstruction | null;
   availableItems: IngredientItem[];
 }
 
 const initialState: ChefInstructions = {
   chefInstructions: [],
-  currentAction: null,
-  currentItems: [],
   currentInstruction: null,
   availableItems: [],
 };
@@ -39,22 +36,17 @@ const chefActionSlice = createSlice({
     resetChefInstructions: (state) => {
       state.chefInstructions = [];
     },
-    setCurrentInstruction: (state, action: PayloadAction<ChefInstruction | null>) => {
-      state.currentInstruction = action.payload;
-    },
-    setCurrentAction: (state, action: PayloadAction<ChefAction | null>) => {
-      state.currentAction = action.payload;
-    },
-    setCurrentItems: (state, action: PayloadAction<IngredientItem[]>) => {
-      state.currentItems = action.payload;
-    },
-    addToCurrentActionItems: (state, action: PayloadAction<IngredientItem>) => {
-      state.currentItems = [...state.currentItems, action.payload];
-    },
-    removeFromCurrentActionItems: (state, action: PayloadAction<IngredientItem>) => {
-      state.currentItems = state.currentItems.filter(
-        (item) => !isEqual(item, action.payload)
+    setCustomInstructionItem: (
+      state,
+      action: PayloadAction<{ id: number; customItem: string }>
+    ) => {
+      const existingInstruction = state.chefInstructions.find(
+        (inst) => inst.id === action.payload.id
       );
+
+      if (existingInstruction) {
+        existingInstruction.customItem = action.payload.customItem;
+      }
     },
     addChefInstruction: (state, action: PayloadAction<ChefInstruction>) => {
       state.chefInstructions.push(action.payload);
@@ -152,14 +144,10 @@ const chefActionSlice = createSlice({
 
 export const {
   resetChefInstructions,
-  setCurrentInstruction,
+  setCustomInstructionItem,
   addChefInstruction,
   removeChefInstruction,
   updateChefInstructionItems,
-  setCurrentAction,
-  setCurrentItems,
-  addToCurrentActionItems,
-  removeFromCurrentActionItems,
   updateInstructionTime,
   updateInstructionAction,
   updateInstructionNote,

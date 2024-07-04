@@ -4,12 +4,7 @@ import { useDispatch } from "react-redux";
 import { setWarning } from "../../state/warning/warningSlice";
 import { resetRecipe } from "../../state/recipe/recipeSlice";
 import { resetIngredientsGroup } from "../../state/ingredientGroups/ingredientGroupsSlice";
-import {
-  resetChefInstructions,
-  setCurrentAction,
-  setCurrentInstruction,
-  setCurrentItems,
-} from "../../state/chefActions/chefActionsSlice";
+import { resetChefInstructions } from "../../state/chefActions/chefActionsSlice";
 
 function ResetFlowButton() {
   const navigate = useNavigate();
@@ -21,9 +16,6 @@ function ResetFlowButton() {
     dispatch(setWarning(""));
     dispatch(resetIngredientsGroup());
     dispatch(resetChefInstructions());
-    dispatch(setCurrentAction(null));
-    dispatch(setCurrentItems([]));
-    dispatch(setCurrentInstruction(null));
     navigate("/");
   };
 

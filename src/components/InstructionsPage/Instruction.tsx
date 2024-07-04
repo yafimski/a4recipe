@@ -2,6 +2,7 @@ import { faBan } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   removeChefInstruction,
+  setCustomInstructionItem,
   updateAvailableItems,
   updateChefInstructionItems,
   type ChefInstruction,
@@ -15,6 +16,7 @@ import { isEqual } from "lodash";
 import type { IngredientItem } from "../../state/ingredientGroups/ingredientGroupsSlice";
 import ActionImageNeutral from "../ActionImageNeutral";
 import IngredientImageNeutral from "../IngredientImageNeutral";
+import { useState } from "react";
 
 interface InstructionProps {
   instruction: ChefInstruction;
@@ -22,6 +24,8 @@ interface InstructionProps {
 }
 
 function Instruction({ instruction, refClick }: InstructionProps) {
+  const [customIngredient, setCustomIngredient] = useState<string>("");
+
   const { setNodeRef } = useDroppable({
     id: instruction.id,
     data: {
@@ -46,13 +50,34 @@ function Instruction({ instruction, refClick }: InstructionProps) {
     dispatch(removeChefInstruction(inst));
   };
 
+  const handleBlur = (
+    e: React.FocusEvent<HTMLInputElement>,
+    instruction: ChefInstruction
+  ) => {
+    dispatch(
+      setCustomInstructionItem({ id: instruction.id, customItem: e.target.value })
+    );
+    (e.target as HTMLInputElement).blur();
+  };
+
+  const handleCustomText = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setCustomIngredient(e.target.value);
+  };
+
+  const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === " ") {
+      e.preventDefault();
+      setCustomIngredient((prev) => `${prev} `);
+    }
+  };
+
   const { id, action, items } = instruction;
 
   return (
     <div
       ref={setNodeRef}
       key={`${id}_${action}`}
-      className="z-50 flex flex-col mb-12 border-b border-gray-200 bg-yellow-200"
+      className="z-50 flex flex-col mb-12 border-l-2 border-r-2 border-l-neutral-400 border-r-neutral-400 rounded-3xl"
     >
       <div className="flex items-center justify-between pl-16">
         <div className="flex justify-start w-full py-2">
@@ -68,7 +93,7 @@ function Instruction({ instruction, refClick }: InstructionProps) {
             <span className="instruction-word">THE</span>
             <div className={`${items.length < 3 ? "flex" : "grid"} gap-2 p-2`}>
               <div className={`${items.length < 3 ? "flex" : "grid grid-cols-3"} center`}>
-                {items.length > 0 ? (
+                {!customIngredient && items.length > 0 ? (
                   items.map((item) => (
                     <div key={`${id}_${item.itemName}`} className="px-2 py-2">
                       <IngredientImageNeutral
@@ -81,9 +106,28 @@ function Instruction({ instruction, refClick }: InstructionProps) {
                     </div>
                   ))
                 ) : (
-                  <span key={id} className="instruction-word text-5xl">
-                    ??
-                  </span>
+                  <div className="flex flex-col justify-between items-center min-h-24">
+                    <span key={id} className="instruction-word text-base">
+                      {customIngredient ? (
+                        <b className="text-neutral-400">
+                          Drop Item <br /> or
+                        </b>
+                      ) : (
+                        <b>
+                          Drop Item <br /> or
+                        </b>
+                      )}
+                    </span>
+                    <input
+                      type="text"
+                      className="input-border w-fit text-sm text-center text-ellipsis whitespace-nowrap overflow-hidden px-0"
+                      placeholder="Custom text"
+                      value={customIngredient}
+                      onChange={(e) => handleCustomText(e)}
+                      onKeyDown={handleKeyDown}
+                      onBlur={(e) => handleBlur(e, instruction)}
+                    />
+                  </div>
                 )}
               </div>
             </div>

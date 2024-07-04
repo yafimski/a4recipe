@@ -31,8 +31,8 @@ function PanelsContainer({ onInstructionClick }: PanelsContainerProps) {
     >
       {chefInstructions.length === 0 && (
         <h2 className="text-fluidSubtitle text-gray-600">
-          Drag an action [ top ] to this area <br />
-          and start adding ingredients [ left ] to it!
+          Drag an action <b>[ top ]</b> to this area <br />
+          and start adding ingredients <b>[left ]</b> to it!
           <br />
           <br />
           To add more steps just
@@ -40,7 +40,7 @@ function PanelsContainer({ onInstructionClick }: PanelsContainerProps) {
           drag another action.
           <br />
           <br />
-          Replace an action by dragging a new one over it!
+          <b>Replace an action by dragging a new one over it!</b>
         </h2>
       )}
       <InstructionsPanels

@@ -16,17 +16,21 @@ function RecipeInstructions() {
           <PrintActionFull actionName={inst.action.actionName} />
         </div>
         <span className="instruction-word-small">THE</span>
-        <div className={`${inst.items.length < 4 ? "flex" : "grid"} gap-2 p-2`}>
-          <div
-            className={`${inst.items.length < 4 ? "flex" : "grid grid-cols-4"} center`}
-          >
-            {inst.items.map((item) => (
-              <div key={`${inst.id}_${item.itemName}`} className="m-1">
-                <PrintItemImg itemName={item.itemName} square={true} />
-              </div>
-            ))}
+        {inst.customItem ? (
+          <b className="instruction-word-small">{inst.customItem}</b>
+        ) : (
+          <div className={`${inst.items.length < 4 ? "flex" : "grid"} gap-2 p-2`}>
+            <div
+              className={`${inst.items.length < 4 ? "flex" : "grid grid-cols-4"} center`}
+            >
+              {inst.items.map((item) => (
+                <div key={`${inst.id}_${item.itemName}`} className="m-1">
+                  <PrintItemImg itemName={item.itemName} square={true} />
+                </div>
+              ))}
+            </div>
           </div>
-        </div>
+        )}
         {inst.action.time !== -1 && (
           <span className="instruction-word-small">
             FOR {inst.action.time} {inst.action.unit}

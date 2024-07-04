@@ -2,7 +2,6 @@ import { useEffect, useRef, useState } from "react";
 import {
   type ChefInstruction,
   updateInstructionNote,
-  setCurrentInstruction,
 } from "../../state/chefActions/chefActionsSlice";
 import { useDispatch } from "react-redux";
 import { faClose } from "@fortawesome/free-solid-svg-icons";
@@ -64,13 +63,12 @@ function InstructionNote({ instruction }: { instruction: ChefInstruction }) {
         value={currentNoteText}
         onChange={handleNoteText}
         onBlur={(e) => handleBlur(e.target.value)}
-        onFocus={() => dispatch(setCurrentInstruction(instruction))}
         onKeyDown={(e) => handleKeyDownBlur(e, instruction)}
       />
       <FontAwesomeIcon
         icon={faClose}
         size="1x"
-        className="absolute bg-white pl-2 cursor-pointer"
+        className="bg-white -ml-2 cursor-pointer"
         onClick={() => handleCancelNote()}
       />
     </div>
