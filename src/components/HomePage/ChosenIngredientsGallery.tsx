@@ -4,7 +4,6 @@ import {
   useSensor,
   MouseSensor,
   TouchSensor,
-  KeyboardSensor,
   DndContext,
   type DragStartEvent,
   DragOverlay,
@@ -15,7 +14,6 @@ import {
   type ClientRect,
 } from "@dnd-kit/core";
 import { restrictToFirstScrollableAncestor } from "@dnd-kit/modifiers";
-import { sortableKeyboardCoordinates } from "@dnd-kit/sortable";
 import {
   type IngredientItem,
   removeItemFromIngredientGroup,
@@ -83,23 +81,6 @@ function ChosenIngredientsGallery() {
     setActiveItem(null);
   };
 
-  const sensors = useSensors(
-    useSensor(MouseSensor, {
-      activationConstraint: {
-        distance: 5,
-      },
-    }),
-    useSensor(TouchSensor, {
-      activationConstraint: {
-        delay: 200,
-        tolerance: 6,
-      },
-    }),
-    useSensor(KeyboardSensor, {
-      coordinateGetter: sortableKeyboardCoordinates,
-    })
-  );
-
   const customCollisionDetectionAlgorithm = (args: {
     active: Active;
     collisionRect: ClientRect;
@@ -128,6 +109,19 @@ function ChosenIngredientsGallery() {
 
     return closestCorners(args);
   };
+
+  const sensors = useSensors(
+    useSensor(MouseSensor, {
+      activationConstraint: {
+        distance: 5,
+      },
+    }),
+    useSensor(TouchSensor, {
+      activationConstraint: {
+        distance: 10,
+      },
+    })
+  );
 
   return (
     <DndContext

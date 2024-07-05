@@ -77,7 +77,7 @@ function Instruction({ instruction, refClick }: InstructionProps) {
     <div
       ref={setNodeRef}
       key={`${id}_${action}`}
-      className="z-50 flex flex-col mb-12 border-l-2 border-r-2 border-l-neutral-400 border-r-neutral-400 rounded-3xl"
+      className="z-50 flex flex-col mb-12 border-l-2 border-r-2 border-l-neutral-400 border-r-neutral-400 rounded-3xl md:scale-90"
     >
       <div className="flex items-center justify-between pl-16">
         <div className="flex justify-start w-full py-2">

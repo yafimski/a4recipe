@@ -27,7 +27,7 @@ function PanelsContainer({ onInstructionClick }: PanelsContainerProps) {
         chefInstructions.length === 0
           ? "justify-center items-center"
           : "justify-start items-center pt-2"
-      } `}
+      } md:overflow-x-auto`}
     >
       {chefInstructions.length === 0 && (
         <h2 className="text-fluidSubtitle text-gray-600">

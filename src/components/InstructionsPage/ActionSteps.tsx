@@ -24,6 +24,10 @@ import {
   type Active,
   type ClientRect,
   type DroppableContainer,
+  MouseSensor,
+  TouchSensor,
+  useSensor,
+  useSensors,
 } from "@dnd-kit/core";
 import { restrictToWindowEdges } from "@dnd-kit/modifiers";
 import IngredientImage from "../IngredientImage";
@@ -218,14 +222,28 @@ function ActionSteps() {
     return closestCorners(args);
   };
 
+  const sensors = useSensors(
+    useSensor(MouseSensor, {
+      activationConstraint: {
+        distance: 0,
+      },
+    }),
+    useSensor(TouchSensor, {
+      activationConstraint: {
+        distance: 10,
+      },
+    })
+  );
+
   return (
     <DndContext
       collisionDetection={customCollisionDetectionAlgorithm}
       modifiers={[restrictToWindowEdges]}
+      sensors={sensors}
       onDragEnd={handleDragEnd}
       onDragStart={handleDragStart}
     >
-      <div className="mt-12 max-h-5/6 w-2/3 input-gallery-border p-4">
+      <div className="mt-12 max-h-5/6 w-4/5 input-gallery-border p-4 overflow-y-hidden">
         <h2 className="text-fluidSubtitle mb-2">
           Plan the instructions and steps for this recipe!
         </h2>
