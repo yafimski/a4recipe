@@ -48,7 +48,6 @@ function RecipeInstructions() {
       <div className="flex w-full left-0">
         <span className="md:text-xs lg:text-sm md:pt-0.5 lg:pt-1">{inst.note}</span>
       </div>
-      <hr className="border-gray-300" />
     </div>
   ));
 }

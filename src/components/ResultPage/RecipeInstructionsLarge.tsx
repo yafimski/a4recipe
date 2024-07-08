@@ -49,7 +49,6 @@ function RecipeInstructions() {
         )}
       </div>
       <span className="instruction-print-text pt-0.5 lg:pt-1">{inst.note}</span>
-      <hr className="w-2/3 mt-1 mb-2 border-gray-300" />
     </div>
   ));
 }
