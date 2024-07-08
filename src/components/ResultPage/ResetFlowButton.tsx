@@ -1,5 +1,5 @@
 import { useNavigate } from "react-router-dom";
-import { handleKeyDownPrevent } from "../../utils/helpers";
+import { handleKeyDownPrevent, srcPath } from "../../utils/helpers";
 import { useDispatch } from "react-redux";
 import { setWarning } from "../../state/warning/warningSlice";
 import { resetRecipe } from "../../state/recipe/recipeSlice";
@@ -16,7 +16,7 @@ function ResetFlowButton() {
     dispatch(setWarning(""));
     dispatch(resetIngredientsGroup());
     dispatch(resetChefInstructions());
-    navigate("/");
+    navigate(`/${srcPath}`);
   };
 
   return (

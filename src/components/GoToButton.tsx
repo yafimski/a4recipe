@@ -49,9 +49,6 @@ function GoToButton({ page, isNext }: GoToButtonProps) {
   };
 
   const handleNext = async () => {
-    console.log("Current location:", location.pathname); // Debugging log to check current path
-    console.log("Navigating to:", page); // Debugging log to check the page value
-
     if (isNext) {
       let pageValid = false;
       let warningText = "";
@@ -91,7 +88,6 @@ function GoToButton({ page, isNext }: GoToButtonProps) {
       }
     } else {
       dispatch(setWarning(""));
-      console.log("Replacing path to:", page);
       navigate(page, { replace: true });
     }
   };
