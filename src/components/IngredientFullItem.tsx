@@ -1,5 +1,5 @@
 import type { IngredientItem } from "../state/ingredientGroups/ingredientGroupsSlice";
-import { defUnit } from "../utils/helpers";
+import { defUnit, srcPath } from "../utils/helpers";
 import AmountInput from "./QuantitiesPage/AmountInput";
 
 interface IngredientProp {
@@ -17,7 +17,7 @@ function IngredientFullItem({ groupName, item }: IngredientProp) {
         className="aspect-videoWide flex flex-row h-clampSmall rounded-2xl card-shadow"
       >
         <img
-          src={`../src/assets/ingredients/${itemName.toLowerCase()}.webp`}
+          src={`${srcPath}/assets/ingredients/${itemName.toLowerCase()}.webp`}
           alt={itemName}
           className="rounded-l-2xl"
         />

@@ -10,3 +10,5 @@ export const handleFocusSelect = (e: { target: { select: () => void } }) => {
 };
 
 export const defUnit = "None";
+
+export const srcPath = process.env.NODE_ENV === "production" ? "/a4recipe/" : "";

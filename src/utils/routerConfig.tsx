@@ -7,7 +7,7 @@ import Quantities from "../pages/Quantities";
 
 const routesConfig = [
   {
-    path: "/",
+    path: process.env.NODE_ENV === "production" ? "/a4recipe/" : "/",
     element: <HomePage />,
     errorElement: <PageNotFound />,
   },

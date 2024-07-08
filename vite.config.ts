@@ -1,8 +1,7 @@
 import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react";
 
-// https://vitejs.dev/config/
 export default defineConfig({
-  base: "/a4recipe/",
+  base: process.env.NODE_ENV === "production" ? "/a4recipe/" : "/",
   plugins: [react()],
 });

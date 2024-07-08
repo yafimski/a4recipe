@@ -1,5 +1,6 @@
 import { useSelector } from "react-redux";
 import type { RootState } from "../../state/store";
+import { srcPath } from "../../utils/helpers";
 
 function RecipeGroups() {
   const ingredientsGroups = useSelector(
@@ -21,7 +22,7 @@ function RecipeGroups() {
             className="flex flex-col h-fit center md:rounded-md lg:rounded-lg"
           >
             <img
-              src={`../src/assets/ingredients/${item.itemName.toLowerCase()}.webp`}
+              src={`${srcPath}/assets/ingredients/${item.itemName.toLowerCase()}.webp`}
               alt={item.itemName}
               className="card-shadow md:w-tinyImage lg:w-miniImage md:rounded-md lg:rounded-lg"
             />

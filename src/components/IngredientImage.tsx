@@ -3,6 +3,7 @@ import { faClose } from "@fortawesome/free-solid-svg-icons";
 import type { IngredientItem } from "../state/ingredientGroups/ingredientGroupsSlice";
 import { CSS } from "@dnd-kit/utilities";
 import { useSortable } from "@dnd-kit/sortable";
+import { srcPath } from "../utils/helpers";
 
 interface IngredientProp {
   groupName: string;
@@ -37,7 +38,7 @@ function IngredientImage({ groupName, item, allowRemove, onRemove }: IngredientP
       {...attributes}
     >
       <img
-        src={`../src/assets/ingredients/${item.itemName.toLowerCase()}.webp`}
+        src={`${srcPath}/assets/ingredients/${item.itemName.toLowerCase()}.webp`}
         alt={item.itemName}
         data-testid={`${groupName}_${item.itemName}_selected`}
         className="print-rounded"

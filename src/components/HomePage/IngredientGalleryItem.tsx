@@ -8,7 +8,7 @@ import {
 } from "../../state/ingredientGroups/ingredientGroupsSlice";
 import { setWarning } from "../../state/warning/warningSlice";
 import type { RootState } from "../../state/store";
-import { handleKeyDownPrevent } from "../../utils/helpers";
+import { handleKeyDownPrevent, srcPath } from "../../utils/helpers";
 
 function IngredientGalleryItem({ item }: { item: IngredientItem }) {
   const { itemName } = item;
@@ -43,9 +43,9 @@ function IngredientGalleryItem({ item }: { item: IngredientItem }) {
     <div className="flex flex-row" data-testid={`${itemName}_gallery`}>
       <div className="relative flex flex-col print-rounded card-shadow w-cw aspect-videoReverse">
         <img
-          src={`../src/assets/ingredients/${itemName.toLowerCase()}.webp`}
+          src={`${srcPath}/assets/ingredients/${itemName.toLowerCase()}.webp`}
           alt={itemName}
-          className="print-rounded"
+          className="print-rounded-img"
         />
         <div
           className="absolute inset-0 flex center bg-white print-rounded bg-opacity-70 opacity-0 hover:opacity-100 hover:cursor-pointer transition-opacity"

@@ -7,6 +7,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useCallback, useEffect, useState } from "react";
 import { allPossibleIngredients } from "../utils/data";
 import Modal from "react-modal";
+import { srcPath } from "../utils/helpers";
 
 interface AmazingGalleryProps {
   isOpen: boolean;
@@ -66,7 +67,7 @@ function AmazingGallery({ isOpen, onClose }: AmazingGalleryProps) {
         </button>
         <span className="modal-image-title">{allPossibleIngredients[currentIndex]}</span>
         <img
-          src={`../src/assets/ingredients/${allPossibleIngredients[
+          src={`${srcPath}/assets/ingredients/${allPossibleIngredients[
             currentIndex
           ].toLowerCase()}.webp`}
           alt={`${allPossibleIngredients[currentIndex]}`}

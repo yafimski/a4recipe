@@ -9,22 +9,9 @@ import ResetFlowButton from "../components/ResultPage/ResetFlowButton";
 function PrintPage() {
   const recipeTitle = useSelector((state: RootState) => state.recipe.title);
 
-  let pageRatio = 0;
-  const page = document.querySelector("#a4");
-  if (page) {
-    pageRatio = page.getBoundingClientRect().width / page.getBoundingClientRect().height;
-  }
-
   return (
     <div data-testid="resultpage" className="relative min-h-screen flex flex-col">
       <ResetFlowButton />
-      <span
-        className={`absolute top-1/3 left-0 ml-12 font-bold ${
-          pageRatio > 0.709 && pageRatio < 0.7095 ? "text-green-600" : "text-red-600"
-        }`}
-      >
-        {pageRatio}
-      </span>
       <GoToButton page={"/instructions"} isNext={false} />
       <div className="flex flex-col center mt-28 mb-16">
         <div
@@ -47,8 +34,8 @@ function PrintPage() {
           <div className="flex flex-col items-center justify-start h-3/5 md:mt-1 lg:mt-2">
             <RecipeInstructions />
           </div>
-          <div className="flex flex-col bg-yellow-200 h-fit justify-between items-center pb-2">
-            <h2 className="text-fluidSubtitle">Enjoy !</h2>
+          <div className="flex flex-col h-fit justify-between items-center pb-2">
+            <h2 className="text-fluidSubtitle sm:mb-1 md:mb-2 lg:mb-4">Enjoy !</h2>
           </div>
         </div>
       </div>

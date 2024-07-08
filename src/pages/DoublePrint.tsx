@@ -9,22 +9,9 @@ import RecipeInstructionsLarge from "../components/ResultPage/RecipeInstructions
 function DoublePrint() {
   const recipeTitle = useSelector((state: RootState) => state.recipe.title);
 
-  let pageRatio = 0;
-  const page = document.querySelector("#a4_1");
-  if (page) {
-    pageRatio = page.getBoundingClientRect().width / page.getBoundingClientRect().height;
-  }
-
   return (
     <div data-testid="doubleResultpage" className="relative min-h-screen flex flex-col">
       <ResetFlowButton />
-      <span
-        className={`absolute top-1/3 left-0 ml-12 font-bold ${
-          pageRatio > 0.709 && pageRatio < 0.7095 ? "text-green-600" : "text-red-600"
-        }`}
-      >
-        {pageRatio}
-      </span>
       <GoToButton page={"/instructions"} isNext={false} />
       <div className="flex flex-row center gap-x-8 mt-28 mb-16">
         <div

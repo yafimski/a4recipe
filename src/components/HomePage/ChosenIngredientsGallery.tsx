@@ -39,8 +39,6 @@ function ChosenIngredientsGallery() {
   };
 
   const handleDragEnd = (e: DragEndEvent) => {
-    console.log("@ END");
-
     const { active, over } = e;
     if (!over) return;
 

@@ -1,6 +1,7 @@
 import { faClose } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import type { IngredientItem } from "../state/ingredientGroups/ingredientGroupsSlice";
+import { srcPath } from "../utils/helpers";
 
 interface IngredientProp {
   groupName: string;
@@ -21,7 +22,7 @@ function IngredientImageNeutral({ groupName, item, onRemoveItem }: IngredientPro
     >
       <img
         draggable="false"
-        src={`../src/assets/ingredients/${item.itemName.toLowerCase()}.webp`}
+        src={`${srcPath}/assets/ingredients/${item.itemName.toLowerCase()}.webp`}
         alt={item.itemName}
         data-testid={`${groupName}_${item.itemName}_shelf`}
         className="print-rounded print-image"

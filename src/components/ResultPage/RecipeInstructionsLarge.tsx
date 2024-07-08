@@ -1,5 +1,6 @@
 import { useSelector } from "react-redux";
 import type { RootState } from "../../state/store";
+import { srcPath } from "../../utils/helpers";
 
 function RecipeInstructions() {
   const chefInstructions = useSelector(
@@ -17,7 +18,7 @@ function RecipeInstructions() {
           <div className="bg-white card-shadow print-rounded print-image mr-2">
             <img
               draggable="false"
-              src={`../src/assets/chefActions/${inst.action.actionName.toLowerCase()}.webp`}
+              src={`${srcPath}/assets/chefActions/${inst.action.actionName}.webp`}
               alt={inst.action.actionName}
               data-testid={`${inst.action.actionName}_action`}
               className="print-rounded-img print-image"
@@ -33,7 +34,7 @@ function RecipeInstructions() {
             {inst.items.map((item) => (
               <div key={`${inst.id}_${item.itemName}`} className="flex center py-1 px-1">
                 <img
-                  src={`../src/assets/ingredients/${item.itemName.toLowerCase()}.webp`}
+                  src={`${srcPath}/assets/ingredients/${item.itemName.toLowerCase()}.webp`}
                   alt={item.itemName}
                   className="card-shadow print-image print-rounded"
                 />{" "}

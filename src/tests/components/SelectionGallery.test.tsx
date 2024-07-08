@@ -65,7 +65,6 @@ describe("SelectionGallery", () => {
     await user.click(resetButton);
     const updatedGroups = store.getState().groups.ingredientsGroups;
 
-    console.log(updatedGroups);
     expect(updatedGroups.length).toBe(0);
   });
 
@@ -76,7 +75,6 @@ describe("SelectionGallery", () => {
     await user.click(resetButton);
     const updatedGroups = store.getState().groups.ingredientsGroups;
 
-    console.log(updatedGroups);
     expect(updatedGroups.length).toBe(0);
   });
 });

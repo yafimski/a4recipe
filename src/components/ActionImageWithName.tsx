@@ -1,6 +1,7 @@
 import type { ChefAction } from "../state/chefActions/chefActionsSlice";
 import { CSS } from "@dnd-kit/utilities";
 import { useSortable } from "@dnd-kit/sortable";
+import { srcPath } from "../utils/helpers";
 
 interface IngredientProp {
   action: ChefAction;
@@ -27,7 +28,7 @@ function ActionImageWithName({ action }: IngredientProp) {
       <div key={actionName} className="bg-white card-shadow print-rounded w-clamp">
         <img
           draggable="false"
-          src={`../src/assets/chefActions/${actionName.toLowerCase()}.webp`}
+          src={`${srcPath}/assets/chefActions/${actionName}.webp`}
           alt={actionName}
           data-testid={`${actionName}_action`}
           className="print-rounded-img rounded-t-lg w-clamp"
