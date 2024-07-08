@@ -11,7 +11,7 @@ function Quantities() {
   return (
     <div data-testid="quantities" className="max-h-screen flex flex-col">
       <GoToButton page={"/instructions"} isNext={true} />
-      <GoToButton page={`/${srcPath}`} isNext={false} />
+      <GoToButton page={`${srcPath}/`} isNext={false} />
       <div className="flex h-screen justify-center text-center mt-8">
         <UnitsSelection />
       </div>

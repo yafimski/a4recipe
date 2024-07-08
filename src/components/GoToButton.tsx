@@ -1,5 +1,5 @@
 import { useNavigate } from "react-router-dom";
-import { defUnit, handleKeyDownPrevent } from "../utils/helpers";
+import { defUnit, handleKeyDownPrevent, srcPath } from "../utils/helpers";
 import { useDispatch, useSelector } from "react-redux";
 import { setWarning } from "../state/warning/warningSlice";
 import type { RootState } from "../state/store";
@@ -53,7 +53,7 @@ function GoToButton({ page, isNext }: GoToButtonProps) {
       let pageValid = false;
       let warningText = "";
 
-      if (page === "/quantities") {
+      if (page === `${srcPath}/quantities`) {
         if (recipeTitle.length > 0 && ingredientsGroups.length > 0) {
           pageValid = true;
         } else {
@@ -61,7 +61,7 @@ function GoToButton({ page, isNext }: GoToButtonProps) {
         }
       }
 
-      if (page === "/instructions") {
+      if (page === `${srcPath}/instructions`) {
         if (await areUnitsValid()) {
           pageValid = true;
 
@@ -72,7 +72,7 @@ function GoToButton({ page, isNext }: GoToButtonProps) {
         }
       }
 
-      if (page === "/print" || page === "/doublePrint") {
+      if (page === `${srcPath}/print` || page === `${srcPath}/doublePrint`) {
         if (await areInstructionsValid()) {
           pageValid = true;
         } else {
