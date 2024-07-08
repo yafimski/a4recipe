@@ -17,47 +17,7 @@ export interface ItemsGroups {
 }
 
 const initialState: ItemsGroups = {
-  ingredientsGroups: [
-    {
-      groupName: "a",
-      items: [
-        { itemName: "Garlic", amount: 1, unit: "g" },
-        { itemName: "Apples", amount: 4, unit: "whole" },
-        { itemName: "Black beans", amount: 1, unit: "liter" },
-        { itemName: "Almond milk", amount: 1, unit: "liter" },
-      ],
-    },
-    {
-      groupName: "asdv",
-      items: [
-        { itemName: "Kale", amount: 1, unit: "liter" },
-        { itemName: "Lemon zest", amount: 1, unit: "liter" },
-        { itemName: "Onion", amount: 1, unit: "g" },
-        { itemName: "Milk", amount: 1, unit: "liter" },
-        { itemName: "Walnuts", amount: 1, unit: "liter" },
-      ],
-    },
-    {
-      groupName: "c",
-      items: [
-        { itemName: "Olive oil", amount: 1, unit: "liter" },
-        { itemName: "Water", amount: 1, unit: "liter" },
-        { itemName: "White Chocolate", amount: 1, unit: "liter" },
-        { itemName: "Black olives", amount: 1, unit: "liter" },
-        { itemName: "Almonds", amount: 1, unit: "liter" },
-      ],
-    },
-    {
-      groupName: "dry stuff",
-      items: [
-        { itemName: "Banana", amount: 1, unit: "liter" },
-        { itemName: "Feta Cheese", amount: 1, unit: "liter" },
-        { itemName: "Parmesan Cheese", amount: 1, unit: "liter" },
-        { itemName: "Leek", amount: 1, unit: "liter" },
-        { itemName: "Butter", amount: 1, unit: "liter" },
-      ],
-    },
-  ],
+  ingredientsGroups: [],
 };
 
 const ingredientGroupsSlice = createSlice({

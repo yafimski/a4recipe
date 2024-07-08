@@ -32,6 +32,7 @@ describe("UnitSelection", () => {
           },
         ],
       },
+      actions: { ...store.getState().actions },
       warning: { ...store.getState().warning },
     };
 
@@ -66,6 +67,7 @@ describe("UnitSelection", () => {
           },
         ],
       },
+      actions: { ...store.getState().actions },
       warning: { ...store.getState().warning },
     };
 

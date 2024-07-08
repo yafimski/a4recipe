@@ -11,7 +11,7 @@ const initialState: RootState = {
     title: "Mock recipe name",
     currentItem: "Mock item",
     currentGroupName: "Mock group",
-    shelf: allPossibleIngredients,
+    possibleItems: allPossibleIngredients,
     batches: 1,
     invalidState: false,
   },
@@ -35,8 +35,11 @@ const initialState: RootState = {
           equipment: "Mock equipment",
         },
         items: [{ itemName: "Mock item", amount: 2, unit: "Mock unit" }],
+        note: "Mock note",
       },
     ],
+    currentInstruction: null,
+    availableItems: [],
   },
 };
 
