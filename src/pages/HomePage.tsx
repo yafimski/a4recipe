@@ -11,15 +11,15 @@ function HomePage() {
   );
 
   return (
-    <div data-testid="homepage" className="min-h-screen flex flex-col">
+    <div data-testid="homepage" className="max-h-screen flex flex-col">
       <GoToButton page={"/quantities"} isNext={true} />
       <Header />
-      <div className="flex flex-grow p-4 gap-8 mx-4 mt-4">
-        <div className="main-gallery w-3/5">
+      <div className="flex flex-grow md:p-2 lg:p-2 sm:gap-4 md:gap-4 lg:gap-8 mx-4">
+        <div className="main-gallery sm:w-2/3 md:w-4/5 lg:w-3/5">
           <SelectionGallery />
         </div>
         <div
-          className={`main-gallery w-2/5 ${
+          className={`main-gallery sm:w-1/3 w-2/5 ${
             ingredientsGroups.length === 0 && "required-element-border"
           }`}
         >

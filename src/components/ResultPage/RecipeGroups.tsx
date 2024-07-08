@@ -1,24 +1,43 @@
 import { useSelector } from "react-redux";
 import type { RootState } from "../../state/store";
-import PrintItemFull from "./PrintItemFull";
 
 function RecipeGroups() {
   const ingredientsGroups = useSelector(
     (state: RootState) => state.groups.ingredientsGroups
   );
 
-  return ingredientsGroups.map((group) => (
-    <div key={group.groupName} className="flex flex-col flex-wrap center mx-4">
-      <p className="font-indie rounded-2xl text-md">{group.groupName}</p>
-      <div className="flex flex-col rounded-2xl  recipe-group-border w-full py-2 px-3">
+  return ingredientsGroups.map((group) => {
+    return (
+      <div
+        key={group.groupName}
+        className="flex flex-row center md:gap-x-3 lg:gap-x-4 mb-2"
+      >
+        <p className="text-fluidSubtitle leading-none  md:mr-2 lg:mr-4">
+          {group.groupName}
+        </p>
         {group.items.map((item) => (
-          <div key={item.itemName} className="m-1">
-            <PrintItemFull groupName={group.groupName} item={item} />
+          <div
+            key={`${group.groupName}_${item.itemName}`}
+            className="flex flex-col h-fit center md:rounded-md lg:rounded-lg"
+          >
+            <img
+              src={`../src/assets/ingredients/${item.itemName.toLowerCase()}.webp`}
+              alt={item.itemName}
+              className="card-shadow md:w-tinyImage lg:w-miniImage md:rounded-md lg:rounded-lg"
+            />
+            <div className="py-2 h-fit">
+              <p className="text-fluidPrintTitle leading-tight px-2">{item.itemName}</p>
+              <p className="text-fluidPrintTitle leading-tight">
+                <b>
+                  {item.amount}&nbsp;&nbsp;{item.unit}
+                </b>
+              </p>
+            </div>
           </div>
         ))}
       </div>
-    </div>
-  ));
+    );
+  });
 }
 
 export default RecipeGroups;

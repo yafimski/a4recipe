@@ -7,11 +7,10 @@ function PrintButton() {
       onKeyDown={handleKeyDownPrevent}
       onClick={() => console.log("here")}
     >
-      <button
-        type="button"
-        className="my-8 sexy-button bg-blue-500 hover:bg-white hover:text-blue-500 focus:text-blue-500 focus:bg-gray-200 text-gray-50"
-      >
-        PRINT PAGE
+      <button type="button" className="print-to-a4-button">
+        PRINT
+        <br />
+        TO A4
       </button>
     </div>
   );

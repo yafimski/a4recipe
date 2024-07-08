@@ -8,7 +8,7 @@ import {
   addChefInstruction,
   updateChefInstructionItems,
   updateInstructionAction,
-  updateAvailableItems,
+  updateAvailableItem,
 } from "../../state/chefActions/chefActionsSlice";
 import { useEffect, useRef, useState } from "react";
 import { faAnglesLeft, faAnglesRight } from "@fortawesome/free-solid-svg-icons";
@@ -187,7 +187,7 @@ function ActionSteps() {
             })
           );
 
-          dispatch(updateAvailableItems(item));
+          dispatch(updateAvailableItem(item));
         }
       }
     }
@@ -243,7 +243,7 @@ function ActionSteps() {
       onDragEnd={handleDragEnd}
       onDragStart={handleDragStart}
     >
-      <div className="mt-12 max-h-5/6 w-4/5 input-gallery-border p-4 overflow-y-hidden">
+      <div className="mt-16 max-h-5/6 w-11/12 input-gallery-border p-4">
         <h2 className="text-fluidSubtitle mb-2">
           Plan the instructions and steps for this recipe!
         </h2>
@@ -263,16 +263,18 @@ function ActionSteps() {
           <Caret icon={faAnglesRight} onCaretClick={() => scrollByItems("right")} />
           {activeAction && (
             <DragOverlay>
-              <ActionImageWithName action={activeAction} showName={true} />
+              <ActionImageWithName action={activeAction} />
             </DragOverlay>
           )}
         </div>
         <div className="flex w-full justify-between mt-8">
           <div
             ref={scrollRef2}
-            className="flex flex-col min-w-fit p-4 mr-10 half-height no-scrollbar overflow-scroll"
+            className="flex flex-col min-w-fit sm:p-2 md:p-4 sm:mr-4 md:mr-2 max-h-half overflow-y-scroll scroll-normal"
           >
-            <InstructionsItems />
+            <div className="scroll-mirror">
+              <InstructionsItems />
+            </div>
           </div>
           {activeItem && (
             <DragOverlay>

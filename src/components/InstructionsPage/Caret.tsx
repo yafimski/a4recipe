@@ -10,7 +10,7 @@ interface CaretProps {
 function Caret({ icon, onCaretClick }: CaretProps) {
   return (
     <div
-      className="flex center short-height cursor-pointer hover:border-y-2 hover:border-black"
+      className="flex center max-h-short cursor-pointer hover:border-y-2 hover:border-black"
       onClick={() => onCaretClick()}
       onKeyDown={handleKeyDownPrevent}
     >

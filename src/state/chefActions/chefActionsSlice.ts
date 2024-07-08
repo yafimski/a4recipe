@@ -123,21 +123,19 @@ const chefActionSlice = createSlice({
     setAvailableItems: (state, action: PayloadAction<IngredientItem[]>) => {
       state.availableItems = action.payload;
     },
-    updateAvailableItems: (state, action: PayloadAction<IngredientItem>) => {
-      console.log("Updating available items");
-      console.log(action.payload);
-
+    updateAvailableItem: (state, action: PayloadAction<IngredientItem>) => {
       const firstIdxMatch = state.availableItems.findIndex((item) =>
         isEqual(item, action.payload)
       );
 
       if (firstIdxMatch === -1) {
-        console.log("Adding item");
         state.availableItems.push(action.payload);
       } else {
-        console.log("item exists");
         state.availableItems.splice(firstIdxMatch, 1);
       }
+    },
+    updateAvailableItems: (state, action: PayloadAction<IngredientItem[]>) => {
+      state.availableItems.push(...action.payload);
     },
   },
 });
@@ -152,6 +150,7 @@ export const {
   updateInstructionAction,
   updateInstructionNote,
   setAvailableItems,
+  updateAvailableItem,
   updateAvailableItems,
 } = chefActionSlice.actions;
 

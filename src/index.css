@@ -4,63 +4,79 @@
 @tailwind components;
 @tailwind utilities;
 
-body,
-html {
-  box-sizing: border-box;
-}
+@layer base {
+  body,
+  html {
+    box-sizing: border-box;
+  }
 
-div,
-button {
-  user-select: none;
-  font-family: "Roboto";
-}
+  div,
+  button {
+    @apply select-none font-roboto;
+  }
 
-div,
-img {
-  touch-action: auto;
-}
+  p,
+  span {
+    @apply font-indie;
+  }
 
-h2,
-input {
-  font-family: "Indie Flower";
-}
+  div,
+  img {
+    touch-action: auto;
+  }
 
-input {
-  padding: 0.5em 1em;
-  font-style: italic;
-}
+  h2,
+  input {
+    @apply font-indie;
+  }
 
-input::placeholder {
-  color: gray;
+  input {
+    padding: 0.5em 1em;
+    font-style: italic;
+  }
+
+  input::placeholder {
+    color: gray;
+  }
+
+  input[type="number"]::-webkit-inner-spin-button,
+  input[type="number"]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+
+  input[type="number"] {
+    appearance: textfield;
+    -moz-appearance: textfield;
+  }
 }
 
 @layer components {
   :root {
-    --fluid-16-40: clamp(1rem, -1.2722rem + 3.5503vi, 2.5rem);
+    --fluid-20-28: clamp(1.25rem, 0.4926rem + 1.1834vi, 1.75rem);
     --fluid-16-24: clamp(1rem, 0.2426rem + 1.1834vi, 1.5rem);
+    --fluid-10-20: clamp(0.625rem, -0.3217rem + 1.4793vi, 1.25rem);
     --fluid-6-16: clamp(0.375rem, -0.5717rem + 1.6vi, 1rem);
+    --fluid-8-14: clamp(0.5rem, -0.068rem + 0.8876vi, 0.875rem);
+    --fluid-6-10: clamp(0.375rem, -0.0037rem + 0.5917vi, 0.625rem);
     --fluid-2-6: clamp(0.125rem, -0.2537rem + 0.5917cqi, 0.375rem);
+    --w-clamp: clamp(3cqw, 6cqw, 8cqw);
+    --w-clamp-input: clamp(24cqw, 36cqw, 44cqw);
+    --w-clamp-small: clamp(12cqw, 20cqw, 28cqw);
+    --h-clamp: clamp(20cqh, 25cqh, 30cqh);
+    --h-clamp-small: clamp(12cqh, 20cqh, 28cqh);
   }
 
-  .font-shadow-light {
-    font-family: "Shadows Into Light";
+  .scroll-normal {
+    direction: rtl;
   }
 
-  .font-indie {
-    font-family: "Indie Flower";
-  }
-
-  .font-roboto {
-    font-family: "Roboto";
-    font-style: normal;
-  }
-
-  .steps-container {
-    max-height: 20ch;
+  .scroll-mirror {
+    direction: ltr;
   }
 
   .modal-open-button {
-    @apply absolute z-10 top-0 left-0 m-24 font-shadow-light text-2xl -rotate-12 text-center hover:-rotate-0 hover:scale-110 transition ease-in-out;
+    @apply absolute z-10 top-0 left-0 sm:m-8 md:m-12 lg:m-16 font-shadowsLight text-fluidSubtitle -rotate-12 text-center hover:-rotate-0 hover:scale-110 transition ease-in-out;
   }
 
   .modal-container {
@@ -68,7 +84,7 @@ input::placeholder {
   }
 
   .modal-content {
-    @apply relative flex flex-col center w-1/3 mt-20 aspect-square rounded-2xl bg-white;
+    @apply relative flex flex-col center w-1/2 mt-20 aspect-square rounded-2xl bg-white;
   }
 
   .modal-image {
@@ -76,7 +92,7 @@ input::placeholder {
   }
 
   .modal-image-title {
-    @apply absolute top-0 text-2xl font-indie mt-2;
+    @apply absolute top-0 md:text-lg lg:text-2xl font-indie mt-2;
   }
 
   .close-modal-button {
@@ -91,21 +107,12 @@ input::placeholder {
     @apply hover:scale-125 transition ease-in-out;
   }
 
+  .nav-icon {
+    @apply md:text-lg lg:text-2xl;
+  }
+
   .modal-overlay {
     @apply fixed inset-0 bg-gray-500 bg-opacity-80 border-none;
-  }
-
-  .instruction-word {
-    @apply font-indie text-xl mx-4;
-  }
-
-  .instruction-word-small {
-    @apply font-indie text-sm;
-  }
-
-  .instruction-word-tiny {
-    @apply font-indie;
-    font-size: 0.5cqw;
   }
 
   .num-input-icons {
@@ -131,14 +138,6 @@ input::placeholder {
     grid-auto-columns: auto;
   }
 
-  .full-image {
-    height: 16ch;
-  }
-
-  .mini-image {
-    height: 2.5cqw;
-  }
-
   .mini-text {
     font-family: "Indie Flower";
     font-size: 6px;
@@ -147,30 +146,6 @@ input::placeholder {
   .small-text {
     font-family: "Indie Flower";
     font-size: 10px;
-  }
-
-  .large-image {
-    height: 10ch;
-  }
-
-  .small-image {
-    height: 7ch;
-  }
-
-  .tiny-image {
-    height: 5ch;
-  }
-
-  .semi-height {
-    max-height: 60vh;
-  }
-
-  .half-height {
-    max-height: 55ch;
-  }
-
-  .short-height {
-    max-height: 20ch;
   }
 
   .no-scrollbar {
@@ -187,7 +162,7 @@ input::placeholder {
   }
 
   .input-border {
-    @apply bg-white card-shadow rounded-lg;
+    @apply bg-white card-shadow;
     border: 0.5px solid rgba(0, 0, 0, 0.12);
     border-bottom: 1px solid rgba(0, 0, 0, 0.12);
   }
@@ -201,7 +176,7 @@ input::placeholder {
   }
 
   .main-gallery {
-    @apply flex flex-col overflow-hidden semi-height rounded-lg bg-white gallery-shadow p-4;
+    @apply flex flex-col overflow-hidden max-h-semi rounded-lg bg-white gallery-shadow p-4;
   }
 
   .a4ratio {
@@ -232,30 +207,7 @@ input::placeholder {
   }
 
   .suspense-gallery-item {
-    @apply relative flex flex-col rounded-2xl card-shadow md:w-20 lg:w-28 xl:w-32 aspect-video-reverse bg-slate-100;
-  }
-
-  .aspect-video-reverse {
-    aspect-ratio: 9 / 16;
-  }
-
-  .aspect-video-wide {
-    aspect-ratio: 20 / 9;
-  }
-
-  .aspect-video-thin {
-    aspect-ratio: 9 / 13;
-  }
-
-  input[type="number"]::-webkit-inner-spin-button,
-  input[type="number"]::-webkit-outer-spin-button {
-    -webkit-appearance: none;
-    margin: 0;
-  }
-
-  input[type="number"] {
-    appearance: textfield;
-    -moz-appearance: textfield;
+    @apply relative flex flex-col rounded-2xl card-shadow lg:w-20 xl:w-32 aspect-videoReverse bg-slate-100;
   }
 
   .toast {
@@ -271,11 +223,6 @@ input::placeholder {
     background-color: rgba(255, 0, 0, 0.2);
   }
 
-  .recipe-group-border {
-    border-left: 1px solid rgba(0, 0, 0, 0.4);
-    border-right: 1px solid rgba(0, 0, 0, 0.4);
-  }
-
   .unit-card {
     @apply bg-white text-black border-b-4 border-transparent thin-shadow p-1 px-2 mx-1 font-indie text-xl;
   }
@@ -286,11 +233,39 @@ input::placeholder {
   }
 
   .sexy-button {
-    @apply py-1.5 px-6 rounded-xl rounded-t-xl tracking-wider leading-loose transition duration-200 card-shadow;
+    @apply px-6 rounded-xl rounded-t-xl tracking-widest leading-loose transition duration-200 card-shadow border-2 border-transparent font-shadowsLight lg:text-base;
   }
 
   .go-to-button-arrow {
-    @apply absolute flex text-white text-center px-4 py-2 m-12 cursor-pointer font-semibold tracking-widest rounded-md duration-300;
+    @apply absolute center flex text-white p-3 lg:p-4 m-8 cursor-pointer font-semibold tracking-widest rounded-md duration-300 font-shadowsLight;
+  }
+
+  .print-to-a4-button {
+    @apply fixed text-black bottom-0 right-0 sm:m-4 md:m-6 lg:m-8 xl:m-10 font-shadowsLight md:text-base lg:text-xl -rotate-12 text-center hover:-rotate-0 hover:scale-110 transition ease-in-out;
+  }
+
+  .recipe-title {
+    @apply sm:text-sm md:text-base lg:text-lg font-shadowsLight md:mt-2 lg:mt-4;
+  }
+
+  .recipe-subtitle-text {
+    @apply sm:text-xs xl:text-base;
+  }
+
+  .print-image {
+    @apply sm:w-smallPrint md:w-smallPrint lg:w-printItem xl:w-tinyImage;
+  }
+
+  .print-rounded {
+    @apply sm:rounded-md md:rounded-md lg:rounded-lg xl:rounded-lg;
+  }
+
+  .print-rounded-img {
+    @apply sm:rounded-t-sm md:rounded-t-md lg:rounded-t-lg xl:rounded-t-lg;
+  }
+
+  .instruction-print-text {
+    @apply text-fluidCard xl:text-fluidPrintSubtitle;
   }
 }
 

@@ -3,8 +3,6 @@ import { defUnit, handleKeyDownPrevent } from "../utils/helpers";
 import { useDispatch, useSelector } from "react-redux";
 import { setWarning } from "../state/warning/warningSlice";
 import type { RootState } from "../state/store";
-import { faArrowLeft, faArrowRight } from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { setAvailableItems } from "../state/chefActions/chefActionsSlice";
 
 interface GoToButtonProps {
@@ -74,7 +72,7 @@ function GoToButton({ page, isNext }: GoToButtonProps) {
         }
       }
 
-      if (page === "/result") {
+      if (page === "/print" || page === "/doublePrint") {
         if (await areInstructionsValid()) {
           pageValid = true;
         } else {
@@ -106,14 +104,12 @@ function GoToButton({ page, isNext }: GoToButtonProps) {
           type="button"
         >
           NEXT
-          <FontAwesomeIcon icon={faArrowRight} className="text-xl ml-4" />
         </button>
       ) : (
         <button
           className="go-to-button-arrow left-0 bg-red-500 hover:bg-red-400 hover:-translate-x-4"
           type="button"
         >
-          <FontAwesomeIcon icon={faArrowLeft} className="text-xl mr-4" />
           BACK
         </button>
       )}

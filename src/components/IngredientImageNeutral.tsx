@@ -9,12 +9,7 @@ interface IngredientProp {
   onRemoveItem: (item: IngredientItem) => void;
 }
 
-function IngredientImageNeutral({
-  groupName,
-  item,
-  size = "lg",
-  onRemoveItem,
-}: IngredientProp) {
+function IngredientImageNeutral({ groupName, item, onRemoveItem }: IngredientProp) {
   const handleRemoveItem = () => {
     onRemoveItem(item);
   };
@@ -22,16 +17,14 @@ function IngredientImageNeutral({
   return (
     <div
       key={`${groupName}_${item.itemName}`}
-      className={`relative rounded-2xl aspect-square ${
-        size === "lg" ? "large-image" : "small-image"
-      } card-shadow center`}
+      className="relative print-rounded aspect-square print-image card-shadow center"
     >
       <img
         draggable="false"
         src={`../src/assets/ingredients/${item.itemName.toLowerCase()}.webp`}
         alt={item.itemName}
         data-testid={`${groupName}_${item.itemName}_shelf`}
-        className="rounded-2xl"
+        className="print-rounded print-image"
       />
       <div className="flex center rounded-2xl">
         <FontAwesomeIcon

@@ -8,10 +8,10 @@ function Quantities() {
   const warning = useSelector((state: RootState) => state.warning.warning);
 
   return (
-    <div data-testid="quantities" className="min-h-screen flex flex-col">
+    <div data-testid="quantities" className="max-h-screen flex flex-col">
       <GoToButton page={"/instructions"} isNext={true} />
       <GoToButton page={"/"} isNext={false} />
-      <div className="flex h-screen justify-center text-center">
+      <div className="flex h-screen justify-center text-center mt-8">
         <UnitsSelection />
       </div>
       {warning && <WarningSnack />}

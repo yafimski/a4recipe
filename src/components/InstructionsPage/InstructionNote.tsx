@@ -54,11 +54,11 @@ function InstructionNote({ instruction }: { instruction: ChefInstruction }) {
   };
 
   return showInput || instruction.note ? (
-    <div className="flex justify-end items-center w-96">
+    <div className="flex justify-end items-center md:w-60 lg:w-96">
       <input
         type="text"
         ref={inputRef}
-        className="input-border w-full text-sm text-center -m-4 text-ellipsis whitespace-nowrap overflow-hidden"
+        className="input-border w-full text-fluidSubtitle text-center md:-m-2 lg:-m-4 text-ellipsis whitespace-nowrap overflow-hidden sm:p-0 md:p-1"
         placeholder="Add a note to this instruction"
         value={currentNoteText}
         onChange={handleNoteText}
@@ -75,7 +75,7 @@ function InstructionNote({ instruction }: { instruction: ChefInstruction }) {
   ) : (
     <button
       type="button"
-      className="sexy-button px-3 py-2 -m-4 min-w-16 card-shadow border border-transparent bg-yellow-100 text-neutral-800 font-semibold rounded-lg text-xs hover:bg-white hover:border-2 hover:border-yellow-200"
+      className="sexy-button md:px-1 lg:px-3 md:py-1 lg:py-2 -m-4 min-w-16 card-shadow border border-transparent bg-yellow-100 text-neutral-800 font-semibold rounded-lg text-xs hover:bg-white hover:border-2 hover:border-yellow-200"
       onClick={() => setAddingNoteId(instruction.id)}
     >
       <span>Add Note</span>

@@ -14,8 +14,6 @@ import {
 } from "../../state/recipe/recipeSlice";
 import { setWarning } from "../../state/warning/warningSlice";
 import WarningSnack from "../WarningSnack";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faSearch } from "@fortawesome/free-solid-svg-icons";
 import { handleFocusSelect } from "../../utils/helpers";
 
 function Header() {
@@ -84,15 +82,15 @@ function Header() {
 
   return (
     <>
-      <div className="w-full h-1/4 center text-center">
-        <h1 className="pt-6 text-fluidTitle font-shadow-light ">Welcome to a4recipe</h1>
-        <h3 className="pt-2 pb-4 text-fluidSubtitle font-indie">
+      <div className="flex flex-col w-full h-1/4 center text-center">
+        <h1 className="mt-4 text-fluidTitle font-shadowsLight">Welcome to a4recipe</h1>
+        <h3 className="pt-2 pb-2 text-fluidSubtitle">
           Name your recipe and start adding ingredients!
         </h3>
         <input
           type="text"
           required
-          className={`w-1/4 center input-border ${
+          className={`w-inputs center input-border xl:w-96 ${
             recipeTitle.length === 0 && "required-element-border"
           }`}
           placeholder="Give your recipe a name"
@@ -105,47 +103,45 @@ function Header() {
           }}
           onFocus={handleFocusSelect}
         />
-        <form className="p-6 pb-4">
-          <button
-            type="button"
-            className="mr-24 sexy-button bg-slate-500 hover:bg-white hover:text-slate-500 focus:text-slate-500 focus:bg-gray-200 text-gray-50"
-            onClick={handleReset}
-          >
-            RESET
-          </button>
-          <>
-            <FontAwesomeIcon
-              icon={faSearch}
-              color="rgba(0,0,0,0.3)"
-              size="1x"
-              className="relative -mx-6"
-            />
-            <input
-              type="text"
-              className="input-border text-center w-96 mr-8"
-              placeholder="Search ingredients"
-              value={currentItem}
-              onInput={handleInputChange}
-              onFocus={handleFocusSelect}
-            />
-          </>
-          <input
-            type="text"
-            className="input-border w-60"
-            placeholder="Give them a group name"
-            value={currentGroupName}
-            onChange={(e) => dispatch(nameGroup(e.target.value))}
-            onFocus={handleFocusSelect}
-          />
-          <button
-            form="addIngredientsSelect"
-            type="submit"
-            className="ml-8 sexy-button bg-blue-500 hover:bg-white hover:text-blue-500 focus:text-blue-500 focus:bg-gray-200 text-gray-50"
-            onClick={(e) => handleAddIngredient(e, currentGroupName, currentItem)}
-          >
-            ADD
-          </button>
-        </form>
+        <div className="md:justify-between lg:justify-center gap-y-4">
+          <form className="pt-4 pb-2">
+            <div className="flex flex-row center w-full mb-4 gap-4">
+              <input
+                type="text"
+                className="input-border text-center w-96 lg:mr-8"
+                placeholder="Search ingredients"
+                value={currentItem}
+                onInput={handleInputChange}
+                onFocus={handleFocusSelect}
+              />
+              <input
+                type="text"
+                className="input-border w-60"
+                placeholder="Give them a group name"
+                value={currentGroupName}
+                onChange={(e) => dispatch(nameGroup(e.target.value))}
+                onFocus={handleFocusSelect}
+              />
+            </div>
+            <div className="flex flex-row justify-between">
+              <button
+                type="button"
+                className="sexy-button bg-slate-500 hover:bg-white hover:text-slate-500 focus:text-slate-500 focus:bg-gray-200 text-gray-50"
+                onClick={handleReset}
+              >
+                RESET
+              </button>
+              <button
+                form="addIngredientsSelect"
+                type="submit"
+                className="sexy-button bg-blue-500 hover:bg-white hover:text-blue-500 focus:text-blue-500 focus:bg-gray-200 text-gray-50"
+                onClick={(e) => handleAddIngredient(e, currentGroupName, currentItem)}
+              >
+                ADD
+              </button>
+            </div>
+          </form>
+        </div>
       </div>
       {warning && <WarningSnack />}
     </>

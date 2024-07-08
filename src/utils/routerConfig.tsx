@@ -1,8 +1,9 @@
 import PageNotFound from "../components/PageNotFound";
+import DoublePrint from "../pages/DoublePrint";
 import HomePage from "../pages/HomePage";
 import Instructions from "../pages/Instructions";
+import PrintPage from "../pages/PrintPage";
 import Quantities from "../pages/Quantities";
-import ResultPage from "../pages/ResultPage";
 
 const routesConfig = [
   {
@@ -12,7 +13,8 @@ const routesConfig = [
   },
   { path: "/quantities", element: <Quantities /> },
   { path: "/instructions", element: <Instructions /> },
-  { path: "/result", element: <ResultPage /> },
+  { path: "/print", element: <PrintPage /> },
+  { path: "/doublePrint", element: <DoublePrint /> },
 ];
 
 export default routesConfig;

@@ -31,7 +31,7 @@ function UnitsPanel({ groupName, items }: UnitsPanelProps) {
           />
           <div
             data-testid="unitsButtonsArray"
-            className="flex flex-col justify-start gap-y-2 mx-8 "
+            className="flex flex-col justify-start md:gap-y-2 sm:mx-6 md:mx-12 lg:mx-8"
           >
             <UnitsButtonGroup
               identifier={`${item.itemName}_${groupName}_common1`}
@@ -44,7 +44,7 @@ function UnitsPanel({ groupName, items }: UnitsPanelProps) {
           </div>
           <form>
             <select
-              className={`font-indie w-28 input-border rounded-md px-2 py-1 ${
+              className={`text-base md:w-20 lg:w-28 input-border rounded-md px-2 py-1 ${
                 extraUnits.includes(item.unit)
                   ? "border-blue-500 border-1 bg-blue-300"
                   : null

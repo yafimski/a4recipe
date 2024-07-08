@@ -47,7 +47,7 @@ function TimeInput({ instruction }: TimeInputProps) {
         <FontAwesomeIcon icon={faMinus} className="num-input-icons" />
       </button>
       <input
-        className={`w-16 p-0 mx-4 focus:outline-none text-center rounded-2xl text-5xl bg-transparent ${
+        className={`sm:w-8 md:w-8 lg:w-16 p-0 md:mx-2 lg:mx-4 focus:outline-none text-center rounded-2xl sm:text-2xl  md:text-3xl lg:text-4xl bg-transparent ${
           localTime === 0 && "required-element-fill"
         }`}
         type="number"

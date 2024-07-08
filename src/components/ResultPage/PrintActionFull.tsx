@@ -10,7 +10,7 @@ function PrintActionFull({ actionName }: IngredientProp) {
         src={`../src/assets/chefActions/${actionName.toLowerCase()}.webp`}
         alt={actionName}
         data-testid={`${actionName}_action`}
-        className="rounded-t-lg tiny-image"
+        className="rounded-t-lg h-tinyImage"
       />
       <p className="small-text py-2">{actionName}</p>
     </div>

@@ -12,13 +12,7 @@ interface IngredientProp {
   size?: "sm" | "lg";
 }
 
-function IngredientImage({
-  groupName,
-  item,
-  allowRemove,
-  onRemove,
-  size = "lg",
-}: IngredientProp) {
+function IngredientImage({ groupName, item, allowRemove, onRemove }: IngredientProp) {
   const { attributes, listeners, setNodeRef, transform, transition } = useSortable({
     id: `${groupName}_${item.itemName}`,
     data: {
@@ -37,9 +31,7 @@ function IngredientImage({
     <div
       ref={setNodeRef}
       key={`${groupName}_${item.itemName}`}
-      className={`relative rounded-2xl aspect-square ${
-        size === "lg" ? "large-image" : "small-image"
-      } card-shadow center`}
+      className="relative print-rounded aspect-square w-clamp card-shadow center"
       style={style}
       {...listeners}
       {...attributes}
@@ -48,7 +40,7 @@ function IngredientImage({
         src={`../src/assets/ingredients/${item.itemName.toLowerCase()}.webp`}
         alt={item.itemName}
         data-testid={`${groupName}_${item.itemName}_selected`}
-        className="rounded-2xl"
+        className="print-rounded"
       />
       {allowRemove && (
         <div className="flex center rounded-2xl">

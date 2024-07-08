@@ -8,15 +8,15 @@ function ActionImageNeutral({ action }: IngredientProp) {
   const { actionName } = action;
 
   return (
-    <div className="rounded-2xl h-36 card-shadow bg-white aspect-video-thin">
+    <div key={actionName} className="bg-white card-shadow print-rounded w-clamp">
       <img
         draggable="false"
         src={`../src/assets/chefActions/${actionName.toLowerCase()}.webp`}
         alt={actionName}
         data-testid={`${actionName}_action`}
-        className="rounded-t-2xl"
+        className="print-rounded-img md:w-clampSmall lg:w-clamp"
       />
-      <p className="text-md py-2">{actionName}</p>
+      <p className="text-fluidCard py-2">{actionName}</p>
     </div>
   );
 }

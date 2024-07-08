@@ -25,7 +25,7 @@ function UnitsButtonGroup({ identifier, units }: UnitsButtonGroupProps) {
       <div className="text-fluidCard">
         {units.map((unit: string) => (
           <button
-            className={`unit-card my-1 sm: text-xs md:text-xl ${
+            className={`unit-card my-1 md: text-xs lg:text-xl ${
               currentItem.unit === unit ? "unit-card-chosen" : null
             }`}
             type="button"

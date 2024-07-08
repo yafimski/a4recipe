@@ -11,7 +11,7 @@ function WarningSnack() {
   useEffect(() => {
     const timer = setTimeout(() => {
       dispatch(setWarning(""));
-    }, 3000);
+    }, 4000);
 
     return () => clearTimeout(timer);
   }, [dispatch]);
@@ -22,7 +22,7 @@ function WarningSnack() {
 
   return (
     <div
-      className="toast"
+      className="toast font-indie"
       onClick={handleClose}
       onKeyDown={handleKeyDownPrevent}
       data-testid={"snack"}

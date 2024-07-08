@@ -14,7 +14,7 @@ function UnitsSelection() {
           Select the Units and Quantities for each ingredient
         </h2>
         {ingredientsGroups.map((group: ItemsGroup) => (
-          <div key={group.groupName} className="mb-4">
+          <div key={group.groupName} className="sm:mb-2 md:mb-4">
             <UnitsPanel
               key={group.groupName}
               groupName={group.groupName}

@@ -40,19 +40,14 @@ function ChosenIngredientsGallery() {
 
   const handleDragEnd = (e: DragEndEvent) => {
     console.log("@ END");
-    const { active, over } = e;
-    console.log(active, over);
 
+    const { active, over } = e;
     if (!over) return;
 
     const isActiveAnItem = active.data.current?.type === "Ingredient";
     const isOverAGroup = over.data.current?.type === "Group";
-    console.log(isActiveAnItem);
-    console.log(isOverAGroup);
 
     const parent = active.data.current?.parentGroup;
-    console.log(parent);
-    console.log(over.id);
 
     if (isActiveAnItem && isOverAGroup && parent !== (over.id as string)) {
       const itemName = (active.id as string).split("_")[1];
@@ -118,7 +113,7 @@ function ChosenIngredientsGallery() {
     }),
     useSensor(TouchSensor, {
       activationConstraint: {
-        distance: 10,
+        distance: 4,
       },
     })
   );
@@ -132,7 +127,7 @@ function ChosenIngredientsGallery() {
       onDragStart={handleDragStart}
     >
       <div className="relative px-4 pb-4 overflow-auto center text-center no-scrollbar overflow-x-hidden">
-        <h2 className="mb-8 text-2xl font-indie">Selected ingredient groups</h2>
+        <h2 className="mb-8 text-fluidSubtitle">Selected ingredient groups</h2>
         <ChosenGroups />
       </div>
       {activeItem && (

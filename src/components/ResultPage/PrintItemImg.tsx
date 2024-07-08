@@ -3,7 +3,7 @@ function PrintItemImg({ itemName, square }: { itemName: string; square: boolean 
     <img
       src={`../src/assets/ingredients/${itemName.toLowerCase()}.webp`}
       alt={itemName}
-      className={`mini-image ${square ? "rounded-md" : "rounded-l-md"}`}
+      className={`h-miniImage ${square ? "rounded-md" : "rounded-l-md"}`}
     />
   );
 }

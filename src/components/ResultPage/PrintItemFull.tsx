@@ -13,14 +13,13 @@ function IngredientFullItem({ groupName, item }: IngredientProp) {
     <div data-testid="ingredientFullItem" className="flex center">
       <div
         key={`${groupName}_${itemName}`}
-        className="aspect-video-wide flex flex-row mini-image rounded-md card-shadow"
+        className="aspect-videoWide flex flex-row rounded-md card-shadow"
       >
-        <PrintItemImg itemName={itemName} square={false} />
-        {/* <img
+        <img
           src={`../src/assets/ingredients/${itemName.toLowerCase()}.webp`}
           alt={itemName}
-          className="rounded-l-md"
-        /> */}
+          className="h-smallImage"
+        />
         <div className="flex flex-col center w-full p-1">
           <p className="mini-text">{itemName}</p>
           <hr className="w-2/3 border-gray-400 py-1" />

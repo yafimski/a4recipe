@@ -91,12 +91,12 @@ function AmountInput({ item, groupName }: AmountInputProps) {
   };
 
   return (
-    <div className="flex flex-row rounded-md mx-6">
-      <button type="button" className="mx-2" onClick={handleSubtract}>
+    <div className="flex flex-row rounded-md sm:mx-2 md:mx-4 lg:mx-6">
+      <button type="button" className="lg:mx-2" onClick={handleSubtract}>
         <FontAwesomeIcon icon={faMinus} className="num-input-icons" />
       </button>
       <input
-        className={`w-16 p-0 py-1 focus:outline-none text-center font-roboto rounded-xl ${
+        className={`sm:w-10 md:w-12 lg:w-16 p-0 py-1 focus:outline-none text-center font-roboto rounded-xl ${
           localAmount === 0 && "required-element-fill"
         }`}
         type="number"
@@ -109,7 +109,7 @@ function AmountInput({ item, groupName }: AmountInputProps) {
         onKeyDown={handleKeyDownBlur}
         onWheel={(e) => (e.target as HTMLElement).blur()}
       />
-      <button type="button" className="mx-2" onClick={handleAdd}>
+      <button type="button" className="lg:mx-2" onClick={handleAdd}>
         <FontAwesomeIcon icon={faPlus} className="num-input-icons" />
       </button>
     </div>

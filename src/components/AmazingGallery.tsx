@@ -49,6 +49,7 @@ function AmazingGallery({ isOpen, onClose }: AmazingGalleryProps) {
     };
   }, [isOpen, handleKeyDown]);
 
+  // biome-ignore lint/style/noNonNullAssertion: <explanation>
   Modal.setAppElement(document.getElementById("root")!);
 
   return (
@@ -61,7 +62,7 @@ function AmazingGallery({ isOpen, onClose }: AmazingGalleryProps) {
     >
       <div className="modal-content">
         <button type="button" className="close-modal-button" onClick={() => onClose()}>
-          <FontAwesomeIcon icon={faClose} className="text-2xl" />
+          <FontAwesomeIcon icon={faClose} className="nav-icon" />
         </button>
         <span className="modal-image-title">{allPossibleIngredients[currentIndex]}</span>
         <img
@@ -73,10 +74,10 @@ function AmazingGallery({ isOpen, onClose }: AmazingGalleryProps) {
         />
         <div className="modal-nav-buttons">
           <button type="button" className="nav-button prev" onClick={prevImage}>
-            <FontAwesomeIcon icon={faChevronLeft} className="text-3xl ml-4" />
+            <FontAwesomeIcon icon={faChevronLeft} className="nav-icon" />
           </button>
           <button type="button" className="nav-button next" onClick={nextImage}>
-            <FontAwesomeIcon icon={faChevronRight} className="text-3xl ml-4" />
+            <FontAwesomeIcon icon={faChevronRight} className="nav-icon" />
           </button>
         </div>
       </div>

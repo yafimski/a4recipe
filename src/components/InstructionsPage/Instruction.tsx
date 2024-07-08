@@ -3,6 +3,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   removeChefInstruction,
   setCustomInstructionItem,
+  updateAvailableItem,
   updateAvailableItems,
   updateChefInstructionItems,
   type ChefInstruction,
@@ -43,11 +44,12 @@ function Instruction({ instruction, refClick }: InstructionProps) {
     const updatedItems = inst.items.filter((currItem) => !isEqual(currItem, item));
     dispatch(updateChefInstructionItems({ id: inst.id, items: updatedItems }));
 
-    dispatch(updateAvailableItems(item));
+    dispatch(updateAvailableItem(item));
   };
 
   const handleRemoveInstruction = (inst: ChefInstruction) => {
     dispatch(removeChefInstruction(inst));
+    dispatch(updateAvailableItems(inst.items));
   };
 
   const handleBlur = (
@@ -77,9 +79,9 @@ function Instruction({ instruction, refClick }: InstructionProps) {
     <div
       ref={setNodeRef}
       key={`${id}_${action}`}
-      className="z-50 flex flex-col mb-12 border-l-2 border-r-2 border-l-neutral-400 border-r-neutral-400 rounded-3xl md:scale-90"
+      className="z-50 flex flex-col mb-12 border-l-2 border-r-2 border-l-neutral-400 border-r-neutral-400 rounded-3xl lg:scale-90"
     >
-      <div className="flex items-center justify-between pl-16">
+      <div className="flex items-center justify-between pl-6">
         <div className="flex justify-start w-full py-2">
           <div
             draggable="false"
@@ -90,9 +92,9 @@ function Instruction({ instruction, refClick }: InstructionProps) {
             onKeyDown={handleKeyDownPrevent}
           >
             <ActionImageNeutral action={action} />
-            <span className="instruction-word">THE</span>
-            <div className={`${items.length < 3 ? "flex" : "grid"} gap-2 p-2`}>
-              <div className={`${items.length < 3 ? "flex" : "grid grid-cols-3"} center`}>
+            <span className="md:text-xs text-fluidSubtitle ml-4">THE</span>
+            <div className="flex flex-row">
+              <div className="center sm:w-36 md:w-44 lg:w-52 xl:w-56 flex flex-row flex-wrap">
                 {!customIngredient && items.length > 0 ? (
                   items.map((item) => (
                     <div key={`${id}_${item.itemName}`} className="px-2 py-2">
@@ -106,8 +108,8 @@ function Instruction({ instruction, refClick }: InstructionProps) {
                     </div>
                   ))
                 ) : (
-                  <div className="flex flex-col justify-between items-center min-h-24">
-                    <span key={id} className="instruction-word text-base">
+                  <div className="flex flex-col justify-between items-center sm:min-h-16 md:min-h-24">
+                    <span key={id} className="text-fluidPrint">
                       {customIngredient ? (
                         <b className="text-neutral-400">
                           Drop Item <br /> or
@@ -120,7 +122,7 @@ function Instruction({ instruction, refClick }: InstructionProps) {
                     </span>
                     <input
                       type="text"
-                      className="input-border w-fit text-sm text-center text-ellipsis whitespace-nowrap overflow-hidden px-0"
+                      className="input-border sm:w-24 md:w-36 text-sm text-center text-ellipsis whitespace-nowrap overflow-hidden p-1"
                       placeholder="Custom text"
                       value={customIngredient}
                       onChange={(e) => handleCustomText(e)}
@@ -134,15 +136,15 @@ function Instruction({ instruction, refClick }: InstructionProps) {
           </div>
           {action.time !== -1 && (
             <div className="flex center">
-              <span className="instruction-word">FOR</span>
+              <span className="text-fluidSubtitle mx-2">FOR</span>
               <TimeInput instruction={instruction} />
-              <span className="instruction-word">{action.unit}</span>
+              <span className="text-fluidSubtitle md:ml-2 lg:ml-4">{action.unit}</span>
             </div>
           )}
         </div>
         <button
           type="button"
-          className="px-4 ml-16 h-fit"
+          className="px-4 md:ml-2 lg:ml-8 h-fit"
           onClick={() => handleRemoveInstruction(instruction)}
         >
           <FontAwesomeIcon
@@ -153,7 +155,7 @@ function Instruction({ instruction, refClick }: InstructionProps) {
           />
         </button>
       </div>
-      <div className="flex center mt-6">
+      <div className="flex center sm:mt-4 md:mt-6">
         <InstructionNote instruction={instruction} />
       </div>
     </div>

@@ -17,7 +17,7 @@ function ChosenGroups() {
         onKeyDown={handleKeyDownPrevent}
         data-testid={"chosen_group"}
         onClick={() => dispatch(nameGroup(group.groupName))}
-        className="group-chip"
+        className="group-chip text-fluidSubtitle"
       >
         {group.groupName}
       </p>

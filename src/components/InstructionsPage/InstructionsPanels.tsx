@@ -16,7 +16,7 @@ const InstructionsPanels = memo(({ onRefClick }: InstructionPanelProps) => {
   const sortedChefInstructions = [...chefInstructions].sort((a, b) => a.id - b.id);
 
   return sortedChefInstructions.map((inst) => (
-    <div key={inst.id} className="pt-4">
+    <div key={inst.id} data-instruction={inst.id} className="pt-4">
       <Instruction
         instruction={inst}
         refClick={(inst: ChefInstruction) => onRefClick(inst)}

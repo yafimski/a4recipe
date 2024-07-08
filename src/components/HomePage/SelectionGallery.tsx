@@ -1,6 +1,6 @@
 import { lazy, Suspense } from "react";
 import { useSelector } from "react-redux";
-import { defUnit } from "../../utils/helpers";
+import { defUnit, handleKeyDownPrevent } from "../../utils/helpers";
 import type { RootState } from "../../state/store";
 import { useState } from "react";
 import AmazingGallery from "../AmazingGallery";
@@ -20,14 +20,20 @@ function SelectionGallery() {
   return (
     <>
       {!openGallery && (
-        <div className="modal-open-button" onClick={() => setOpenGallery(true)}>
+        <div
+          className="modal-open-button"
+          onClick={() => setOpenGallery(true)}
+          onKeyDown={handleKeyDownPrevent}
+        >
           CLICK ME
           <br />
-          to say "Wow" and "Ooooh"
+          to say "Wow"
+          <br />
+          and "Ooooh"
         </div>
       )}
       <AmazingGallery isOpen={openGallery} onClose={() => setOpenGallery(false)} />
-      <div className="relative flex flex-row overflow-auto no-scrollbar p-4  justify-evenly">
+      <div className="flex flex-row overflow-auto no-scrollbar justify-evenly">
         <div className={`flex flex-row flex-wrap center gap-y-8 gap-x-4 ${gridClass}`}>
           {possibleIngredients.map((itemName) => (
             <Suspense

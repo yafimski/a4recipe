@@ -4,10 +4,9 @@ import { useSortable } from "@dnd-kit/sortable";
 
 interface IngredientProp {
   action: ChefAction;
-  showName: boolean;
 }
 
-function ActionImageWithName({ action, showName }: IngredientProp) {
+function ActionImageWithName({ action }: IngredientProp) {
   const { attributes, listeners, setNodeRef, transform, transition } = useSortable({
     id: action.actionName,
     data: {
@@ -25,15 +24,15 @@ function ActionImageWithName({ action, showName }: IngredientProp) {
 
   return (
     <div ref={setNodeRef} style={style} {...listeners} {...attributes}>
-      <div key={actionName} className="bg-white card-shadow rounded-2xl">
+      <div key={actionName} className="bg-white card-shadow print-rounded w-clamp">
         <img
           draggable="false"
           src={`../src/assets/chefActions/${actionName.toLowerCase()}.webp`}
           alt={actionName}
           data-testid={`${actionName}_action`}
-          className="rounded-t-2xl max-h-28"
+          className="print-rounded-img rounded-t-lg w-clamp"
         />
-        {showName && <p className="text-base py-2">{actionName}</p>}
+        <p className="text-fluidPrint py-2">{actionName}</p>
       </div>
     </div>
   );
