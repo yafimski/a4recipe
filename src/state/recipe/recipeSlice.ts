@@ -11,7 +11,7 @@ export interface RecipeState {
 }
 
 const initialState: RecipeState = {
-  title: "Amazing Vegan Blueberry Pie",
+  title: "",
   currentItem: "",
   currentGroupName: "",
   possibleItems: allPossibleIngredients,

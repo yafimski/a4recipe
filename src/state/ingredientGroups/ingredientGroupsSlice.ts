@@ -17,30 +17,7 @@ export interface ItemsGroups {
 }
 
 const initialState: ItemsGroups = {
-  ingredientsGroups: [
-    {
-      groupName: "testing 1",
-      items: [
-        { itemName: "Olive oil", amount: 1, unit: "piece" },
-        { itemName: "Banana", amount: 1, unit: "piece" },
-        { itemName: "Green olives", amount: 1, unit: "piece" },
-        { itemName: "Almonds", amount: 1, unit: "piece" },
-        { itemName: "Yellow Bell Pepper", amount: 1, unit: "piece" },
-        { itemName: "Water", amount: 1, unit: "piece" },
-        { itemName: "Chickpeas", amount: 250, unit: "g" },
-      ],
-    },
-    {
-      groupName: "test 2",
-      items: [
-        { itemName: "Black beans", amount: 1, unit: "piece" },
-        { itemName: "Leek", amount: 1, unit: "piece" },
-        { itemName: "Coconut oil", amount: 1, unit: "piece" },
-        { itemName: "Yeast", amount: 1, unit: "piece" },
-        { itemName: "Baking powder", amount: 1, unit: "piece" },
-      ],
-    },
-  ],
+  ingredientsGroups: [],
 };
 
 const ingredientGroupsSlice = createSlice({
