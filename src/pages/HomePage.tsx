@@ -4,6 +4,8 @@ import ChosenIngredientsGallery from "../components/HomePage/ChosenIngredientsGa
 import GoToButton from "../components/GoToButton";
 import { useSelector } from "react-redux";
 import type { RootState } from "../state/store";
+import Social from "../components/HomePage/Social";
+import { faGithub, faLinkedin } from "@fortawesome/free-brands-svg-icons";
 
 function HomePage() {
   const ingredientsGroups = useSelector(
@@ -25,6 +27,10 @@ function HomePage() {
         >
           <ChosenIngredientsGallery />
         </div>
+      </div>
+      <div className="absolute top-0 left-0 m-4">
+        <Social link="https://www.linkedin.com/in/yafimsimanovsky/" icon={faLinkedin} />
+        <Social link="https://github.com/yafimski/a4recipe" icon={faGithub} />
       </div>
     </div>
   );

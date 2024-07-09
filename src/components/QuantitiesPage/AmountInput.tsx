@@ -96,7 +96,7 @@ function AmountInput({ item, groupName }: AmountInputProps) {
         <FontAwesomeIcon icon={faMinus} className="num-input-icons" />
       </button>
       <input
-        className={`sm:w-10 md:w-12 lg:w-16 sm:py-0.5 lg:py-1 md:mx-1 lg:mx-2 focus:outline-none text-center font-roboto rounded-xl ${
+        className={`sm:w-10 md:w-12 lg:w-16 sm:py-0 lg:py-1 md:mx-1 lg:mx-2 focus:outline-none text-center font-roboto rounded-xl ${
           localAmount === 0 && "required-element-fill"
         }`}
         type="number"
