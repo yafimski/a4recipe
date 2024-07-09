@@ -3,7 +3,7 @@ import { handleKeyDownPrevent, srcPath } from "../../utils/helpers";
 import { useDispatch } from "react-redux";
 import { setWarning } from "../../state/warning/warningSlice";
 import { resetRecipe } from "../../state/recipe/recipeSlice";
-import { resetIngredientsGroup } from "../../state/ingredientGroups/ingredientGroupsSlice";
+import { resetIngredientsGroups } from "../../state/ingredientGroups/ingredientGroupsSlice";
 import { resetChefInstructions } from "../../state/chefActions/chefActionsSlice";
 
 function ResetFlowButton() {
@@ -14,9 +14,9 @@ function ResetFlowButton() {
   const handleNext = async () => {
     dispatch(resetRecipe());
     dispatch(setWarning(""));
-    dispatch(resetIngredientsGroup());
+    dispatch(resetIngredientsGroups());
     dispatch(resetChefInstructions());
-    navigate(`/${srcPath}`);
+    navigate(`${srcPath}/`);
   };
 
   return (
@@ -29,7 +29,9 @@ function ResetFlowButton() {
         className="go-to-button-arrow right-0 py-4 bg-green-500 hover:bg-green-400 hover:-translate-y-4"
         type="button"
       >
-        MAKE ANOTHER
+        MAKE
+        <br />
+        ANOTHER
       </button>
     </div>
   );

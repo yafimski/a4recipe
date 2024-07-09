@@ -33,7 +33,7 @@ function ActionImageWithName({ action }: IngredientProp) {
           data-testid={`${actionName}_action`}
           className="print-rounded-img rounded-t-lg w-clamp"
         />
-        <p className="text-fluidPrint py-2">{actionName}</p>
+        <p className="md:text-sm text-fluidPrint py-2">{actionName}</p>
       </div>
     </div>
   );

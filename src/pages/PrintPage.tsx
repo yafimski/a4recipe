@@ -5,6 +5,8 @@ import PrintButton from "../components/ResultPage/PrintButton";
 import RecipeGroups from "../components/ResultPage/RecipeGroups";
 import RecipeInstructions from "../components/ResultPage/RecipeInstructions";
 import ResetFlowButton from "../components/ResultPage/ResetFlowButton";
+import SaveButton from "../components/ResultPage/SaveButton";
+import BatchInput from "../components/ResultPage/BatchInput";
 
 function PrintPage() {
   const recipeTitle = useSelector((state: RootState) => state.recipe.title);
@@ -15,34 +17,38 @@ function PrintPage() {
       <GoToButton page={"/instructions"} isNext={false} />
       <div className="flex flex-col center mt-28 mb-16">
         <div
-          id="a4"
-          className="relative flex flex-col a4ratio w-2/3 text-center input-border justify-between"
+          id="printpage"
+          className="relative flex flex-col w-2/3 text-center input-border"
         >
           <div className="flex flex-col h-fit justify-between items-center">
-            <h1 className="text-fluidTitle font-shadowsLight md:mt-2 lg:mt-4">
-              {recipeTitle}
-            </h1>
-            <hr className="w-1/2 border-gray-200 md:mb-2 lg:mb-4" />
-            <h2 className="text-fluidSubtitle mb-2">Ingredients:</h2>
-          </div>
-          <div className="grid grid-rows-3 h-2/5">
+            <div className="flex flex-col center w-full">
+              <h1 className="print-title mt-8">{recipeTitle}</h1>
+              <hr className="hr-generic w-2/3" />
+              <BatchInput />
+
+              <div className="relative flex center">
+                <h2 className="print-subtitle z-10 bg-white px-6">Ingredients:</h2>
+                <hr className="hr-long" />
+              </div>
+            </div>
             <RecipeGroups />
           </div>
-          <div className="h-fit justify-between items-center">
-            <h2 className="text-fluidSubtitle md:mt-2 lg:mt-8">Steps:</h2>
-          </div>
-          <div className="flex flex-col items-center justify-start h-3/5 md:mt-1 lg:mt-2">
+
+          <div className="flex flex-col h-fit justify-between items-center">
+            <div className="relative flex center">
+              <h2 className="print-subtitle z-10 bg-white px-6">Steps:</h2>
+              <hr className="hr-long" />
+            </div>
             <RecipeInstructions />
-          </div>
-          <div className="flex flex-col h-fit justify-between items-center pb-2">
-            <h2 className="text-fluidSubtitle sm:mb-1 md:mb-2 lg:mb-4">Enjoy !</h2>
+            <div className="flex flex-col h-fit justify-between items-center pb-2">
+              <h2 className="print-subtitle">Enjoy !</h2>
+            </div>
           </div>
         </div>
       </div>
 
-      <div className="fixed bottom-0 right-0 go-to-button-arrow mb-0">
-        <PrintButton />
-      </div>
+      <PrintButton />
+      <SaveButton />
     </div>
   );
 }

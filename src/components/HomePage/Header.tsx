@@ -3,7 +3,7 @@ import type { RootState } from "../../state/store";
 import {
   type ItemsGroup,
   addItemToIngredientGroup,
-  resetIngredientsGroup,
+  resetIngredientsGroups,
 } from "../../state/ingredientGroups/ingredientGroupsSlice";
 import {
   setItem,
@@ -15,6 +15,7 @@ import {
 import { setWarning } from "../../state/warning/warningSlice";
 import WarningSnack from "../WarningSnack";
 import { handleFocusSelect } from "../../utils/helpers";
+import LoadButton from "./LoadButton";
 
 function Header() {
   const dispatch = useDispatch();
@@ -77,12 +78,12 @@ function Header() {
 
   const handleReset = () => {
     dispatch(resetRecipe());
-    dispatch(resetIngredientsGroup());
+    dispatch(resetIngredientsGroups());
   };
 
   return (
     <>
-      <div className="flex flex-col w-full h-1/4 center text-center">
+      <div className="relative flex flex-col w-full h-1/4 center text-center">
         <h1 className="mt-4 text-fluidTitle font-shadowsLight">Welcome to a4recipe</h1>
         <h3 className="pt-2 pb-2 text-fluidSubtitle">
           Name your recipe and start adding ingredients!
@@ -131,6 +132,7 @@ function Header() {
               >
                 RESET
               </button>
+              <LoadButton />
               <button
                 form="addIngredientsSelect"
                 type="submit"

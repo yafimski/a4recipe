@@ -15,19 +15,18 @@
     @apply select-none font-roboto;
   }
 
+  h2,
+  h3,
+  span,
   p,
-  span {
+  input,
+  select {
     @apply font-indie;
   }
 
   div,
   img {
     touch-action: auto;
-  }
-
-  h2,
-  input {
-    @apply font-indie;
   }
 
   input {
@@ -84,7 +83,7 @@
   }
 
   .modal-content {
-    @apply relative flex flex-col center w-1/2 mt-20 aspect-square rounded-2xl bg-white;
+    @apply relative flex flex-col center w-1/2 md:m-12 lg:m-16 xl:mt-20 aspect-square rounded-2xl bg-white;
   }
 
   .modal-image {
@@ -130,6 +129,22 @@
 
   .group-chip-dead {
     @apply px-6 py-0.5 border-r-2 border-l-2 rounded-2xl border-blue-300 text-black mb-4 font-indie;
+  }
+
+  .group-borders-half {
+    @apply px-2 border-r-2 border-l-2 rounded-3xl border-neutral-300;
+  }
+
+  .print-title {
+    @apply mt-3 mb-2 text-2xl font-shadowsLight;
+  }
+
+  .print-subtitle {
+    @apply font-bold mt-4 mb-4 text-xl;
+  }
+
+  .print-small-text {
+    @apply text-sm font-indie;
   }
 
   .grid-autofill {
@@ -210,6 +225,10 @@
     @apply relative flex flex-col rounded-2xl card-shadow lg:w-20 xl:w-32 aspect-videoReverse bg-slate-100;
   }
 
+  .suspense-gallery-item {
+    @apply relative flex flex-col rounded-2xl card-shadow w-clamp aspect-videoReverse bg-slate-100;
+  }
+
   .toast {
     @apply fixed top-16 left-1/2 transform -translate-x-1/2 bg-black text-white p-4 px-8;
     animation: fadeIn 1s ease-in-out;
@@ -237,11 +256,23 @@
   }
 
   .go-to-button-arrow {
-    @apply absolute center flex text-white p-3 lg:p-4 m-8 cursor-pointer font-semibold tracking-widest rounded-md duration-300 font-shadowsLight;
+    @apply absolute z-10 center flex text-white p-3 lg:p-4 m-8 cursor-pointer font-semibold tracking-widest rounded-md duration-300 font-shadowsLight;
   }
 
-  .print-to-a4-button {
-    @apply fixed text-black bottom-0 right-0 sm:m-4 md:m-6 lg:m-8 xl:m-10 font-shadowsLight md:text-base lg:text-xl -rotate-12 text-center hover:-rotate-0 hover:scale-110 transition ease-in-out;
+  .generic-text-button {
+    @apply fixed font-bold tracking-widest font-shadowsLight md:text-base lg:text-xl text-center transition ease-in-out;
+  }
+
+  .print-button {
+    @apply generic-text-button text-black bottom-0 right-0 sm:m-4 md:m-6 lg:m-8 xl:m-10 md:text-base lg:text-xl -rotate-12 hover:-rotate-0 hover:scale-110;
+  }
+
+  .save-button {
+    @apply generic-text-button text-green-500 bottom-0 left-0 sm:m-4 md:m-6 lg:m-8 xl:m-10 md:text-base lg:text-xl hover:scale-125;
+  }
+
+  .load-button {
+    @apply sexy-button font-indie bg-red-300 sm:text-sm md:text-sm lg:text-sm xl:text-sm hover:scale-125 p-2;
   }
 
   .recipe-title {
@@ -253,7 +284,7 @@
   }
 
   .print-image {
-    @apply sm:w-smallPrint md:w-smallPrint lg:w-printItem xl:w-tinyImage;
+    @apply sm:w-smallPrint md:w-printItem lg:w-printItem xl:w-tinyImage;
   }
 
   .print-rounded {
@@ -266,6 +297,15 @@
 
   .instruction-print-text {
     @apply text-fluidCard xl:text-fluidPrintSubtitle;
+  }
+
+  .hr-generic {
+    @apply w-full border-gray-300 md:my-1 lg:my-2 xl:my-2;
+  }
+
+  .hr-long {
+    @apply absolute top-1/2 w-1/2 border-gray-300;
+    scale: 5 1;
   }
 }
 

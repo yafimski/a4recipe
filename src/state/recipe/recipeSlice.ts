@@ -11,7 +11,7 @@ export interface RecipeState {
 }
 
 const initialState: RecipeState = {
-  title: "",
+  title: "Amazing Vegan Blueberry Pie",
   currentItem: "",
   currentGroupName: "",
   possibleItems: allPossibleIngredients,
@@ -23,6 +23,10 @@ const recipeSlice = createSlice({
   name: "recipe",
   initialState,
   reducers: {
+    setRecipe: (_, action: PayloadAction<RecipeState>) => {
+      const updatedRecipe = { ...action.payload, possibleItems: allPossibleIngredients };
+      return updatedRecipe;
+    },
     resetRecipe: (state) => {
       state.title = "";
       state.currentItem = "";
@@ -55,13 +59,14 @@ const recipeSlice = createSlice({
 });
 
 export const {
+  setRecipe,
+  resetRecipe,
+  toggleInvalidState,
   nameRecipe,
   nameGroup,
   setItem,
   updatePossibleItems,
   setBatches,
-  resetRecipe,
-  toggleInvalidState,
 } = recipeSlice.actions;
 
 export default recipeSlice.reducer;

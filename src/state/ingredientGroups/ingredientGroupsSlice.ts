@@ -17,14 +17,40 @@ export interface ItemsGroups {
 }
 
 const initialState: ItemsGroups = {
-  ingredientsGroups: [],
+  ingredientsGroups: [
+    {
+      groupName: "testing 1",
+      items: [
+        { itemName: "Olive oil", amount: 1, unit: "piece" },
+        { itemName: "Banana", amount: 1, unit: "piece" },
+        { itemName: "Green olives", amount: 1, unit: "piece" },
+        { itemName: "Almonds", amount: 1, unit: "piece" },
+        { itemName: "Yellow Bell Pepper", amount: 1, unit: "piece" },
+        { itemName: "Water", amount: 1, unit: "piece" },
+        { itemName: "Chickpeas", amount: 250, unit: "g" },
+      ],
+    },
+    {
+      groupName: "test 2",
+      items: [
+        { itemName: "Black beans", amount: 1, unit: "piece" },
+        { itemName: "Leek", amount: 1, unit: "piece" },
+        { itemName: "Coconut oil", amount: 1, unit: "piece" },
+        { itemName: "Yeast", amount: 1, unit: "piece" },
+        { itemName: "Baking powder", amount: 1, unit: "piece" },
+      ],
+    },
+  ],
 };
 
 const ingredientGroupsSlice = createSlice({
   name: "groups",
   initialState,
   reducers: {
-    resetIngredientsGroup: (state) => {
+    setIngredientsGroups: (_, action: PayloadAction<ItemsGroups>) => {
+      return action.payload;
+    },
+    resetIngredientsGroups: (state) => {
       state.ingredientsGroups = [];
     },
     addItemToIngredientGroup: (
@@ -99,6 +125,17 @@ const ingredientGroupsSlice = createSlice({
         existingIngredient[0].amount = amount;
       }
     },
+    updateAllmounts: (
+      state,
+      action: PayloadAction<{ batch: number; divider: number }>
+    ) => {
+      for (const group of state.ingredientsGroups) {
+        for (const item of group.items) {
+          item.amount /= action.payload.divider;
+          item.amount *= action.payload.batch;
+        }
+      }
+    },
     updateUnit: (
       state,
       action: PayloadAction<{ groupName: string; itemName: string; unit: string }>
@@ -121,11 +158,13 @@ const ingredientGroupsSlice = createSlice({
 });
 
 export const {
+  setIngredientsGroups,
+  resetIngredientsGroups,
   addItemToIngredientGroup,
   removeItemFromIngredientGroup,
   updateAmount,
+  updateAllmounts,
   updateUnit,
-  resetIngredientsGroup,
 } = ingredientGroupsSlice.actions;
 
 export default ingredientGroupsSlice.reducer;

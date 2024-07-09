@@ -7,10 +7,10 @@ function PrintButton() {
       onKeyDown={handleKeyDownPrevent}
       onClick={() => console.log("here")}
     >
-      <button type="button" className="print-to-a4-button">
+      <button type="button" className="print-button">
         PRINT
         <br />
-        TO A4
+        THIS OUT !
       </button>
     </div>
   );

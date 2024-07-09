@@ -109,7 +109,7 @@ function Instruction({ instruction, refClick }: InstructionProps) {
                   ))
                 ) : (
                   <div className="flex flex-col justify-between items-center sm:min-h-16 md:min-h-24">
-                    <span key={id} className="text-fluidPrint">
+                    <span key={id} className="sm:text-sm md:text-base lg:text-lg">
                       {customIngredient ? (
                         <b className="text-neutral-400">
                           Drop Item <br /> or

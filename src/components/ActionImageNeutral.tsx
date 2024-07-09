@@ -17,7 +17,7 @@ function ActionImageNeutral({ action }: IngredientProp) {
         data-testid={`${actionName}_action`}
         className="print-rounded-img md:w-clampSmall lg:w-clamp"
       />
-      <p className="text-fluidCard py-2">{actionName}</p>
+      <p className="md:text-sm text-fluidCard py-2">{actionName}</p>
     </div>
   );
 }

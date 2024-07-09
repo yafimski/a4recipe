@@ -33,6 +33,9 @@ const chefActionSlice = createSlice({
   name: "chefActions",
   initialState,
   reducers: {
+    setChefInstructions: (_, action: PayloadAction<ChefInstructions>) => {
+      return action.payload;
+    },
     resetChefInstructions: (state) => {
       state.chefInstructions = [];
     },
@@ -141,6 +144,7 @@ const chefActionSlice = createSlice({
 });
 
 export const {
+  setChefInstructions,
   resetChefInstructions,
   setCustomInstructionItem,
   addChefInstruction,
