@@ -6,13 +6,37 @@ import { useSelector } from "react-redux";
 import type { RootState } from "../state/store";
 import Social from "../components/HomePage/Social";
 import { faGithub, faLinkedin } from "@fortawesome/free-brands-svg-icons";
+import { useEffect, useState } from "react";
 
 function HomePage() {
+  const [windowWidth, setWindowWidth] = useState<number>(window.innerWidth);
+
+  useEffect(() => {
+    const handleResize = () => {
+      setWindowWidth(window.innerWidth);
+    };
+
+    window.addEventListener("resize", handleResize);
+
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
+
   const ingredientsGroups = useSelector(
     (state: RootState) => state.groups.ingredientsGroups
   );
 
-  return (
+  return windowWidth < 768 ? (
+    <div className="h-screen flex flex-col center">
+      <p className="flex w-1/2 text-center xs:text-base sm:text-xl md:text-2xl">
+        For the best experience,
+        <br />
+        <br />
+        Please open this website on a tablet or laptop :)
+      </p>
+    </div>
+  ) : (
     <div data-testid="homepage" className="max-h-screen flex flex-col">
       <GoToButton page={"/quantities"} isNext={true} />
       <Header />

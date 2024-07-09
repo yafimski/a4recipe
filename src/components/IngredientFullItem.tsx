@@ -21,12 +21,12 @@ function IngredientFullItem({ groupName, item }: IngredientProp) {
           alt={itemName}
           className="rounded-l-2xl"
         />
-        <div className="flex flex-col center w-1/2 md:p-0 lg:p-2 m-auto md:gap-0.5 lg:gap-1">
+        <div className="flex flex-col center w-1/2 md:p-0 lg:p-1 m-auto md:gap-0.5 lg:gap-0.5">
           <p className="text-fluidSubtitle">{itemName}</p>
           <hr className="hr-generic" />
           <AmountInput item={item} groupName={groupName} />
           <p
-            className={`text-fluidSubtitle rounded-xl px-3 md:mt-0 lg:mt-1 xl:mt-2 ${
+            className={`text-fluidSubtitle rounded-xl px-3 md:mt-1 lg:mt-0 xl:text-xl ${
               unit === defUnit && "required-element-fill"
             }`}
           >
