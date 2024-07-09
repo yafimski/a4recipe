@@ -29,7 +29,7 @@ function BatchInput() {
   }, [dispatch, localBatch]);
 
   return (
-    <div className="relative mb-12">
+    <div className="relative mb-4">
       <div className="flex flex-col center rounded-md mx-2">
         <p className="text-xl"># of batches</p>
         <input

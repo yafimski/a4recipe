@@ -54,15 +54,13 @@
   :root {
     --fluid-20-28: clamp(1.25rem, 0.4926rem + 1.1834vi, 1.75rem);
     --fluid-16-24: clamp(1rem, 0.2426rem + 1.1834vi, 1.5rem);
-    --fluid-10-20: clamp(0.625rem, -0.3217rem + 1.4793vi, 1.25rem);
     --fluid-6-16: clamp(0.375rem, -0.5717rem + 1.6vi, 1rem);
     --fluid-8-14: clamp(0.5rem, -0.068rem + 0.8876vi, 0.875rem);
+    --fluid-10-20: clamp(0.625rem, -0.3217rem + 1.4793vi, 1.25rem);
     --fluid-6-10: clamp(0.375rem, -0.0037rem + 0.5917vi, 0.625rem);
-    --fluid-2-6: clamp(0.125rem, -0.2537rem + 0.5917cqi, 0.375rem);
     --w-clamp: clamp(3cqw, 6cqw, 8cqw);
-    --w-clamp-input: clamp(24cqw, 36cqw, 44cqw);
     --w-clamp-small: clamp(12cqw, 20cqw, 28cqw);
-    --h-clamp: clamp(20cqh, 25cqh, 30cqh);
+    --w-clamp-input: clamp(24cqw, 36cqw, 44cqw);
     --h-clamp-small: clamp(12cqh, 20cqh, 28cqh);
   }
 

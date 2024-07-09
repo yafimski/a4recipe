@@ -15,7 +15,7 @@ function RecipeGroups() {
           className="flex flex-wrap center mb-12 group-borders-half w-10/12"
         >
           <p className="font-bold mb-4">{group.groupName}</p>
-          <div className="flex flex-wrap center gap-x-10 gap-y-4">
+          <div className="flex flex-wrap center gap-x-10 md:gap-y-4 lg:gap-y-8">
             {group.items.map((item) => (
               <div
                 key={`${group.groupName}_${item.itemName}`}
@@ -24,7 +24,8 @@ function RecipeGroups() {
                 <img
                   src={`${srcPath}/assets/ingredients/${item.itemName.toLowerCase()}.webp`}
                   alt={item.itemName}
-                  className="rounded-2xl md:w-smallImage lg:w-fullImage"
+                  // className="print-rounded md:w-16 lg:w-28"
+                  className="print-rounded md:w-12 lg:w-28"
                 />
                 <div className="flex flex-col center w-16 ml-1">
                   <span className="md:text-xs lg:text-sm rounded-xl md:mt-1 lg:mt-1 xl:mt-2">
