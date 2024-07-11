@@ -24,8 +24,11 @@ function Header() {
     (state: RootState) => state.recipe.currentGroupName
   );
   const currentItem = useSelector((state: RootState) => state.recipe.currentItem);
+
   const recipeTitle = useSelector((state: RootState) => state.recipe.title);
+
   const warning = useSelector((state: RootState) => state.warning.warning);
+
   const ingredientsGroups = useSelector(
     (state: RootState) => state.groups.ingredientsGroups
   );
@@ -117,7 +120,9 @@ function Header() {
               />
               <input
                 type="text"
-                className="input-border w-60"
+                className={`input-border w-60 ${
+                  !currentGroupName && "required-element-border"
+                }`}
                 placeholder="Give them a group name"
                 value={currentGroupName}
                 onChange={(e) => dispatch(nameGroup(e.target.value))}

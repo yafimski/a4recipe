@@ -41,7 +41,11 @@ function IngredientGalleryItem({ item }: { item: IngredientItem }) {
 
   return (
     <div className="flex flex-row" data-testid={`${itemName}_gallery`}>
-      <div className="relative flex flex-col print-rounded card-shadow w-cw aspect-videoReverse">
+      <div
+        className={`relative flex flex-col print-rounded card-shadow w-cw aspect-videoReverse ${
+          !currentGroupName && "opacity-50"
+        }`}
+      >
         <img
           src={`${srcPath}/assets/ingredients/${itemName.toLowerCase()}.webp`}
           alt={itemName}
