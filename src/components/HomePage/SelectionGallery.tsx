@@ -33,7 +33,7 @@ function SelectionGallery() {
         </div>
       )}
       <AmazingGallery isOpen={openGallery} onClose={() => setOpenGallery(false)} />
-      <div className="flex flex-row overflow-auto no-scrollbar justify-evenly">
+      <div className="flex flex-row overflow-auto no-scrollbar justify-evenly pb-2">
         <div className={`flex flex-row flex-wrap center gap-y-8 gap-x-4 ${gridClass}`}>
           {possibleIngredients.map((itemName) => (
             <Suspense
