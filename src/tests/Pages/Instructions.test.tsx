@@ -10,14 +10,14 @@ import createMockStore from "../../test-utils/mockStore";
 import routesConfig from "../../utils/routerConfig";
 import { RouterProvider, createMemoryRouter } from "react-router-dom";
 
-describe("Quantities", () => {
+describe("Instructions", () => {
   let store: ReturnType<typeof createMockStore>;
   let router: ReturnType<typeof createMemoryRouter>;
 
   beforeEach(async () => {
     store = createMockStore();
 
-    router = createMemoryRouter(routesConfig, { initialEntries: ["/quantities"] });
+    router = createMemoryRouter(routesConfig, { initialEntries: ["/instructions"] });
     await act(async () => {
       render(
         <Provider store={store}>
@@ -31,36 +31,33 @@ describe("Quantities", () => {
     cleanup();
   });
 
-  it("should go to /instructions when next button clicked", async () => {
+  it("should go to /print when next button clicked", async () => {
     const nextPageButton = screen.getByTestId("next");
     const user = userEvent.setup();
     await user.click(nextPageButton);
 
-    expect(screen.getByTestId("instructions")).toBeInTheDocument();
+    expect(screen.getByTestId("printpage")).toBeInTheDocument();
   });
 
-  it("should go to / when back button clicked", async () => {
+  it("should go to /quantities when back button clicked", async () => {
     const backPageButton = screen.getByTestId("back");
     const user = userEvent.setup();
     await user.click(backPageButton);
 
-    expect(screen.getByTestId("homepage")).toBeInTheDocument();
+    expect(screen.getByTestId("quantities")).toBeInTheDocument();
   });
 
-  it("should show toast when next button clicked if not all quantities and units are filled", async () => {
+  it("should show toast when next button clicked if instructions exist", async () => {
     cleanup();
 
     const updatedCustomInitialState = {
       recipe: { ...store.getState().recipe },
-      groups: {
-        ingredientsGroups: [
-          {
-            groupName: "Mock group",
-            items: [{ itemName: "Mock item", amount: 0, unit: "None" }],
-          },
-        ],
+      groups: { ...store.getState().groups },
+      actions: {
+        chefInstructions: [],
+        currentInstruction: null,
+        availableItems: [],
       },
-      actions: { ...store.getState().actions },
       warning: { ...store.getState().warning },
     };
 
@@ -79,6 +76,6 @@ describe("Quantities", () => {
     await user.click(nextPageButton);
 
     expect(screen.getByTestId("snack")).toBeInTheDocument();
-    expect(screen.getByTestId("quantities")).toBeInTheDocument();
+    expect(screen.getByTestId("instructions")).toBeInTheDocument();
   });
 });

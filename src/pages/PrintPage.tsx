@@ -19,7 +19,7 @@ function PrintPage() {
   const recipeTitle = useSelector((state: RootState) => state.recipe.title);
 
   return (
-    <div data-testid="resultpage" className="relative min-h-screen flex flex-col">
+    <div data-testid="printpage" className="relative min-h-screen flex flex-col">
       <ResetFlowButton />
       <GoToButton page={"/instructions"} isNext={false} />
       <div className="flex flex-col center mt-28 mb-16">
@@ -52,17 +52,29 @@ function PrintPage() {
             </div>
             <div className="absolute bottom-0 left-0 text-fluidPrintSubtitle m-2">
               <p>made with love by Yafim Simanovsky</p>
-              <p>https://github.com/yafimski/a4recipe</p>
+              <a
+                target="_blank"
+                rel="noopener noreferrer"
+                className="font-indie"
+                href="https://github.com/yafimski/a4recipe"
+              >
+                https://github.com/yafimski/a4recipe
+              </a>
               <hr className="w-full mt-1" />
             </div>
           </div>
         </div>
       </div>
-      <button type="button" className="print-button" onClick={handlePrint}>
-        PRINT
-        <br />
-        THIS OUT !
-      </button>
+      <div className="relative">
+        <button type="button" className="fixed print-button" onClick={handlePrint}>
+          <span className="print-tooltip">
+            If the print looks weird try to play with the paper size and custom scale :)
+          </span>
+          PRINT
+          <br />
+          THIS OUT !
+        </button>
+      </div>
       <SaveButton />
     </div>
   );

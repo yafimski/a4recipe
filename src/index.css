@@ -265,6 +265,14 @@
     @apply generic-text-button text-black bottom-0 right-0 sm:m-4 md:m-6 lg:m-8 xl:m-10 md:text-base lg:text-xl -rotate-12 hover:-rotate-0 hover:scale-110;
   }
 
+  .print-tooltip {
+    @apply absolute bottom-20 right-4 transform rotate-0 text-sm bg-black text-white w-44 p-4 font-shadowsLight tracking-widest font-normal text-center hidden;
+  }
+
+  .print-button:hover > .print-tooltip {
+    @apply block;
+  }
+
   .save-button {
     @apply generic-text-button text-green-500 bottom-0 left-0 sm:m-4 md:m-6 lg:m-8 xl:m-10 md:text-base lg:text-xl hover:scale-125;
   }
