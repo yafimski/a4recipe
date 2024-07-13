@@ -13,7 +13,7 @@ function RecipeGroups() {
       {ingredientsGroups.map((group) => (
         <div
           key={group.groupName}
-          className="flex flex-wrap center mb-12 group-borders-half w-10/12"
+          className="flex flex-col flex-wrap center mb-12 group-borders-half w-10/12"
         >
           <p className="font-bold mb-4">{group.groupName}</p>
           <div className="flex flex-wrap center gap-x-10 md:gap-y-4 lg:gap-y-8">
