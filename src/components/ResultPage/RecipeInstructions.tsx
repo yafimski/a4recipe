@@ -1,6 +1,7 @@
 import { useSelector } from "react-redux";
 import type { RootState } from "../../state/store";
 import { srcPath } from "../../utils/helpers";
+import { allPossibleIngredients } from "../../utils/data";
 
 function RecipeInstructions() {
   const chefInstructions = useSelector(
@@ -30,18 +31,24 @@ function RecipeInstructions() {
               <b className="print-small-text">{inst.customItem}</b>
             ) : (
               <div className="center justify-start flex flex-row flex-wrap max-w-52 lg:max-w-80 md:gap-y-1 lg:gap-y-2">
-                {inst.items.map((item) => (
-                  <div
-                    key={`${inst.id}_${item.itemName}`}
-                    className="flex center py-1 px-2"
-                  >
-                    <img
-                      src={`${srcPath}/assets/ingredients/${item.itemName.toLowerCase()}.webp`}
-                      alt={item.itemName}
-                      className="card-shadow w-12 lg:w-20 print-rounded"
-                    />
-                  </div>
-                ))}
+                {inst.items.map((item) => {
+                  const imgPath = allPossibleIngredients.includes(item.itemName)
+                    ? item.itemName
+                    : "chefhat";
+
+                  return (
+                    <div
+                      key={`${inst.id}_${item.itemName}`}
+                      className="flex center py-1 px-2"
+                    >
+                      <img
+                        src={`${srcPath}/assets/ingredients/${imgPath.toLowerCase()}.webp`}
+                        alt={item.itemName}
+                        className="card-shadow w-12 lg:w-20 print-rounded"
+                      />
+                    </div>
+                  );
+                })}
               </div>
             )}
             {inst.action.time !== -1 && (

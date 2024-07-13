@@ -2,6 +2,7 @@ import { faClose } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import type { IngredientItem } from "../state/ingredientGroups/ingredientGroupsSlice";
 import { srcPath } from "../utils/helpers";
+import { allPossibleIngredients } from "../utils/data";
 
 interface IngredientProp {
   groupName: string;
@@ -15,6 +16,10 @@ function IngredientImageNeutral({ groupName, item, onRemoveItem }: IngredientPro
     onRemoveItem(item);
   };
 
+  const imgPath = allPossibleIngredients.includes(item.itemName)
+    ? item.itemName
+    : "chefhat";
+
   return (
     <div
       key={`${groupName}_${item.itemName}`}
@@ -22,7 +27,7 @@ function IngredientImageNeutral({ groupName, item, onRemoveItem }: IngredientPro
     >
       <img
         draggable="false"
-        src={`${srcPath}/assets/ingredients/${item.itemName.toLowerCase()}.webp`}
+        src={`${srcPath}/assets/ingredients/${imgPath.toLowerCase()}.webp`}
         alt={item.itemName}
         data-testid={`${groupName}_${item.itemName}_shelf`}
         className="print-rounded print-image"

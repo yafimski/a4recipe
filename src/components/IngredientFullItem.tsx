@@ -1,4 +1,5 @@
 import type { IngredientItem } from "../state/ingredientGroups/ingredientGroupsSlice";
+import { allPossibleIngredients } from "../utils/data";
 import { defUnit, srcPath } from "../utils/helpers";
 import AmountInput from "./QuantitiesPage/AmountInput";
 
@@ -10,6 +11,10 @@ interface IngredientProp {
 function IngredientFullItem({ groupName, item }: IngredientProp) {
   const { itemName, unit } = item;
 
+  const imgPath = allPossibleIngredients.includes(item.itemName)
+    ? item.itemName
+    : "chefhat";
+
   return (
     <div data-testid="ingredientFullItem" className="flex center">
       <div
@@ -17,7 +22,7 @@ function IngredientFullItem({ groupName, item }: IngredientProp) {
         className="aspect-videoWide flex flex-row h-clampSmall rounded-2xl card-shadow"
       >
         <img
-          src={`${srcPath}/assets/ingredients/${itemName.toLowerCase()}.webp`}
+          src={`${srcPath}/assets/ingredients/${imgPath.toLowerCase()}.webp`}
           alt={itemName}
           className="rounded-l-2xl"
         />

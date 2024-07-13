@@ -1,4 +1,4 @@
-import { commonUnits, extraUnits } from "../../utils/data";
+import { commonUnits } from "../../utils/data";
 import UnitsButtonGroup from "./UnitsButtonGroup";
 import {
   type IngredientItem,
@@ -42,23 +42,13 @@ function UnitsPanel({ groupName, items }: UnitsPanelProps) {
               units={commonUnits.slice(commonUnits.length / 2)}
             />
           </div>
-          <form>
-            <select
-              className={`text-base md:w-20 lg:w-28 input-border rounded-md px-2 py-1 ${
-                extraUnits.includes(item.unit)
-                  ? "border-blue-500 border-1 bg-blue-300"
-                  : null
-              }`}
-              value={item.unit}
-              onChange={(e) => handleExtraUnitsChange(item, e.target.value)}
-            >
-              {extraUnits.map((unit: string) => (
-                <option key={unit} value={unit}>
-                  {unit}
-                </option>
-              ))}
-            </select>
-          </form>
+          <input
+            type="text"
+            className="input-border w-28 md:text-sm lg:text-lg text-center text-ellipsis whitespace-nowrap overflow-hidden sm:p-0 md:p-1 mb-4"
+            placeholder="Custom unit"
+            value={commonUnits.includes(item.unit) ? "" : item.unit}
+            onChange={(e) => handleExtraUnitsChange(item, e.target.value)}
+          />
         </div>
       ))}
     </div>

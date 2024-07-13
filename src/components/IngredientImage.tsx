@@ -4,6 +4,7 @@ import type { IngredientItem } from "../state/ingredientGroups/ingredientGroupsS
 import { CSS } from "@dnd-kit/utilities";
 import { useSortable } from "@dnd-kit/sortable";
 import { srcPath } from "../utils/helpers";
+import { allPossibleIngredients } from "../utils/data";
 
 interface IngredientProp {
   groupName: string;
@@ -28,6 +29,10 @@ function IngredientImage({ groupName, item, allowRemove, onRemove }: IngredientP
     transform: CSS.Translate.toString(transform),
   };
 
+  const imgPath = allPossibleIngredients.includes(item.itemName)
+    ? item.itemName
+    : "chefhat";
+
   return (
     <div
       ref={setNodeRef}
@@ -38,11 +43,12 @@ function IngredientImage({ groupName, item, allowRemove, onRemove }: IngredientP
       {...attributes}
     >
       <img
-        src={`${srcPath}/assets/ingredients/${item.itemName.toLowerCase()}.webp`}
+        src={`${srcPath}/assets/ingredients/${imgPath.toLowerCase()}.webp`}
         alt={item.itemName}
         data-testid={`${groupName}_${item.itemName}_selected`}
-        className="print-rounded"
+        className={`${imgPath === "chefhat" ? "print-rounded-img" : "print-rounded"} `}
       />
+      {imgPath === "chefhat" && <p className="md:text-xs lg:text-sm">{item.itemName}</p>}
       {allowRemove && (
         <div className="flex center rounded-2xl">
           <FontAwesomeIcon

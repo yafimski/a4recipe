@@ -4,6 +4,7 @@ import { defUnit, handleKeyDownPrevent } from "../../utils/helpers";
 import type { RootState } from "../../state/store";
 import { useState } from "react";
 import AmazingGallery from "../AmazingGallery";
+import CustomIngredient from "./CustomIngredient";
 
 const IngredientGalleryItem = lazy(() => import("./IngredientGalleryItem"));
 
@@ -33,7 +34,7 @@ function SelectionGallery() {
         </div>
       )}
       <AmazingGallery isOpen={openGallery} onClose={() => setOpenGallery(false)} />
-      <div className="flex flex-row overflow-auto no-scrollbar justify-evenly pb-2">
+      <div className="flex flex-row overflow-auto no-scrollbar justify-evenly p-2">
         <div className={`flex flex-row flex-wrap center gap-y-8 gap-x-4 ${gridClass}`}>
           {possibleIngredients.map((itemName) => (
             <Suspense
@@ -50,6 +51,7 @@ function SelectionGallery() {
               <IngredientGalleryItem item={{ itemName, amount: 0, unit: defUnit }} />
             </Suspense>
           ))}
+          {possibleIngredients.length === 0 && <CustomIngredient />}
         </div>
       </div>
     </>

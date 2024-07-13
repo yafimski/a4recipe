@@ -9,6 +9,7 @@ import {
 import { setWarning } from "../../state/warning/warningSlice";
 import type { RootState } from "../../state/store";
 import { handleKeyDownPrevent, srcPath } from "../../utils/helpers";
+import { allPossibleIngredients } from "../../utils/data";
 
 function IngredientGalleryItem({ item }: { item: IngredientItem }) {
   const { itemName } = item;
@@ -24,30 +25,28 @@ function IngredientGalleryItem({ item }: { item: IngredientItem }) {
   const dispatch = useDispatch();
 
   const handleAddItemFromIngredients = () => {
-    if (!currentGroupName) {
-      dispatch(setWarning("Ingredient group cannot be empty"));
-    } else {
-      const itemExists = ingredientsGroups
-        .filter((group: ItemsGroup) => group.groupName === currentGroupName)[0]
-        ?.items.filter((item) => item.itemName === itemName)[0];
+    const groupDefault = currentGroupName || "All";
 
-      if (itemExists) {
-        dispatch(setWarning("Ingredient is already in the group!"));
-      } else {
-        dispatch(addItemToIngredientGroup({ groupName: currentGroupName, itemName }));
-      }
+    const itemExists = ingredientsGroups
+      .filter((group: ItemsGroup) => group.groupName === groupDefault)[0]
+      ?.items.filter((item) => item.itemName === itemName)[0];
+
+    if (itemExists) {
+      dispatch(setWarning("Ingredient is already in the group!"));
+    } else {
+      dispatch(addItemToIngredientGroup({ groupName: groupDefault, itemName }));
     }
   };
 
+  const imgPath = allPossibleIngredients.includes(item.itemName)
+    ? item.itemName
+    : "chefhat";
+
   return (
     <div className="flex flex-row" data-testid={`${itemName}_gallery`}>
-      <div
-        className={`relative flex flex-col print-rounded card-shadow w-cw aspect-videoReverse ${
-          !currentGroupName && "opacity-50"
-        }`}
-      >
+      <div className="relative flex flex-col print-rounded card-shadow w-cw aspect-videoReverse">
         <img
-          src={`${srcPath}/assets/ingredients/${itemName.toLowerCase()}.webp`}
+          src={`${srcPath}/assets/ingredients/${imgPath.toLowerCase()}.webp`}
           alt={itemName}
           className="print-rounded-img"
         />

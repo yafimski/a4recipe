@@ -40,9 +40,7 @@ function Header() {
   ) => {
     event.preventDefault();
 
-    if (!groupName) {
-      dispatch(setWarning("Enter a group name!"));
-    } else if (!itemName) {
+    if (!itemName) {
       dispatch(setWarning("Search an ingredient!"));
     } else {
       if (possibleItems.length === 0) {
@@ -120,12 +118,10 @@ function Header() {
               />
               <input
                 type="text"
-                className={`input-border w-60 ${
-                  !currentGroupName && "required-element-border"
-                }`}
-                placeholder="Give them a group name"
+                className="input-border w-64"
+                placeholder="You can place it in a subgroup"
                 value={currentGroupName}
-                onChange={(e) => dispatch(nameGroup(e.target.value))}
+                onChange={(e) => dispatch(nameGroup(e.target.value || "All"))}
                 onFocus={handleFocusSelect}
               />
             </div>
@@ -141,7 +137,11 @@ function Header() {
               <button
                 form="addIngredientsSelect"
                 type="submit"
-                className="sexy-button bg-blue-500 hover:bg-white hover:text-blue-500 focus:text-blue-500 focus:bg-gray-200 text-gray-50"
+                disabled={possibleItems.length === 0}
+                className={`sexy-button bg-blue-500 hover:bg-white hover:text-blue-500 focus:text-blue-500 focus:bg-gray-200 text-gray-50 ${
+                  possibleItems.length === 0 &&
+                  "bg-gray-200 text-gray-400 hover:bg-gray-200 hover:text-gray-400 "
+                }`}
                 onClick={(e) => handleAddIngredient(e, currentGroupName, currentItem)}
               >
                 ADD
