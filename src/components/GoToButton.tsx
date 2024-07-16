@@ -22,6 +22,7 @@ function GoToButton({ page, isNext }: GoToButtonProps) {
   const chefInstructions = useSelector(
     (state: RootState) => state.actions.chefInstructions
   );
+  const availableItems = useSelector((state: RootState) => state.actions.availableItems);
 
   const areUnitsValid = async () => {
     const allItems = ingredientsGroups.flatMap((group) => group.items.flat());
@@ -65,8 +66,10 @@ function GoToButton({ page, isNext }: GoToButtonProps) {
         if (await areUnitsValid()) {
           pageValid = true;
 
-          const allItems = ingredientsGroups.flatMap((group) => group.items.flat());
-          dispatch(setAvailableItems(allItems));
+          if (availableItems.length === 0) {
+            const allItems = ingredientsGroups.flatMap((group) => group.items.flat());
+            dispatch(setAvailableItems(allItems));
+          }
         } else {
           warningText = "Fill in all quantities and units!";
         }

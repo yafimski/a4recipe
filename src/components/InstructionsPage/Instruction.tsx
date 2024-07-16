@@ -112,18 +112,18 @@ function Instruction({ instruction, refClick }: InstructionProps) {
                     <span key={id} className="sm:text-sm md:text-base lg:text-lg">
                       {customIngredient ? (
                         <b className="text-neutral-400">
-                          Drop Item <br /> or
+                          Drop Items <br /> or
                         </b>
                       ) : (
                         <b>
-                          Drop Item <br /> or
+                          Drop Items <br /> or
                         </b>
                       )}
                     </span>
                     <input
                       type="text"
                       className="input-border sm:w-24 md:w-36 text-sm text-center text-ellipsis whitespace-nowrap overflow-hidden p-1"
-                      placeholder="Custom text"
+                      placeholder="Write it yourself"
                       value={customIngredient}
                       onChange={(e) => handleCustomText(e)}
                       onKeyDown={handleKeyDown}

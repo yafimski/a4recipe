@@ -31,7 +31,7 @@ function IngredientFullItem({ groupName, item }: IngredientProp) {
           <hr className="hr-generic" />
           <AmountInput item={item} groupName={groupName} />
           <p
-            className={`md:text-sm lg:text-base rounded-xl px-3 md:mt-1 lg:mt-0 ${
+            className={`md:text-sm lg:text-base rounded-xl px-3 md:mt-1 lg:mt-1 xl:mt-2 ${
               unit === defUnit && "required-element-fill"
             }`}
           >
