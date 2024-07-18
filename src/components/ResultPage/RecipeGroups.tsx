@@ -9,14 +9,14 @@ function RecipeGroups() {
   );
 
   return (
-    <div className="flex flex-col center">
+    <div className="flex flex-col center w-10/12">
       {ingredientsGroups.map((group) => (
         <div
           key={group.groupName}
-          className="flex flex-col flex-wrap center mb-12 group-borders-half w-10/12"
+          className="flex flex-col flex-wrap center mb-12 group-borders-half py-4"
         >
           <p className="font-bold mb-4">{group.groupName}</p>
-          <div className="flex flex-wrap center gap-x-10 md:gap-y-4 lg:gap-y-8">
+          <div className="flex flex-wrap center md:gap-4 lg:gap-8 px-4">
             {group.items.map((item) => {
               const imgPath = allPossibleIngredients.includes(item.itemName)
                 ? item.itemName
